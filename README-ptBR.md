@@ -202,8 +202,8 @@ Este projeto **não pode ser comercializado** nem utilizado com fins lucrativos.
 
 ## Autores
 
-- Edinéia dos Santos Brizola Brum  
-- Jefferson Rodrigo Speck  
+- [Edinéia dos Santos Brizola Brum](https://github.com/edibrum)  
+- [Jefferson Rodrigo Speck](https://github.com/jeffersonspeck)  
 - Rafael Ferreira Lima  
 
-**Proponente da atividade**: Prof. Sidgley Camargo de Andrade
+**Proponente da atividade**: Prof. [Sidgley Camargo de Andrade](https://github.com/sidgleyandrade)

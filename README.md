@@ -71,30 +71,29 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 > ¹ *SRP – Single Responsibility Principle*.
 
 -----
-
 ## 3. Key Improvements Over the Original Code
 
-| Category                   | Implemented Improvement                                                          | Impact                                                                      |
-| -------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| **Architecture**           | Logical folders (`models`, `services`, `logs`, `output`)                             | Facilitates scalability and onboarding for new developers                      |
-| **Domain**                 | `Pokemon` as an immutable `@dataclass`                                             | Eliminates "Primitive Obsession," ensures attribute consistency              |
-| **Object Creation**        | `PokemonBuilder` allows step-by-step construction with validations                   | Avoids giant constructors or too many optional parameters                     |
-| **Parsing**                | Specialized methods (`fetch_html`, `discover_pages`, `_parse_tables`)               | Reduces cyclomatic complexity and duplication                                 |
-| **Logging**                | Centralized configuration (`logging.py`) + dedicated file in `logs/`                 | More readable, filterable, and reusable logs                                  |
-| **Correct CSV**            | `Pokemon.to_dict()` standardizes column order                                     | Corrects misalignment that occurred in the original                             |
-| **Analysis**               | `csv_analyzer.py` performs integrity checks and statistics                         | Checks for duplicates, null values, type distribution                          |
-| **Preparation for Tests**  | Each class has a single responsibility                                              | Facilitates `pytest` suite creation                                            |
+| Category               | Implemented Improvement                                               | Impact                                                      |
+|------------------------|------------------------------------------------------------------------|--------------------------------------------------------------|
+| **Architecture**       | Logical folders (`models`, `services`, `logs`, `output`)               | Facilitates scalability and onboarding for new developers    |
+| **Domain**             | `Pokemon` as an immutable `@dataclass`                                 | Eliminates "Primitive Obsession," ensures attribute consistency |
+| **Object Creation**    | `PokemonBuilder` allows step-by-step construction with validations     | Avoids giant constructors or too many optional parameters    |
+| **Parsing**            | Specialized methods (`fetch_html`, `discover_pages`, `_parse_tables`)  | Reduces cyclomatic complexity and duplication                |
+| **Logging**            | Centralized configuration (`logging.py`) + dedicated file in `logs/`   | More readable, filterable, and reusable logs                 |
+| **Correct CSV**        | `Pokemon.to_dict()` standardizes column order                          | Corrects misalignment that occurred in the original          |
+| **Analysis**           | `csv_analyzer.py` performs integrity checks and statistics              | Checks for duplicates, null values, type distribution        |
+| **Preparation for Tests** | Each class has a single responsibility                               | Facilitates `pytest` suite creation                          |
 
 -----
 
 ## 4. Design Patterns Identified / Applied
 
-| Pattern                        | Location / Role                                                                                   |
-| ------------------------------ | ------------------------------------------------------------------------------------------- |
-| **Builder**                    | `PokemonBuilder` – creation of complex objects without giant constructors.                        |
-| **Facade / Utility**           | `PokemonCSVAnalyzer` – simplified interface for CSV inspection.                                 |
+| Pattern                        | Location / Role                                                                                     |
+| ------------------------------ | --------------------------------------------------------------------------------------------------- |
+| **Builder**                    | `PokemonBuilder` – creation of complex objects without giant constructors.                          |
+| **Facade / Utility**           | `PokemonCSVAnalyzer` – simplified interface for CSV inspection.                                     |
 | **Factory Method (implicit)**  | `PokemonCrawler.crawl()` – decides how to instantiate `PokemonBuilder` according to HTML structure. |
-| **Singleton (implicit)**       | Global logger configuration in `setup_logging()` – ensures a single `Logger` instance.             |
+| **Singleton (implicit)**       | Global logger configuration in `setup_logging()` – ensures a single `Logger` instance.              |
 
 -----
 
@@ -102,14 +101,14 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ### 5.1 General Map of Corrected Smells
 
-| Code Smell (original)             | Solution / Refactoring                                       |
+| Code Smell (original)             | Solution / Refactoring                                    |
 | --------------------------------- | --------------------------------------------------------- |
 | **Long Method**                   | **Extract Method** + **Extract Class** (`PokemonCrawler`) |
-| **Duplicated Code**               | `discover_pages`, `fetch_html` centralize HTTP access    |
-| **Primitive Obsession**           | **Extract Class** `Pokemon`                               |
+| **Duplicated Code**               | `discover_pages`, `fetch_html` centralize HTTP access     |
+| **Primitive Obsession**           | **Extract Class** `Pokemon`                               |
 | **Global Variables**              | Only constants remain (candidates for `Enum`)             |
-| **Visible External Dependency**   | Centralized log configuration (`setup_logging`)         |
-| **Confusing Names**               | Suggested renaming of `logging.py` → `log_config.py`     |
+| **Visible External Dependency**   | Centralized log configuration (`setup_logging`)           |
+| **Confusing Names**               | Suggested renaming of `logging.py` → `log_config.py`      |
 | **Lack of Null Checks**           | Guard-clauses at critical parsing points                  |
 
 > **Note:** Some complementary structural improvements are also considered valid refactorings according to Fowler (2019), even without altering the program's logic. These include:
@@ -131,28 +130,28 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ### 6.1 Requested Synthesis Table (Identified after refactoring lol)
 
-| Code Smell                     | Snippet (new code)                 | Executed/Proposed Refactoring                                               | Comments                          |
-| ----------------------------- | ---------------------------------- | ------------------------------------------------------------------------ | -------------------------------- |
+| Code Smell                    | Snippet (new code)                 | Executed/Proposed Refactoring                                            | Comments                             |
+| ----------------------------- | ---------------------------------- | ------------------------------------------------------------------------ | ------------------------------------ |
 | Long Methods                  | `_parse_tables` (`PokemonCrawler`) | **Extract Method** – break into `_extract_main_image`, `_parse_kv_pairs` | Still \>120 LOC; complicates testing |
-| Duplicated Code               | Requests + BS4 parsing             | **Extract Class** (`fetch_html`, `discover_pages`)                       | Reduces redundancy                 |
-| Primitive Obsession           | Pokémon representation             | **Extract Class** `Pokemon` + Builder                                    | Strong, validated model           |
-| Lack of Null Checks           | Search for `img` in tables         | **Guard-Clause** before accessing `.img`                                 | Avoids `AttributeError`          |
-| Ambiguous Names               | Module `logging.py`                | **Rename Module** (suggested)                                             | Avoids conflict with standard lib |
+| Duplicated Code               | Requests + BS4 parsing             | **Extract Class** (`fetch_html`, `discover_pages`)                       | Reduces redundancy                   |
+| Primitive Obsession           | Pokémon representation             | **Extract Class** `Pokemon` + Builder                                    | Strong, validated model              |
+| Lack of Null Checks           | Search for `img` in tables         | **Guard-Clause** before accessing `.img`                                 | Avoids `AttributeError`              |
+| Ambiguous Names               | Module `logging.py`                | **Rename Module** (suggested)                                            | Avoids conflict with standard lib    |
 
 -----
 
 ## 7. Opportunities for Improvement and Next Steps
 
-| Topic                       | Recommended Action                                                                             |
+| Topic                      | Recommended Action                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------ |
-| **Additional Refactoring** | Break `_parse_tables` into smaller sub-methods.                                         |
-| **Enums**                  | Convert `HEADER_COLORS`/`VALUE_COLORS` to `Enum` to avoid *string literals*.             |
-| **Typing**                 | Use `pydantic` for model validation or `typing.Annotated`.                             |
-| **Tests**                  | Implement `pytest` suite with \>80% coverage.                                         |
-| **CI/CD**                  | Add *pre-commit* (black, isort, ruff) and GitHub Actions.                              |
-| **Strategy Pattern**       | Allow crawlers for multiple Pokémon data sources.                                      |
+| **Additional Refactoring** | Break `_parse_tables` into smaller sub-methods.                                      |
+| **Enums**                  | Convert `HEADER_COLORS`/`VALUE_COLORS` to `Enum` to avoid *string literals*.         |
+| **Typing**                 | Use `pydantic` for model validation or `typing.Annotated`.                           |
+| **Tests**                  | Implement `pytest` suite with \>80% coverage.                                        |
+| **CI/CD**                  | Add *pre-commit* (black, isort, ruff) and GitHub Actions.                            |
+| **Strategy Pattern**       | Allow crawlers for multiple Pokémon data sources.                                    |
 | **Exception Handling**     | Replace generic `except Exception` with specific exceptions (`requests.exceptions`). |
-| **Internationalization**   | Parameterize messages for PT/EN if the project is open-source.                         |
+| **Internationalization**   | Parameterize messages for PT/EN if the project is open-source.                       |
 
 -----
 
@@ -160,9 +159,9 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 The inspection and refactoring process was based on:
 
-  * **Fowler's Catalog** – Chapter 9 of the book *Engenharia de Software Moderna* (Modern Software Engineering) provides an adaptation of 11 essential refactorings (Extract Method, Inline Method, Extract Class, etc.) and guidelines for incremental application.
-  * **Code Smells Catalog** – Fowler (Chapter 7) defines low-quality code signals such as *Long Method*, *Primitive Obsession*, *Duplicated Code*, and others.
-  * **Design Patterns (GoF)** – *Builder* and *Facade* were employed to reduce coupling and expose clear APIs.
+* **Fowler's Catalog** – Chapter 9 of the book *Engenharia de Software Moderna* (Modern Software Engineering) provides an adaptation of 11 essential refactorings (Extract Method, Inline Method, Extract Class, etc.) and guidelines for incremental application.
+* **Code Smells Catalog** – Fowler (Chapter 7) defines low-quality code signals such as *Long Method*, *Primitive Obsession*, *Duplicated Code*, and others.
+* **Design Patterns (GoF)** – *Builder* and *Facade* were employed to reduce coupling and expose clear APIs.
 
 The conducted refactoring eliminates most code smells, improves complexity metrics, and prepares the project for future evolutions (new crawlers, database persistence, REST API, etc.).
 
@@ -185,18 +184,18 @@ This document was prepared to serve as documentation for the refactoring work pe
 
 This project is made available for **academic and educational use**, with permission to:
 
-  - Freely use the source code;
-  - Modify and adapt as needed;
-  - Share modified versions.
+- Freely use the source code;
+- Modify and adapt as needed;
+- Share modified versions.
 
 **Terms of Use**:
 
-  - It is mandatory to **cite the original authors**.
-  - In any redistribution or adaptation, visible credit must be included to:
-      - Edinéia dos Santos Brizola Brum
-      - Jefferson Rodrigo Speck
-      - Rafael Ferreira Lima
-  - The activity was originally proposed by Professor **Sidgley Camargo de Andrade**, and this should also be acknowledged in derivative versions.
+- It is mandatory to **cite the original authors**.
+- In any redistribution or adaptation, visible credit must be included to:
+  - [Edinéia dos Santos Brizola Brum](https://github.com/edibrum)  
+  - [Jefferson Rodrigo Speck](https://github.com/jeffersonspeck)  
+  - Rafael Ferreira Lima
+- The activity was originally proposed by Professor [Sidgley Camargo de Andrade](https://github.com/sidgleyandrade), and this should also be acknowledged in derivative versions.
 
 This project **cannot be commercialized** or used for profit.
 
@@ -204,8 +203,8 @@ This project **cannot be commercialized** or used for profit.
 
 ## Authors
 
-  - Edinéia dos Santos Brizola Brum
-  - Jefferson Rodrigo Speck
-  - Rafael Ferreira Lima
+- [Edinéia dos Santos Brizola Brum](https://github.com/edibrum)  
+- [Jefferson Rodrigo Speck](https://github.com/jeffersonspeck)  
+- Rafael Ferreira Lima
 
-**Activity Proponent**: Prof. Sidgley Camargo de Andrade
+**Activity Proponent**: Prof. [Sidgley Camargo de Andrade](https://github.com/sidgleyandrade)
