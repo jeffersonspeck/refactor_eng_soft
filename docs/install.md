@@ -36,10 +36,17 @@ pip install -r requirements.txt
 
 ---
 
-4. **Leitura da Documentação do Arquivos**
+4. **Criação da Documentação dos `.py`**
 
 ```bash
-pdoc models/ services/ -o docs
+#execute o código abaixo se você modificar algo no código, para que gere a nova documentação pelo pdoc
+export PDOC_DISPLAY_ENV_VARS=1 #evita warning do pdoc
+pdoc main.py models services -o docs
+```
+
+```bash
+#se a documentação já existir ou após você gerar, basta virtualizar o servidor ou acessar os htmls contidos em docs/
+python -m http.server --bind 127.0.0.1 --directory docs
 ```
 
 ## Configuração
