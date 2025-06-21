@@ -16,8 +16,8 @@ Este projeto realiza o **web scraping** de páginas do site [pokemythology.net](
 1. **Clone o repositório**
 
 ```bash
-git clone https://github.com/seu-usuario/pokemon-crawler.git
-cd pokemon-crawler
+git clone https://github.com/jeffersonspeck/refactor_eng_soft.git
+cd refactor_eng_soft
 ````
 
 2. **Crie um ambiente virtual (opcional, mas recomendado)**
