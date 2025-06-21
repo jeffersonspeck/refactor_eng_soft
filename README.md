@@ -4,6 +4,9 @@
 
 ---
 
+## Documentações auxiliares
+1. [Documentação Técnica](docs/documentation.md)
+
 ## Sumário
 
 1. [Links indicados pelo professor](#1-links-indicados-pelo-professor)
