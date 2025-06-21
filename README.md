@@ -57,18 +57,21 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ### 2.1 Key Structural Differences
 
-| Aspect                   | Original Code (`crawler-pokemon.py`) | Refactored Code                                            | Gains                      |
-| ------------------------- | -------------------------------------- | ------------------------------------------------------------ | -------------------------- |
-| Folder Organization     | Single file                           | **Models / services / output layers**                       | Modularity, maintenance    |
-| Data Model               | Generic `dict`                        | `@dataclass Pokemon` (immutable)                              | Typing, safety             |
-| Pokémon Object Creation | Scattered logic                       | **Builder Pattern** (`PokemonBuilder`)                       | Validation, extensibility  |
-| Parsing & Crawling        | Single, long function (`crawl_page`)   | `PokemonCrawler` class with smaller methods                  | SRP¹, testability          |
-| Logging                   | Single `logging.basicConfig`           | `setup_logging()` function with configurable handlers and levels | Useful, standardized logs  |
-| Post-crawl analysis       | Non-existent                            | `PokemonCSVAnalyzer`                                         | Validation, statistics     |
-| Output Organization      | CSV in project root                   | CSV in `output/`                                             | Separation of artifacts    |
-| Error Handling            | Generic `except Exception`             | Specific exceptions + context in log                       | Easier debugging           |
+| **Aspect**              | **Original Code (`crawler-pokemon.py`)** | **Refactored Code**                                          | **Benefits / Impact**                                |
+| ----------------------- | ---------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
+| **Folder Organization** | Single monolithic file                   | `models/`, `services/`, `logs/`, `output/`                   | Modularity, scalability, easier onboarding           |
+| **Data Model**          | Generic `dict`                           | Immutable `@dataclass Pokemon`                               | Strong typing, safety, readability                   |
+| **Object Creation**     | Scattered logic                          | *Builder* pattern via `PokemonBuilder`                       | Step-by-step validation, extensibility               |
+| **Parsing & Crawling**  | One long function (`crawl_page`)         | `PokemonCrawler` with specialized methods (`fetch`, `parse`) | Lower cyclomatic complexity, SRP¹, testability       |
+| **Logging**             | Single `logging.basicConfig` call        | `setup_logging()` with multiple handlers                     | Standardized, reusable, and filterable logs          |
+| **Error Handling**      | Generic `except Exception`               | `ParsingError` + detailed logs with `exc_info`               | Easier debugging and traceability                    |
+| **Output Organization** | CSV in project root                      | `output/pokemons.csv`                                        | Clear separation between artifacts and code          |
+| **Post-crawl Analysis** | Not available                            | `csv_analyzer.py`                                            | Data consistency checks and useful statistics        |
+| **CSV Export**          | Ad-hoc inline code                       | `write_pokemon_csv()` in `csv_writer.py`                     | Re-use, clarity, single responsibility               |
+| **Extras / Narrative**  | Not available                            | `quests.py` adds random “quests”                             | Educational value, optional gamification for display |
+| **Test Readiness**      | No structure                             | Classes with single responsibility                           | Unit tests via `pytest` are feasible and encouraged  |
 
-> ¹ *SRP – Single Responsibility Principle*.
+¹ **SRP** – *Single Responsibility Principle* (each module/class has one clear reason to change).
 
 -----
 ## 3. Key Improvements Over the Original Code

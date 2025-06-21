@@ -46,6 +46,7 @@ from services.pokemon_crawler import PokemonCrawler
 from services.quests import QuestPokemon
 from services.logging import setup_logging
 from services.csv_analyzer import PokemonCSVAnalyzer
+from services.csv_writer import write_pokemon_csv # type: ignore   
 
 # ---------------------------------------------------------------------------
 # [PT-BR] Configuração da aplicação 
@@ -112,21 +113,8 @@ def main() -> None:
     # [PT-BR] Escrita do CSV consolidado
     # [EN] Writing the consolidated CSV
     # -----------------------------------------------------------------------------
-    fieldnames = sorted({k for p in all_pokemons for k in p.to_dict().keys()})
-    with open(OUTPUT_FILE, "w", encoding="utf-8", newline="") as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for p in all_pokemons:
-            row = {
-                k: (v.replace("\n", " ").strip() if isinstance(v, str) else v)
-                for k, v in p.to_dict().items()
-            }
-            if all(v in (None, "", "0") for v in row.values()):
-                logging.warning("Row skipped—almost empty: %s", row)
-                continue
-            writer.writerow(row)
-
-    print(f"\n{len(all_pokemons)} Pokémon exported to '{OUTPUT_FILE}'.")
+    written = write_pokemon_csv(all_pokemons, OUTPUT_FILE)
+    print(f"\n{written} Pokémon exported to '{OUTPUT_FILE}'.")    
 
     # -------------------------------------------------------------------------------------
     # [PT-BR] Análise opcional do CSV contendo estatísticas e consistência, gravada no log

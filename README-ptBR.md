@@ -45,7 +45,8 @@
 │   ├── pokemon.py
 │   └── pokemon_builder.py
 ├── services/        # regras de negócio e utilitários
-│   ├── csv_analyzer.py
+│   ├── csv_writer.py        # escreve o csv
+│   ├── csv_analyzer.py      # analiza a consistência
 │   ├── logging.py           # configuração central de logs
 │   ├── pokemon_crawler.py   # crawler e parser
 │   └── quests.py            # utilidades extra (ex.: missões)
@@ -56,18 +57,20 @@
 
 ### 2.1 Principais diferenças estruturais
 
-| Aspecto                   | Código Original (`crawler-pokemon.py`) | Código Refatorado                                            | Ganhos                     |
-| ------------------------- | -------------------------------------- | ------------------------------------------------------------ | -------------------------- |
-| Organização de pastas     | Arquivo único                          | **Camadas models / services / output**                       | Modularidade, manutenção   |
-| Modelo de dados           | `dict` genérico                        | `@dataclass Pokemon` (imutável)                              | Tipagem, segurança         |
-| Criação de objeto Pokémon | Lógica espalhada                       | **Builder Pattern** (`PokemonBuilder`)                       | Validação, extensibilidade |
-| Parsing & Crawling        | Função única e longa (`crawl_page`)    | Classe `PokemonCrawler` com métodos menores                  | SRP¹, testabilidade        |
-| Logging                   | `logging.basicConfig` único            | Função `setup_logging()` com handlers e níveis configuráveis | Logs úteis e padronizados  |
-| Análise pós-crawl         | Inexistente                            | `PokemonCSVAnalyzer`                                         | Validação, estatísticas    |
-| Organização da saída      | CSV na raiz do projeto                 | CSV em `output/`                                             | Separação de artefatos     |
-| Tratamento de erros       | `except Exception` genérico            | Exceções específicas + contexto no log                       | Depuração facilitada       |
-
-> ¹ *SRP – Single Responsibility Principle*.
+| **Aspecto**                | **Código Original (`crawler-pokemon.py`)** | **Código Refatorado**                                          | **Ganhos / Impacto**                                      |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------- | --------------------------------------------------------- |
+| **Organização de pastas**  | Arquivo único                              | `models/`, `services/`, `logs/`, `output/`                     | Modularidade, escalabilidade, onboarding facilitado       |
+| **Modelo de dados**        | `dict` genérico                            | `@dataclass Pokemon` (imutável)                                | Tipagem forte, segurança, legibilidade                    |
+| **Criação de objetos**     | Lógica espalhada                           | Padrão *Builder* com `PokemonBuilder`                          | Validação progressiva, extensibilidade                    |
+| **Parsing & Crawling**     | Função única longa (`crawl_page`)          | `PokemonCrawler` com métodos especializados (`fetch`, `parse`) | Redução de complexidade ciclomática, SRP¹, testabilidade  |
+| **Logging**                | `logging.basicConfig` único                | `setup_logging()` com múltiplos handlers                       | Logs padronizados e reutilizáveis                         |
+| **Tratamento de erros**    | `except Exception` genérico                | `ParsingError`, logs detalhados com `exc_info`                 | Depuração facilitada, rastreabilidade de falhas           |
+| **Organização da saída**   | CSV na raiz do projeto                     | `output/pokemons.csv`                                          | Separação clara entre artefato e código                   |
+| **Análise pós-crawl**      | Inexistente                                | `csv_analyzer.py`                                              | Checagem de consistência, estatísticas úteis              |
+| **Exportação CSV**         | Ad-hoc inline                              | Função `write_pokemon_csv()` em `csv_writer.py`                | Reuso, clareza, responsabilidade única                    |
+| **Extras / Narrativas**    | Inexistente                                | `quests.py` adiciona missões aleatórias                        | Valor educacional, gamificação opcional para visualização |
+| **Preparação para testes** | Sem estrutura                              | Classes com responsabilidades únicas                           | Testes unitários via `pytest` viáveis e incentivados      |
+> ¹ *SRP = Single Responsibility Principle (Princípio da Responsabilidade Única).*
 
 ---
 
