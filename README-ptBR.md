@@ -191,10 +191,10 @@ Este projeto é disponibilizado para **uso acadêmico e educacional**, com permi
 **Condições de uso**:
 - É obrigatório manter a **citação dos autores originais**.
 - Em qualquer redistribuição ou adaptação, deve ser incluído crédito visível a:
-  - Edinéia dos Santos Brizola Brum  
-  - Jefferson Rodrigo Speck  
-  - Rafael Ferreira Lima  
-- A atividade foi originalmente proposta pelo professor **Sidgley Camargo de Andrade**, e isso também deve ser reconhecido nas versões derivadas.
+  - [Edinéia dos Santos Brizola Brum](https://github.com/edibrum)  
+  - [Jefferson Rodrigo Speck](https://github.com/jeffersonspeck)  
+  - [Rafael Ferreira Lima](ferreira.rfl@gmail.com)
+- A atividade foi originalmente proposta pelo professor [Sidgley Camargo de Andrade](https://github.com/sidgleyandrade), e isso também deve ser reconhecido nas versões derivadas.
 
 Este projeto **não pode ser comercializado** nem utilizado com fins lucrativos.
 
@@ -204,6 +204,6 @@ Este projeto **não pode ser comercializado** nem utilizado com fins lucrativos.
 
 - [Edinéia dos Santos Brizola Brum](https://github.com/edibrum)  
 - [Jefferson Rodrigo Speck](https://github.com/jeffersonspeck)  
-- Rafael Ferreira Lima  
+- [Rafael Ferreira Lima](ferreira.rfl@gmail.com)
 
 **Proponente da atividade**: Prof. [Sidgley Camargo de Andrade](https://github.com/sidgleyandrade)

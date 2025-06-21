@@ -194,7 +194,7 @@ This project is made available for **academic and educational use**, with permis
 - In any redistribution or adaptation, visible credit must be included to:
   - [Edinéia dos Santos Brizola Brum](https://github.com/edibrum)  
   - [Jefferson Rodrigo Speck](https://github.com/jeffersonspeck)  
-  - Rafael Ferreira Lima
+  - [Rafael Ferreira Lima](ferreira.rfl@gmail.com)
 - The activity was originally proposed by Professor [Sidgley Camargo de Andrade](https://github.com/sidgleyandrade), and this should also be acknowledged in derivative versions.
 
 This project **cannot be commercialized** or used for profit.
@@ -205,6 +205,6 @@ This project **cannot be commercialized** or used for profit.
 
 - [Edinéia dos Santos Brizola Brum](https://github.com/edibrum)  
 - [Jefferson Rodrigo Speck](https://github.com/jeffersonspeck)  
-- Rafael Ferreira Lima
+- [Rafael Ferreira Lima](ferreira.rfl@gmail.com)
 
 **Activity Proponent**: Prof. [Sidgley Camargo de Andrade](https://github.com/sidgleyandrade)
