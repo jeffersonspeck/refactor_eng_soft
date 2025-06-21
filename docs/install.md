@@ -36,6 +36,12 @@ pip install -r requirements.txt
 
 ---
 
+4. **Leitura da Documentação do Arquivos**
+
+```bash
+pdoc models/ services/ --html --output-dir docs
+```
+
 ## Configuração
 
 1. Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
