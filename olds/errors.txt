@@ -1,0 +1,660 @@
+2025-06-20 16:20:42,671 - Error url=None ix=44
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:42,674 - Error url=None ix=46
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:42,677 - Error url=None ix=48
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:43,429 - Error url=None ix=33
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:43,434 - Error url=None ix=38
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:43,441 - Error url=None ix=49
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:43,444 - Error url=None ix=51
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:43,447 - Error url=None ix=54
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:44,929 - Error url=None ix=7
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:44,932 - Error url=None ix=9
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:44,978 - Error url=None ix=36
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:44,983 - Error url=None ix=38
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:44,988 - Error url=None ix=40
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:44,992 - Error url=None ix=42
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:46,532 - Error url=None ix=17
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,536 - Error url=None ix=19
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,538 - Error url=None ix=21
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,541 - Error url=None ix=23
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,544 - Error url=None ix=25
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,547 - Error url=None ix=27
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,549 - Error url=None ix=29
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,553 - Error url=None ix=31
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:46,557 - Error url=None ix=33
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:47,193 - Error url=None ix=9
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,196 - Error url=None ix=11
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,198 - Error url=None ix=13
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,202 - Error url=None ix=15
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,206 - Error url=None ix=17
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,208 - Error url=None ix=19
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,212 - Error url=None ix=21
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,215 - Error url=None ix=23
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,220 - Error url=None ix=25
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,223 - Error url=None ix=27
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,227 - Error url=None ix=29
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,230 - Error url=None ix=31
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,233 - Error url=None ix=33
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,236 - Error url=None ix=35
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,238 - Error url=None ix=37
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,241 - Error url=None ix=39
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,243 - Error url=None ix=41
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,246 - Error url=None ix=43
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,249 - Error url=None ix=45
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,252 - Error url=None ix=47
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,254 - Error url=None ix=49
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,586 - Error url=None ix=1
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,589 - Error url=None ix=3
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,592 - Error url=None ix=5
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,595 - Error url=None ix=7
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,598 - Error url=None ix=9
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,601 - Error url=None ix=11
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,604 - Error url=None ix=13
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,607 - Error url=None ix=15
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,610 - Error url=None ix=17
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,613 - Error url=None ix=19
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,616 - Error url=None ix=21
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,619 - Error url=None ix=23
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,622 - Error url=None ix=25
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,625 - Error url=None ix=27
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,629 - Error url=None ix=29
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,632 - Error url=None ix=31
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,635 - Error url=None ix=33
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,638 - Error url=None ix=35
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,640 - Error url=None ix=37
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,643 - Error url=None ix=39
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,646 - Error url=None ix=41
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,649 - Error url=None ix=43
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,651 - Error url=None ix=45
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,654 - Error url=None ix=47
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,657 - Error url=None ix=49
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 38, in crawl_page
+    values[1], values[2] = values[2], values[1]
+IndexError: list index out of range
+2025-06-20 16:20:47,975 - Error url=None ix=8
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:47,977 - Error url=None ix=10
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:47,980 - Error url=None ix=12
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:47,985 - Error url=None ix=21
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:47,988 - Error url=None ix=23
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:47,990 - Error url=None ix=25
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,321 - Error url=None ix=14
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,323 - Error url=None ix=16
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,336 - Error url=None ix=45
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,338 - Error url=None ix=47
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,340 - Error url=None ix=49
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,342 - Error url=None ix=51
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,345 - Error url=None ix=53
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:48,701 - Error url=None ix=2
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:49,112 - Error url=None ix=8
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:49,115 - Error url=None ix=10
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:49,119 - Error url=None ix=12
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:49,121 - Error url=None ix=14
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:49,124 - Error url=None ix=16
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:49,127 - Error url=None ix=18
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:49,136 - Error url=None ix=33
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,142 - Error url=None ix=41
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,145 - Error url=None ix=42
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,148 - Error url=None ix=43
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,151 - Error url=None ix=44
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,154 - Error url=None ix=45
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,156 - Error url=None ix=46
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,159 - Error url=None ix=47
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,161 - Error url=None ix=48
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,164 - Error url=None ix=49
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,167 - Error url=None ix=50
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,170 - Error url=None ix=51
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,172 - Error url=None ix=52
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,175 - Error url=None ix=53
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,177 - Error url=None ix=54
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,180 - Error url=None ix=55
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,183 - Error url=None ix=56
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:49,869 - Error url=None ix=32
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:50,216 - Error url=None ix=11
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:50,219 - Error url=None ix=13
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:50,239 - Error url=None ix=15
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:50,251 - Error url=None ix=33
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:50,255 - Error url=None ix=35
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,237 - Error url=None ix=42
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,239 - Error url=None ix=44
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,243 - Error url=None ix=49
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,245 - Error url=None ix=51
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,247 - Error url=None ix=53
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,553 - Error url=None ix=1
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 39, in crawl_page
+    values[1] = table.find('td', {"bgcolor": ["#CADAF9","#DEE9FF"], "align": ["middle"]}).img.get('src')
+AttributeError: 'NoneType' object has no attribute 'get'
+2025-06-20 16:20:51,568 - Error url=None ix=35
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,570 - Error url=None ix=37
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,572 - Error url=None ix=39
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:51,575 - Error url=None ix=41
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,263 - Error url=None ix=46
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,265 - Error url=None ix=48
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,268 - Error url=None ix=50
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,270 - Error url=None ix=52
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,272 - Error url=None ix=54
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,274 - Error url=None ix=56
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,955 - Error url=None ix=11
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,957 - Error url=None ix=13
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,961 - Error url=None ix=18
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list
+2025-06-20 16:20:52,964 - Error url=None ix=22
+Traceback (most recent call last):
+  File "/home/techcoop/Python/trabalho_pokemon/crawler-pokemon.py", line 33, in crawl_page
+    tags.pop(0)
+IndexError: pop from empty list

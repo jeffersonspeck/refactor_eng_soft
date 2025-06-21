@@ -43,6 +43,7 @@
 │   ├── pokemon_crawler.py   # crawler e parser
 │   └── quests.py            # utilidades extra (ex.: missões)
 ├── output/          # artefatos gerados (pokemons.csv)
+├── olds/            # arquivos antigos antes da fatoração (originais do Prof. Sidgley)
 └── main.py          # ponto de entrada do aplicativo
 ```
 
