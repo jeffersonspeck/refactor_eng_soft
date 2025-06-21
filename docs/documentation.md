@@ -1,46 +1,46 @@
-# Ciclo Funcional do Sistema
+# System Functional Cycle
 
-## Fluxo Principal (Execução sem erros)
+## Main Flow (Error-Free Execution)
 
-1. **Início**  
-   A aplicação é iniciada pelo script **`main.py`**.
+1.  **Start**
+   The application starts with the **`main.py`** script.
 
-2. **Configuração de Logging**  
-   O módulo **`services/logging.py`** configura os logs (arquivo, formato, níveis).
+2.  **Logging Configuration**
+   The **`services/logging.py`** module configures logs (file, format, levels).
 
-3. **Inicialização do Crawler**  
-   Um objeto da classe **`PokemonCrawler`** é instanciado.
+3.  **Crawler Initialization**
+   A **`PokemonCrawler`** class object is instantiated.
 
-4. **Acesso à Página Inicial**  
-   - O crawler chama **`fetch_html(url)`** para obter a página `lista01.htm`.  
-   - O HTML retornado é limpo e convertido em objeto **`BeautifulSoup`** (*soup*).
+4.  **Initial Page Access**
+   * The crawler calls **`fetch_html(url)`** to retrieve the `lista01.htm` page.
+   * The returned HTML is cleaned and converted into a **`BeautifulSoup`** object (*soup*).
 
-5. **Descoberta de Links Secundários**  
-   A função **`discover_pages()`** coleta todos os links para páginas de Pokémon individuais ou blocos.
+5.  **Secondary Link Discovery**
+   The **`discover_pages()`** function collects all links to individual Pokémon or block pages.
 
-6. **Parsing das Páginas**  
-   Para cada URL descoberta:  
-   1. Chama-se novamente **`fetch_html`**.  
-   2. O conteúdo é analisado em **`_parse_tables`**.  
-   3. Cada tabela é transformada em **`PokemonBuilder`**, depois em **`Pokemon`**.  
-   4. O objeto **`Pokemon`** é adicionado à lista interna de resultados válidos.
+6.  **Page Parsing**
+   For each discovered URL:
+   1.  **`fetch_html`** is called again.
+   2.  The content is analyzed in **`_parse_tables`**.
+   3.  Each table is transformed into a **`PokemonBuilder`**, then into a **`Pokemon`** object.
+   4.  The **`Pokemon`** object is added to the internal list of valid results.
 
-7. **Análise e Exportação**  
-   - (Opcional) **`PokemonCSVAnalyzer`** verifica integridade (nulos, duplicados, estatísticas).  
-   - A lista final é exportada para **`pokemons.csv`** dentro da pasta `output/`.
+7.  **Analysis and Export**
+   * (Optional) **`PokemonCSVAnalyzer`** verifies integrity (nulls, duplicates, statistics).
+   * The final list is exported to **`pokemons.csv`** within the `output/` folder.
 
-8. **Encerramento Normal**  
-   O programa finaliza e grava mensagem de sucesso no log.
+8.  **Normal Termination**
+   The program finishes and logs a success message.
 
 ---
 
-## Fluxo Alternativo (Erros)
+## Alternative Flow (Errors)
 
-| Etapa | Possível Erro | Tratamento |
-|-------|---------------|------------|
-| **`fetch_html`** | `URLError`, `HTTPError` (falha de conexão) | Erro logado com contexto; crawler continua com a próxima URL |
-| **Parsing (`_parse_tables`)** | Tabela malformada ou sem imagem | Exceção capturada e logada; tabela descartada, loop prossegue |
-| **Criação do `Pokemon`** | Campo essencial ausente | `PokemonBuilder` gera aviso no log e pode descartar ou criar objeto incompleto |
-| **Exportação CSV** | Erro de escrita (permissão, arquivo aberto) | Erro logado; aplicação aborta com `exit(1)` ou segue em modo degradado |
+| Step | Possible Error | Handling |
+|---|---|---|
+| **`fetch_html`** | `URLError`, `HTTPError` (connection failure) | Error logged with context; crawler continues with the next URL |
+| **Parsing (`_parse_tables`)** | Malformed table or missing image | Exception caught and logged; table discarded, loop continues |
+| **`Pokemon` Creation** | Essential field missing | `PokemonBuilder` generates a warning in the log and may discard or create an incomplete object |
+| **CSV Export** | Write error (permission, file open) | Error logged; application aborts with `exit(1)` or proceeds in degraded mode |
 
-> **Observação:** em todos os casos de erro, o logger registra **stack trace**, URL/tabela afetada e nível apropriado (`WARNING` ou `ERROR`), permitindo diagnóstico rápido.
+> **Note:** In all error cases, the logger records the **stack trace**, affected URL/table, and appropriate level (`WARNING` or `ERROR`), allowing for quick diagnosis.

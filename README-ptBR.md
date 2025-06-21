@@ -6,8 +6,8 @@
 
 ## Documentações auxiliares
 
-1. [Manual de Configuração e Instalação](docs/install.md)
-2. [Documentação Técnica](docs/documentation.md)
+1. [Manual de Configuração e Instalação](docs/install-ptBR.md)
+2. [Documentação Técnica](docs/documentation-ptBR.md)
 3. [Documentação Interativa](https://jeffersonspeck.github.io/refactor_eng_soft/)
 
 ## Sumário
