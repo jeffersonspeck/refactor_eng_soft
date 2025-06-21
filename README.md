@@ -5,6 +5,7 @@
 ---
 
 ## Documentações auxiliares
+
 1. [Documentação Técnica](docs/documentation.md)
 
 ## Sumário
@@ -36,6 +37,7 @@
 
 ```text
 .
+├── docs/            # documentações diversas do projeto
 ├── logs/            # arquivos .txt gerados pelo logger
 ├── models/          # entidades de domínio
 │   ├── pokemon.py
