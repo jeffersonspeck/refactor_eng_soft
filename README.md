@@ -111,6 +111,12 @@
 | **Nomes confusos**                | Sugerida renomeação de `logging.py` → `log_config.py`     |
 | **Falta de verificação de nulos** | Guard-clauses nos pontos críticos de parsing              |
 
+> **Nota:** Algumas melhorias estruturais complementares também são consideradas refatorações válidas conforme Fowler (2019), mesmo sem alterar a lógica do programa. Entre elas:
+> 
+> - **Adicionar docstrings e comentários descritivos**, desde que aumentem a clareza e compreensão do código;
+> - **Corrigir indentação, formatação e nomes ambíguos**, melhorando a legibilidade;
+> - **Mover trechos de código entre arquivos** (por exemplo, extrair classes utilitárias para módulos separados), desde que preserve o comportamento e melhore a organização interna.
+
 ---
 
 ## 6. Pontos fortes da nova solução
