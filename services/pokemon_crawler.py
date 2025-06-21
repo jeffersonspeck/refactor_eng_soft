@@ -197,6 +197,9 @@ class PokemonCrawler:
                     if not tds:
                         continue
 
+                    # teste para conferir os valores    
+                    # print([td.get_text(strip=True) for td in tds])
+
                     # --------------------------------------------------
                     # [PT-BR] Imagem principal (primeira <img> encontrada na coluna 0)
                     # [EN]  Main image (first <img> tag found in column 0)
@@ -211,9 +214,14 @@ class PokemonCrawler:
                     # [PT-BR] Número do Pokémon (formato "001")
                     # [EN]    Pokémon number (format "001")
                     # --------------------------------------------------
-                    if len(tds) >= 2 and "Nº" in tds[0].get_text():
+                    if len(tds) >= 3 and tds[1].get_text(strip=True) == "Nº:":
+                        row_data["Nº"] = tds[2].get_text(strip=True)
+                    elif len(tds) >= 2 and "Nº" in tds[0].get_text():
                         row_data["Nº"] = tds[1].get_text(strip=True)
-                        # Não faz *continue* – podemos ter mais info na mesma linha
+                    # if len(tds) >= 2 and "Nº" in tds[0].get_text():
+                    #     row_data["Nº"] = tds[1].get_text(strip=True)
+                        # continue
+                        # # Não faz *continue* – podemos ter mais info na mesma linha
 
                     # --------------------------------------------------
                     # [PT-BR] Coloração shiny (procura "Coloração Shiny" na linha atual ou na próxima, se necessário)
@@ -243,7 +251,9 @@ class PokemonCrawler:
                         label = tds[i].get_text(strip=True)
                         if not label.endswith(":"):
                             continue
-                        value = tds[i + 1].get_text(" ", strip=True)
+                        #comentado para testar quebra de linha
+                        # value = tds[i + 1].get_text(" ", strip=True)
+                        value = " ".join(tds[i + 1].get_text(" ", strip=True).split())                        
                         row_data[label.rstrip(":")] = value
 
                 # ------------------------------------------------------
