@@ -2,10 +2,13 @@
 Módulo pokemon_builder.py
 ===========================
 
-Implementa o padrão de projeto Builder para facilitar a construção
+[PT-BR] Implementa o padrão de projeto Builder para facilitar a construção
 de objetos ``Pokemon`` de forma incremental e segura.
 
-Uso:
+[EN] Implements the Builder design pattern to simplify the incremental and safe
+construction of ``Pokemon`` objects.
+
+Uso / Usage:
     builder = PokemonBuilder()
     pokemon = (
         builder.number("025")
@@ -20,39 +23,46 @@ from models.pokemon import Pokemon
 
 class PokemonBuilder:
     def __init__(self):
-        # Armazena atributos intermediários antes de construir o objeto final
+        # [PT-BR] Armazena atributos intermediários antes de construir o objeto final
+        # [EN] Stores intermediate attributes before building the final object
         self._attrs = {
             "types": [],
             "extra_attributes": {}
         }
 
     def number(self, n: str):
-        # Define o número do Pokémon (como string para manter zeros à esquerda)
+        # [PT-BR] Define o número do Pokémon (mantém zeros à esquerda)
+        # [EN] Sets the Pokémon number (keeps leading zeros)
         self._attrs["number"] = n
         return self
 
     def name(self, n: str):
-        # Define o nome principal do Pokémon
+        # [PT-BR] Define o nome principal do Pokémon
+        # [EN] Sets the main name of the Pokémon
         self._attrs["name"] = n
         return self
 
     def add_type(self, t: str):
-        # Adiciona um tipo à lista de tipos
+        # [PT-BR] Adiciona um tipo à lista de tipos
+        # [EN] Adds a type to the types list
         self._attrs["types"].append(t)
         return self
 
     def image(self, url: str):
-        # Define a URL da imagem principal
+        # [PT-BR] Define a URL da imagem principal
+        # [EN] Sets the main image URL
         self._attrs["image"] = url
         return self
 
     def add_attribute(self, key: str, value: str):
-        # Adiciona um atributo extra ao dicionário de atributos não padronizados
+        # [PT-BR] Adiciona um atributo extra ao dicionário de atributos personalizados
+        # [EN] Adds an extra attribute to the custom attributes dictionary
         self._attrs["extra_attributes"][key] = value
         return self
 
     def build(self) -> Pokemon:
-        # Constrói e retorna a instância final de Pokemon
+        # [PT-BR] Constrói e retorna a instância final de Pokemon
+        # [EN] Builds and returns the final Pokemon instance
         return Pokemon(
             number=self._attrs.get("number", 0),
             name=self._attrs.get("name", ""),

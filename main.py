@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Módulo main.py
-======================
+==============
 
+[PT-BR]
 Ponto de entrada para o sistema de captura de dados Pokémon.
 
 Fluxo principal:
@@ -13,12 +14,27 @@ Fluxo principal:
 5. Exporta o conjunto consolidado para um CSV.
 6. Executa uma análise opcional do CSV gerado.
 
-Uso:
-    $ python main.py
-
 Variáveis de ambiente esperadas (definidas em ``.env``):
     START_PAGE   URL da página inicial a ser rastreada.
     OUTPUT_FILE  Caminho do arquivo CSV de saída.
+
+[EN]
+Entry point for the Pokémon data capture system.
+
+Main flow:
+1. Loads configuration variables from the ``.env`` file (START_PAGE, OUTPUT_FILE).
+2. Sets up the logging system.
+3. Discovers all Pokémon listing pages starting from the initial one.
+4. Crawls each page, parses the tables, and creates ``Pokemon`` objects.
+5. Exports the consolidated data to a CSV file.
+6. Optionally runs an analysis of the generated CSV.
+
+Expected environment variables (defined in ``.env``):
+    START_PAGE   Initial page URL to be crawled.
+    OUTPUT_FILE  Output CSV file path.
+
+Usage:
+    $ python main.py
 """
 import csv
 import logging
@@ -33,10 +49,12 @@ from services.logging import setup_logging
 from services.csv_analyzer import PokemonCSVAnalyzer
 
 # ---------------------------------------------------------------------------
-# Configuração da aplicação
+# [PT-BR] Configuração da aplicação 
+# [EN]    Application setup
 # ---------------------------------------------------------------------------
 
-# Carrega variáveis do arquivo .env (na raiz do projeto)
+# [PT-BR] Carrega variáveis do arquivo .env (na raiz do projeto)
+# [EN]   Loads variables from the .env file (located at the project root)
 load_dotenv()
 
 START_PAGE: str = os.getenv(
@@ -44,20 +62,25 @@ START_PAGE: str = os.getenv(
 )
 OUTPUT_FILE: str = os.getenv("OUTPUT_FILE", "output/pokemons.csv")
 
-# Garante que a pasta de saída exista
+# [PT-BR] Garante que a pasta de saída exista
+# [EN]   Ensures that the output folder exists
 Path(OUTPUT_FILE).parent.mkdir(parents=True, exist_ok=True)
 
-# Configura logging (arquivo + console)
+# [PT-BR] Configura logging (arquivo + console)
+# [EN]   Configures logging (file + console)
 setup_logging()
-#-----------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------
-# Função principal
+# [PT-BR] Função principal que orquestra o fluxo completo do programa.
+# [EN]   Main function that orchestrates the full program flow.
 # ----------------------------------------------------------------------------
 def main() -> None:
-    """Fluxo principal de execução."""
-
-    # Descoberta de páginas a partir da página inicial
+    """
+    [PT-BR] Fluxo principal de execução.
+    [EN] Main execution flow.
+    """
+    # [PT-BR] Descoberta de páginas a partir da página inicial
+    # [EN]   Discover sub-pages starting from the initial page
     urls = PokemonCrawler.discover_pages(START_PAGE)
     if START_PAGE not in urls:
         urls.insert(0, START_PAGE)
@@ -65,11 +88,13 @@ def main() -> None:
     print(f"{len(urls)} pages found. Starting capture…")
     all_pokemons = []
 
-    # Itera sobre cada URL coletada
+    # [PT-BR] Itera sobre cada URL coletada
+    # [EN]   Iterates over each collected URL
     for url in urls:
         logging.info("Crawling Pokémon from: %s", url)
 
-        # Exemplo de uso da classe QuestPokemon com texto lúdico no console
+        # [PT-BR] Exemplo de uso da classe QuestPokemon com texto lúdico no console
+        # [EN] Example usage of the QuestPokemon class with playful text in the console
         print(QuestPokemon(url).generate_description())
 
         try:
@@ -77,7 +102,7 @@ def main() -> None:
             all_pokemons.extend(pokemons)
             print(f"  + {len(pokemons)} Pokémon captured on this page.\n")
             logging.info("  + %d Pokémon captured on this page.", len(pokemons))
-        except Exception:  # pylint: disable=broad-except
+        except Exception:
             logging.error("Failed to process %s", url, exc_info=True)
 
     if not all_pokemons:
@@ -85,7 +110,8 @@ def main() -> None:
         return
 
     # -----------------------------------------------------------------------------
-    # Escrita do CSV consolidado
+    # [PT-BR] Escrita do CSV consolidado
+    # [EN] Writing the consolidated CSV
     # -----------------------------------------------------------------------------
     fieldnames = sorted({k for p in all_pokemons for k in p.to_dict().keys()})
     with open(OUTPUT_FILE, "w", encoding="utf-8", newline="") as csvfile:
@@ -102,15 +128,16 @@ def main() -> None:
             writer.writerow(row)
 
     print(f"\n{len(all_pokemons)} Pokémon exported to '{OUTPUT_FILE}'.")
-    #------------------------------------------------------------------------------
 
-    # -----------------------------------------------------------------------------
-    # Análise opcional do CSV contendo estatísticas e consistência. gravada no log
-    # -----------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------
+    # [PT-BR] Análise opcional do CSV contendo estatísticas e consistência, gravada no log
+    # [EN] Optional CSV analysis with statistics and consistency check, logged
+    # --------------------------------------------------------------------------------------
     PokemonCSVAnalyzer(OUTPUT_FILE).run_full_report()
 
 # ---------------------------------------------------------------------------
-# Execução direta
+# [PT-BR] Execução direta
+# [EN] Direct execution
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     main()

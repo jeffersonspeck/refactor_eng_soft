@@ -1,18 +1,30 @@
 """
 Módulo pokemon_crawler.py
-====================
+==========================
 
+[PT-BR]
 Módulo responsável por varrer ("crawlear") páginas do site **pokemythology.net**
 e extrair informações tabulares sobre Pokémon.  
 O fluxo de uso previsto é:
 
 - Instanciar ``PokemonCrawler`` com a URL de uma lista ou página individual.
-- Chamar ``crawl()`` - que devolve um ``list[Pokemon]``.
+- Chamar ``crawl()`` - que devolve uma ``list[Pokemon]``.
 
 O módulo também oferece ``discover_pages`` (método estático) para, a partir da
 página *lista01.htm*, descobrir todos os demais HTML relevantes.
 
-Uso típico:
+[EN]
+Module responsible for crawling **pokemythology.net** pages and extracting
+tabular Pokémon information.  
+Typical usage flow:
+
+- Instantiate ``PokemonCrawler`` with a list or individual page URL.
+- Call ``crawl()`` - returns a ``list[Pokemon]``.
+
+The module also provides ``discover_pages`` (static method), which, starting from
+*lista01.htm*, discovers all relevant HTML pages.
+
+Uso típico / Typical usage:
     from services.pokemon_crawler import PokemonCrawler
 
     urls = PokemonCrawler.discover_pages("https://pokemythology.net/conteudo/pokemon/lista01.htm")
@@ -35,17 +47,19 @@ from bs4 import BeautifulSoup # type: ignore
 from models.pokemon import Pokemon
 from models.pokemon_builder import PokemonBuilder
 
-# Cores usadas nas tabelas do site; mantidas como *constantes* de módulo.
+# [PT-BR] Cores usadas nas tabelas do site; mantidas como *constantes* de módulo.
+# [EN] Colors used in the site’s tables; kept as module-level *constants*.
 HEADER_COLORS = ["#96B8FB", "#ADC7FB"]
 VALUE_COLORS: list[str] = ["#CADAF9", "#cadaf9", "#DEE9FF"]
 
-
 class ParsingError(Exception):
-    """Erro genérico de parsing (ex.: tabela fora do padrão ou campo essencial ausente)."""
-
-
+    """[PT-BR] Erro genérico de parsing (ex.: tabela fora do padrão ou campo essencial ausente).
+    [EN] Generic parsing error (e.g., malformed table or missing essential field).
+    """
 class PokemonCrawler:
-    """Crawleia páginas HTML da *PokéMythology* e devolve objetos :class:`Pokemon`."""
+    """[PT-BR] Crawleia páginas HTML da *PokéMythology* e devolve objetos :class:`Pokemon`.
+    [EN] Crawls *PokéMythology* HTML pages and returns :class:`Pokemon` objects.
+    """
 
     BASE_URL = "https://pokemythology.net"
 
@@ -53,14 +67,41 @@ class PokemonCrawler:
         self.url = url
 
     # ---------------------------------------------------------------------
-    # Métodos utilitários (HTTP / descoberta)
+    # [PT-BR] Métodos utilitários (HTTP / descoberta)
+    # [EN] Utility methods (HTTP / discovery)
     # ---------------------------------------------------------------------
     @staticmethod
     def discover_pages(start_page: str) -> list[str]:
-        """Descobre todas as sub‑páginas de Pokémon a partir da *start_page*.
+        """
+        [PT-BR] Descobre todas as sub-páginas de Pokémon a partir da *start_page*.
 
-        A função busca links que começam com ``/conteudo/pokemon/`` e terminam
-        com ``.htm``; devolve a lista **ordenada e sem duplicatas**.
+        A função realiza uma varredura na página inicial fornecida, buscando todos os links
+        que começam com ``/conteudo/pokemon/`` e terminam com ``.htm``. Esses links apontam
+        para páginas individuais de Pokémon ou listas relacionadas.
+
+        O retorno é uma lista de URLs absolutas, já resolvidas a partir do domínio base
+        do site PokéMythology. A lista final é ordenada alfabeticamente e não contém duplicatas.
+
+        Parâmetros:
+            start_page (str): URL completa da primeira página de onde começar a descoberta.
+
+        Retorna:
+            list[str]: Lista ordenada e única de URLs para páginas de Pokémon.
+
+        [EN] Discovers all Pokémon sub-pages starting from the given *start_page*.
+
+        This function scans the initial page for all anchor tags whose `href` attribute
+        starts with ``/conteudo/pokemon/`` and ends with ``.htm`` — these represent individual
+        Pokémon or list pages.
+
+        It returns a list of absolute URLs resolved using the site's base domain.
+        The result is an alphabetically sorted list with duplicates removed.
+
+        Parameters:
+            start_page (str): Full URL of the starting page for discovery.
+
+        Returns:
+            list[str]: Alphabetically sorted, deduplicated list of Pokémon page URLs.
         """
         resp = requests.get(start_page, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
         resp.encoding = "utf-8"
@@ -75,7 +116,9 @@ class PokemonCrawler:
         return sorted(set(links))
 
     def fetch_html(self) -> str:
-        """Faz download do HTML da :pyattr:`url` com *user-agent* customizado."""
+        """[PT-BR] Faz download do HTML da URL com *user-agent* customizado.
+        [EN] Downloads HTML content from the given URL with a custom user-agent.
+        """
         try:
             req = Request(self.url, headers={"User-Agent": "Mozilla/5.0"})
             with urlopen(req) as resp:
@@ -85,30 +128,64 @@ class PokemonCrawler:
             raise
 
     # ------------------------------------------------------------------
-    # Pipeline público
+    # [PT-BR] Pipeline público
+    # [EN] Public pipeline
     # ------------------------------------------------------------------
     def crawl(self) -> list[Pokemon]:
-        """Retorna uma lista de :class:`Pokemon` encontrados na página."""
+        """[PT-BR] Retorna uma lista de :class:`Pokemon` encontrados na página.
+        [EN] Returns a list of :class:`Pokemon` found on the page.
+        """
         html = self.fetch_html()
         return list(self._parse_tables(html))
 
     # ------------------------------------------------------------------
-    # Parsing interno
+    # [PT-BR] Parsing interno
+    # [EN] Internal parsing
     # ------------------------------------------------------------------
     def _parse_tables(self, html: str) -> Iterable[Pokemon]:
-        """Lê todas as tabelas *principais* e converte em objetos ``Pokemon``.
+        """
+        [PT-BR] Lê todas as tabelas *principais* e converte em objetos ``Pokemon``.
 
-        Uma *tabela principal* é identificada por possuir atributo ``id`` no
-        HTML. O método percorre cada linha (``<tr>``) e:
-        1. Captura imagem principal e shiny quando existir;
-        2. Lê pares *label: valor*;
-        3. Feed a um :class:`PokemonBuilder`.
+        Uma *tabela principal* é identificada por possuir o atributo ``id`` no HTML.
+        O método percorre cada linha da tabela (elementos ``<tr>``) e realiza as seguintes etapas:
+        
+        1. Captura a imagem principal do Pokémon (se houver);
+        2. Captura a imagem de coloração shiny, quando disponível;
+        3. Lê pares de dados no formato *rótulo: valor*;
+        4. Preenche um objeto ``PokemonBuilder`` com os dados extraídos.
+
+        Ao final, devolve instâncias de ``Pokemon`` geradas dinamicamente com base nos dados tabulares.
+
+        Parâmetros:
+            html (str): Conteúdo HTML bruto da página a ser processada.
+
+        Retorna:
+            Iterable[Pokemon]: Objetos ``Pokemon`` criados a partir das tabelas da página.
+
+        [EN] Reads all *main* tables and converts them into ``Pokemon`` objects.
+
+        A *main table* is identified by having an ``id`` attribute in the HTML markup.
+        The method iterates over each row (``<tr>`` elements) and performs the following steps:
+
+        1. Extracts the Pokémon's main image (if available);
+        2. Extracts the shiny coloration image (if available);
+        3. Parses data pairs in the form *label: value*;
+        4. Populates a ``PokemonBuilder`` object with the extracted data.
+
+        Returns dynamically built ``Pokemon`` instances based on the page's tabular structure.
+
+        Parameters:
+            html (str): Raw HTML content of the page to be parsed.
+
+        Returns:
+            Iterable[Pokemon]: List of ``Pokemon`` objects generated from the parsed tables.
         """
         soup = BeautifulSoup(html, "html.parser")
 
         for ix, table in enumerate(soup.find_all("table"), start=1):
             if not table.get("id"):
-                continue  # ignora tabelas decorativas
+                continue  # [PT-BR] Ignora tabelas decorativas (sem atributo 'id')
+                          # [EN] Skip decorative tables (those without an 'id' attribute)
 
             try:
                 row_data: dict[str, str] = {}
@@ -121,7 +198,8 @@ class PokemonCrawler:
                         continue
 
                     # --------------------------------------------------
-                    # Imagem principal (primeira <img> encontrada na coluna 0)
+                    # [PT-BR] Imagem principal (primeira <img> encontrada na coluna 0)
+                    # [EN]  Main image (first <img> tag found in column 0)
                     # --------------------------------------------------
                     if not main_image and tds[0].find("img"):
                         img = tds[0].find("img")
@@ -130,15 +208,16 @@ class PokemonCrawler:
                             row_data["Imagem"] = main_image
 
                     # --------------------------------------------------
-                    # Número do Pokémon (formato "001")
+                    # [PT-BR] Número do Pokémon (formato "001")
+                    # [EN]    Pokémon number (format "001")
                     # --------------------------------------------------
                     if len(tds) >= 2 and "Nº" in tds[0].get_text():
                         row_data["Nº"] = tds[1].get_text(strip=True)
                         # Não faz *continue* – podemos ter mais info na mesma linha
 
                     # --------------------------------------------------
-                    # Coloration shiny (procura "Coloração Shiny" na linha atual
-                    # ou na próxima, se necessário)
+                    # [PT-BR] Coloração shiny (procura "Coloração Shiny" na linha atual ou na próxima, se necessário)
+                    # [EN]    Shiny coloration (searches for "Coloração Shiny" in the current row or the next one, if needed)
                     # --------------------------------------------------
                     line_txt = tr.get_text(" ", strip=True).lower()
                     if "coloração shiny" in line_txt:
@@ -147,14 +226,18 @@ class PokemonCrawler:
                             row_data["Coloração Shiny"] = urljoin(self.BASE_URL, shiny_img["src"])
                         continue
 
-                    # Coloration shiny embutida na linha do nome
+                    # --------------------------------------------------
+                    # [PT-BR] Coloração shiny embutida na linha do nome
+                    # [EN]    Shiny coloration embedded in the name row
+                    # --------------------------------------------------
                     if len(tds) >= 2 and "Nome:" in tds[0].get_text():
                         img = tr.find("img")
                         if img and img.get("src"):
                             row_data["Coloração Shiny"] = urljoin(self.BASE_URL, img["src"])
 
                     # --------------------------------------------------
-                    # Pares label/valor (0‑1, 2‑3, ...)
+                    # [PT-BR] Pares label/valor (colunas 0‑1, 2‑3, ...)
+                    # [EN]    Label/value pairs (columns 0‑1, 2‑3, ...)
                     # --------------------------------------------------
                     for i in range(0, len(tds) - 1, 2):
                         label = tds[i].get_text(strip=True)
@@ -164,7 +247,8 @@ class PokemonCrawler:
                         row_data[label.rstrip(":")] = value
 
                 # ------------------------------------------------------
-                # Constrói o objeto ``Pokemon`` via builder
+                # [PT-BR] Constrói o objeto ``Pokemon`` via builder
+                # [EN]    Builds the ``Pokemon`` object using the builder
                 # ------------------------------------------------------
                 builder = PokemonBuilder()
 
@@ -178,12 +262,13 @@ class PokemonCrawler:
                 if main_image:
                     builder.image(main_image)
 
-                # Outros atributos genéricos (altura, peso, etc.)
+                # [PT-BR] Outros atributos genéricos (altura, peso, etc.)
+                # [EN]    Generic attributes (height, weight, etc.)
                 for k, v in row_data.items():
                     if k not in {"Nº", "Nome", "Tipo"}:
                         builder.add_attribute(k, v)
 
                 yield builder.build()
 
-            except Exception:  # noqa: BLE001 — queremos log detalhado
+            except Exception:
                 logging.error("Failed to process table %d na URL %s", ix, self.url, exc_info=True)

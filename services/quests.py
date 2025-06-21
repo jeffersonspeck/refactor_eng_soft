@@ -2,10 +2,13 @@
 Módulo quests.py
 ==================
 
-Gera uma descrição aleatória de "missão" para cada página crawleada,
+[PT-BR] Gera uma descrição aleatória de "missão" para cada página crawleada,
 inspirada em desafios de jogos da franquia Pokémon.
 
-Uso:
+[EN]    Generates a random "quest" description for each crawled page,
+inspired by challenges from the Pokémon game series.
+
+Uso / Usage:
     from services.quests import QuestPokemon
     quest = QuestPokemon(url)
     print(quest.generate_description())
@@ -39,7 +42,8 @@ class QuestPokemon:
     ]
 
     def __init__(self, url: str):
-        # Armazena a URL e sorteia um conjunto de elementos da missão
+        # [PT-BR] Armazena a URL e sorteia um conjunto de elementos da missão
+        # [EN]    Stores the URL and randomly selects a set of quest elements
         self.url = url
         self.environment = random.choice(self.ENVIRONMENTS)
         self.difficulty = random.choice(self.DIFFICULTIES)
@@ -47,7 +51,8 @@ class QuestPokemon:
         self.reward = random.choice(self.REWARDS)
 
     def generate_description(self) -> str:
-        # Gera descrição textual da missão formatada
+        # [PT-BR] Gera descrição textual da missão formatada
+        # [EN]    Generates a formatted textual description of the quest
         return (
             f"\n"
             f"Environment: {self.environment}\n"
