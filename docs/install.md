@@ -31,7 +31,7 @@ venv\Scripts\activate     # Windows
 3. **Instale as dependências**
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt # Linux/macOS/Windows
 ```
 
 ---
@@ -40,7 +40,13 @@ pip install -r requirements.txt
 
 ```bash
 #execute o código abaixo se você modificar algo no código, para que gere a nova documentação pelo pdoc
-export PDOC_DISPLAY_ENV_VARS=1 #evita warning do pdoc
+
+#use uma das linhas abaixo para seu ambiente, caso queira evitar warning do pdoc
+set PDOC_DISPLAY_ENV_VARS=1 #cmd windows
+$env:PDOC_DISPLAY_ENV_VARS = "1" #powershell
+export PDOC_DISPLAY_ENV_VARS=1 #linux
+
+#igual para todos os ambientes
 pdoc main.py models services -o docs
 ```
 
@@ -87,23 +93,10 @@ O programa irá:
 .
 ├── main.py                # ponto de entrada
 ├── .env                   # configurações do usuário
+├── docs/                  # documentação
 ├── output/                # CSVs gerados
 ├── logs/                  # arquivos de log
 ├── models/                # definição das entidades
 ├── services/              # lógica de negócio (crawler, logger, etc.)
 └── requirements.txt       # dependências do projeto
 ```
-
----
-
-## Análise dos Dados
-
-O sistema inclui um analisador de CSV (`PokemonCSVAnalyzer`) que pode, ao final da execução:
-
-* Contar quantos Pokémon foram capturados
-* Identificar colunas com valores ausentes
-* Verificar duplicações
-
-Os resultados são exibidos no console e/ou registrados no log.
-
----
