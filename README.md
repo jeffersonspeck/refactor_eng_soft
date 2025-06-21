@@ -111,7 +111,6 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 | **Primitive Obsession**           | **Extract Class** `Pokemon`                               |
 | **Global Variables**              | Only constants remain (candidates for `Enum`)             |
 | **Visible External Dependency**   | Centralized log configuration (`setup_logging`)           |
-| **Confusing Names**               | Suggested renaming of `logging.py` → `log_config.py`      |
 | **Lack of Null Checks**           | Guard-clauses at critical parsing points                  |
 
 > **Note:** Some complementary structural improvements are also considered valid refactorings according to Fowler (2019), even without altering the program's logic. These include:

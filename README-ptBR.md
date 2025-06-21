@@ -111,7 +111,6 @@
 | **Obsessão por Tipos Primitivos** | **Extract Class** `Pokemon`                               |
 | **Variáveis Globais**             | Mantidas apenas as constantes (candidatas a `Enum`)       |
 | **Dependência externa visível**   | Configuração de log centralizada (`setup_logging`)        |
-| **Nomes confusos**                | Sugerida renomeação de `logging.py` → `log_config.py`     |
 | **Falta de verificação de nulos** | Guard-clauses nos pontos críticos de parsing              |
 
 > **Nota:** Algumas melhorias estruturais complementares também são consideradas refatorações válidas conforme Fowler (2019), mesmo sem alterar a lógica do programa. Entre elas:
