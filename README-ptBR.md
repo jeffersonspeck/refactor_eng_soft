@@ -109,7 +109,7 @@
 | **Método Longo**                  | **Extract Method** + **Extract Class** (`PokemonCrawler`) |
 | **Código Duplicado**              | `discover_pages`, `fetch_html` centralizam acesso HTTP    |
 | **Obsessão por Tipos Primitivos** | **Extract Class** `Pokemon`                               |
-| **Variáveis Globais**             | Mantidas apenas as constantes (candidatas a `Enum`)       |
+| **Variáveis Globais**             | Removidas                                                 |
 | **Dependência externa visível**   | Configuração de log centralizada (`setup_logging`)        |
 | **Falta de verificação de nulos** | Guard-clauses nos pontos críticos de parsing              |
 
@@ -147,13 +147,11 @@
 | Tema                       | Ação Recomendada                                                                     |
 | -------------------------- | ------------------------------------------------------------------------------------ |
 | **Refatoração adicional**  | Quebrar `_parse_tables` em sub-métodos menores.                                      |
-| **Enums**                  | Converter `HEADER_COLORS`/`VALUE_COLORS` em `Enum` para evitar *string literals*.    |
 | **Tipagem**                | Usar `pydantic` para validação de modelos ou `typing.Annotated`.                     |
 | **Testes**                 | Implementar suíte `pytest` com cobertura de >80 %.                                   |
 | **CI/CD**                  | Adicionar *pre-commit* (black, isort, ruff) e GitHub Actions.                        |
 | **Pattern Strategy**       | Permitir crawlers para múltiplas fontes de dados Pokémon.                            |
 | **Tratamento de exceções** | Trocar `except Exception` genérico por exceções específicas (`requests.exceptions`). |
-| **Internacionalização**    | Parametrizar mensagens para PT/EN se o projeto for aberto.                           |
 
 ---
 

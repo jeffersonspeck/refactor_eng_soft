@@ -47,11 +47,6 @@ from bs4 import BeautifulSoup # type: ignore
 from models.pokemon import Pokemon
 from models.pokemon_builder import PokemonBuilder
 
-# [PT-BR] Cores usadas nas tabelas do site; mantidas como *constantes* de módulo.
-# [EN] Colors used in the site’s tables; kept as module-level *constants*.
-HEADER_COLORS = ["#96B8FB", "#ADC7FB"]
-VALUE_COLORS: list[str] = ["#CADAF9", "#cadaf9", "#DEE9FF"]
-
 class ParsingError(Exception):
     """[PT-BR] Erro genérico de parsing (ex.: tabela fora do padrão ou campo essencial ausente).
     [EN] Generic parsing error (e.g., malformed table or missing essential field).
@@ -65,7 +60,6 @@ class PokemonCrawler:
 
     def __init__(self, url: str) -> None:
         self.url = url
-
     # ---------------------------------------------------------------------
     # [PT-BR] Métodos utilitários (HTTP / descoberta)
     # [EN] Utility methods (HTTP / discovery)

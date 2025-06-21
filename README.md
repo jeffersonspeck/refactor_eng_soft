@@ -109,7 +109,7 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 | **Long Method**                   | **Extract Method** + **Extract Class** (`PokemonCrawler`) |
 | **Duplicated Code**               | `discover_pages`, `fetch_html` centralize HTTP access     |
 | **Primitive Obsession**           | **Extract Class** `Pokemon`                               |
-| **Global Variables**              | Only constants remain (candidates for `Enum`)             |
+| **Global Variables**              | Removed                                                   |
 | **Visible External Dependency**   | Centralized log configuration (`setup_logging`)           |
 | **Lack of Null Checks**           | Guard-clauses at critical parsing points                  |
 
@@ -147,13 +147,11 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 | Topic                      | Recommended Action                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------ |
 | **Additional Refactoring** | Break `_parse_tables` into smaller sub-methods.                                      |
-| **Enums**                  | Convert `HEADER_COLORS`/`VALUE_COLORS` to `Enum` to avoid *string literals*.         |
 | **Typing**                 | Use `pydantic` for model validation or `typing.Annotated`.                           |
 | **Tests**                  | Implement `pytest` suite with \>80% coverage.                                        |
 | **CI/CD**                  | Add *pre-commit* (black, isort, ruff) and GitHub Actions.                            |
 | **Strategy Pattern**       | Allow crawlers for multiple Pokémon data sources.                                    |
 | **Exception Handling**     | Replace generic `except Exception` with specific exceptions (`requests.exceptions`). |
-| **Internationalization**   | Parameterize messages for PT/EN if the project is open-source.                       |
 
 -----
 
