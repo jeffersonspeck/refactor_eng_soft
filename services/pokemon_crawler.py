@@ -110,7 +110,8 @@ class PokemonCrawler:
         return sorted(set(links))
 
     def fetch_html(self) -> str:
-        """[PT-BR] Faz download do HTML da URL com *user-agent* customizado.
+        """
+        [PT-BR] Faz download do HTML da URL com *user-agent* customizado.
         [EN] Downloads HTML content from the given URL with a custom user-agent.
         """
         try:
@@ -126,7 +127,8 @@ class PokemonCrawler:
     # [EN] Public pipeline
     # ------------------------------------------------------------------
     def crawl(self) -> list[Pokemon]:
-        """[PT-BR] Retorna uma lista de :class:`Pokemon` encontrados na página.
+        """
+        [PT-BR] Retorna uma lista de :class:`Pokemon` encontrados na página.
         [EN] Returns a list of :class:`Pokemon` found on the page.
         """
         html = self.fetch_html()
@@ -137,142 +139,77 @@ class PokemonCrawler:
     # [EN] Internal parsing
     # ------------------------------------------------------------------
     def _parse_tables(self, html: str) -> Iterable[Pokemon]:
-        """
-        [PT-BR] Lê todas as tabelas *principais* e converte em objetos ``Pokemon``.
-
-        Uma *tabela principal* é identificada por possuir o atributo ``id`` no HTML.
-        O método percorre cada linha da tabela (elementos ``<tr>``) e realiza as seguintes etapas:
-        
-        1. Captura a imagem principal do Pokémon (se houver);
-        2. Captura a imagem de coloração shiny, quando disponível;
-        3. Lê pares de dados no formato *rótulo: valor*;
-        4. Preenche um objeto ``PokemonBuilder`` com os dados extraídos.
-
-        Ao final, devolve instâncias de ``Pokemon`` geradas dinamicamente com base nos dados tabulares.
-
-        Parâmetros:
-            html (str): Conteúdo HTML bruto da página a ser processada.
-
-        Retorna:
-            Iterable[Pokemon]: Objetos ``Pokemon`` criados a partir das tabelas da página.
-
-        [EN] Reads all *main* tables and converts them into ``Pokemon`` objects.
-
-        A *main table* is identified by having an ``id`` attribute in the HTML markup.
-        The method iterates over each row (``<tr>`` elements) and performs the following steps:
-
-        1. Extracts the Pokémon's main image (if available);
-        2. Extracts the shiny coloration image (if available);
-        3. Parses data pairs in the form *label: value*;
-        4. Populates a ``PokemonBuilder`` object with the extracted data.
-
-        Returns dynamically built ``Pokemon`` instances based on the page's tabular structure.
-
-        Parameters:
-            html (str): Raw HTML content of the page to be parsed.
-
-        Returns:
-            Iterable[Pokemon]: List of ``Pokemon`` objects generated from the parsed tables.
-        """
         soup = BeautifulSoup(html, "html.parser")
-
-        for ix, table in enumerate(soup.find_all("table"), start=1):
-            if not table.get("id"):
-                continue  # [PT-BR] Ignora tabelas decorativas (sem atributo 'id')
-                          # [EN] Skip decorative tables (those without an 'id' attribute)
-
+        for table in soup.find_all("table", id=True):
             try:
-                row_data: dict[str, str] = {}
-                main_image: str | None = None
-                trs = table.find_all("tr")
-
-                for pos, tr in enumerate(trs):
-                    tds = tr.find_all("td")
-                    if not tds:
-                        continue
-
-                    # teste para conferir os valores    
-                    # print([td.get_text(strip=True) for td in tds])
-
-                    # --------------------------------------------------
-                    # [PT-BR] Imagem principal (primeira <img> encontrada na coluna 0)
-                    # [EN]  Main image (first <img> tag found in column 0)
-                    # --------------------------------------------------
-                    if not main_image and tds[0].find("img"):
-                        img = tds[0].find("img")
-                        if img and img.get("src"):
-                            main_image = urljoin(self.BASE_URL, img["src"])
-                            row_data["Imagem"] = main_image
-
-                    # --------------------------------------------------
-                    # [PT-BR] Número do Pokémon (formato "001")
-                    # [EN]    Pokémon number (format "001")
-                    # --------------------------------------------------
-                    if len(tds) >= 3 and tds[1].get_text(strip=True) == "Nº:":
-                        row_data["Nº"] = tds[2].get_text(strip=True)
-                    elif len(tds) >= 2 and "Nº" in tds[0].get_text():
-                        row_data["Nº"] = tds[1].get_text(strip=True)
-                    # if len(tds) >= 2 and "Nº" in tds[0].get_text():
-                    #     row_data["Nº"] = tds[1].get_text(strip=True)
-                        # continue
-                        # # Não faz *continue* – podemos ter mais info na mesma linha
-
-                    # --------------------------------------------------
-                    # [PT-BR] Coloração shiny (procura "Coloração Shiny" na linha atual ou na próxima, se necessário)
-                    # [EN]    Shiny coloration (searches for "Coloração Shiny" in the current row or the next one, if needed)
-                    # --------------------------------------------------
-                    line_txt = tr.get_text(" ", strip=True).lower()
-                    if "coloração shiny" in line_txt:
-                        shiny_img = tr.find("img") or (trs[pos + 1].find("img") if pos + 1 < len(trs) else None)
-                        if shiny_img and shiny_img.get("src"):
-                            row_data["Coloração Shiny"] = urljoin(self.BASE_URL, shiny_img["src"])
-                        continue
-
-                    # --------------------------------------------------
-                    # [PT-BR] Coloração shiny embutida na linha do nome
-                    # [EN]    Shiny coloration embedded in the name row
-                    # --------------------------------------------------
-                    if len(tds) >= 2 and "Nome:" in tds[0].get_text():
-                        img = tr.find("img")
-                        if img and img.get("src"):
-                            row_data["Coloração Shiny"] = urljoin(self.BASE_URL, img["src"])
-
-                    # --------------------------------------------------
-                    # [PT-BR] Pares label/valor (colunas 0‑1, 2‑3, ...)
-                    # [EN]    Label/value pairs (columns 0‑1, 2‑3, ...)
-                    # --------------------------------------------------
-                    for i in range(0, len(tds) - 1, 2):
-                        label = tds[i].get_text(strip=True)
-                        if not label.endswith(":"):
-                            continue
-                        #comentado para testar quebra de linha
-                        # value = tds[i + 1].get_text(" ", strip=True)
-                        value = " ".join(tds[i + 1].get_text(" ", strip=True).split())                        
-                        row_data[label.rstrip(":")] = value
-
-                # ------------------------------------------------------
-                # [PT-BR] Constrói o objeto ``Pokemon`` via builder
-                # [EN]    Builds the ``Pokemon`` object using the builder
-                # ------------------------------------------------------
-                builder = PokemonBuilder()
-
-                if "Nº" in row_data:
-                    builder.number(row_data["Nº"])
-                if "Nome" in row_data:
-                    builder.name(row_data["Nome"])
-                if "Tipo" in row_data:
-                    for t in row_data["Tipo"].split("/"):
-                        builder.add_type(t.strip())
-                if main_image:
-                    builder.image(main_image)
-
-                # [PT-BR] Outros atributos genéricos (altura, peso, etc.)
-                # [EN]    Generic attributes (height, weight, etc.)
-                for k, v in row_data.items():
-                    if k not in {"Nº", "Nome", "Tipo"}:
-                        builder.add_attribute(k, v)
-
-                yield builder.build()
-
+                yield self._parse_single_table(table)
             except Exception:
-                logging.error("Failed to process table %d na URL %s", ix, self.url, exc_info=True)
+                logging.error("Error on URL %s", self.url, exc_info=True)
+
+    def _parse_single_table(self, table: Tag) -> Pokemon: # type: ignore
+        row_data: dict[str, str] = {}
+        main_image = None
+        trs = table.find_all("tr")
+
+        for pos, tr in enumerate(trs):
+            tds = tr.find_all("td")
+            if not tds:
+                continue
+
+            self._maybe_extract_main_image(tds, row_data)
+            self._maybe_extract_number(tds, row_data)
+            self._maybe_extract_shiny(tr, trs, pos, row_data)
+            self._maybe_extract_label_value_pairs(tds, row_data)
+
+        return self._build_pokemon(row_data)
+
+    def _maybe_extract_main_image(self, tds: list[Tag], row_data: dict) -> None: # type: ignore
+        if "Imagem" not in row_data and tds[0].find("img"):
+            img = tds[0].find("img")
+            if img and img.get("src"):
+                main_image = urljoin(self.BASE_URL, img["src"])
+                row_data["Imagem"] = main_image
+
+    def _maybe_extract_number(self, tds: list[Tag], row_data: dict) -> None: # type: ignore
+        if len(tds) >= 3 and tds[1].get_text(strip=True) == "Nº:":
+            row_data["Nº"] = tds[2].get_text(strip=True)
+        elif len(tds) >= 2 and "Nº" in tds[0].get_text():
+            row_data["Nº"] = tds[1].get_text(strip=True)
+
+    def _maybe_extract_shiny(self, tr: Tag, trs: list[Tag], pos: int, row_data: dict) -> None: # type: ignore
+        line_txt = tr.get_text(" ", strip=True).lower()
+        if "coloração shiny" in line_txt:
+            shiny_img = tr.find("img") or (trs[pos + 1].find("img") if pos + 1 < len(trs) else None)
+            if shiny_img and shiny_img.get("src"):
+                row_data["Coloração Shiny"] = urljoin(self.BASE_URL, shiny_img["src"])
+        elif len(tr.find_all("td")) >= 2 and "Nome:" in tr.find_all("td")[0].get_text():
+            img = tr.find("img")
+            if img and img.get("src"):
+                row_data["Coloração Shiny"] = urljoin(self.BASE_URL, img["src"])
+
+    def _maybe_extract_label_value_pairs(self, tds: list[Tag], row_data: dict) -> None: # type: ignore
+        for i in range(0, len(tds) - 1, 2):
+            label = tds[i].get_text(strip=True)
+            if not label.endswith(":"):
+                continue
+            value = " ".join(tds[i + 1].get_text(" ", strip=True).split())
+            row_data[label.rstrip(":")] = value
+
+    def _build_pokemon(self, data: dict[str, str]) -> Pokemon:
+        builder = PokemonBuilder()
+
+        if "Nº" in data:
+            builder.number(data["Nº"])
+        if "Nome" in data:
+            builder.name(data["Nome"])
+        if "Tipo" in data:
+            for t in data["Tipo"].split("/"):
+                builder.add_type(t.strip())
+        if "Imagem" in data:
+            builder.image(data["Imagem"])
+
+        for k, v in data.items():
+            if k not in {"Nº", "Nome", "Tipo", "Imagem"}:
+                builder.add_attribute(k, v)
+
+        return builder.build()

@@ -130,23 +130,12 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 5.  **Ready for unit tests**: minimal dependencies and easy mock injection.
 6.  **Extensible to other websites**: just implement new parsing strategies.
 
-### 6.1 Requested Synthesis Table (Identified after refactoring lol)
-
-| Code Smell                    | Snippet (new code)                 | Executed/Proposed Refactoring                                            | Comments                             |
-| ----------------------------- | ---------------------------------- | ------------------------------------------------------------------------ | ------------------------------------ |
-| Long Methods                  | `_parse_tables` (`PokemonCrawler`) | **Extract Method** – break into `_extract_main_image`, `_parse_kv_pairs` | Still \>120 LOC; complicates testing |
-| Duplicated Code               | Requests + BS4 parsing             | **Extract Class** (`fetch_html`, `discover_pages`)                       | Reduces redundancy                   |
-| Primitive Obsession           | Pokémon representation             | **Extract Class** `Pokemon` + Builder                                    | Strong, validated model              |
-| Lack of Null Checks           | Search for `img` in tables         | **Guard-Clause** before accessing `.img`                                 | Avoids `AttributeError`              |
-| Ambiguous Names               | Module `logging.py`                | **Rename Module** (suggested)                                            | Avoids conflict with standard lib    |
-
 -----
 
 ## 7. Opportunities for Improvement and Next Steps
 
 | Topic                      | Recommended Action                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------ |
-| **Additional Refactoring** | Break `_parse_tables` into smaller sub-methods.                                      |
 | **Typing**                 | Use `pydantic` for model validation or `typing.Annotated`.                           |
 | **Tests**                  | Implement `pytest` suite with \>80% coverage.                                        |
 | **CI/CD**                  | Add *pre-commit* (black, isort, ruff) and GitHub Actions.                            |

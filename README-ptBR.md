@@ -130,23 +130,12 @@
 5. **Pronto para testes unitários**: dependências mínimas e injeção fácil de mocks.
 6. **Extensível a outros sites**: basta implementar novas estratégias de parsing.
 
-### 6.1 Tabela-síntese solicitada (Que identifiquei após refatoração kkkkkk)
-
-| Code Smell                    | Trecho (novo código)               | Refactoring Executado/Proposto                                           | Comentários                      |
-| ----------------------------- | ---------------------------------- | ------------------------------------------------------------------------ | -------------------------------- |
-| Métodos Longos                | `_parse_tables` (`PokemonCrawler`) | **Extract Method** – quebrar em `_extract_main_image`, `_parse_kv_pairs` | Ainda >120 LOC; dificulta testes |
-| Código Duplicado              | Requests + BS4 parsing             | **Extract Class** (`fetch_html`, `discover_pages`)                       | Reduz redundância                |
-| Obsessão por Tipos Primitivos | Representação de Pokémon           | **Extract Class** `Pokemon` + Builder                                    | Modelo forte e validado          |
-| Falta de verificação de nulos | Busca de `img` em tabelas          | **Guard-Clause** antes de acessar `.img`                                 | Evita `AttributeError`           |
-| Nomes ambíguos                | Módulo `logging.py`                | **Rename Module** (sugerido)                                             | Evita conflito com lib padrão    |
-
 ---
 
 ## 7. Oportunidades de melhoria e próximos passos
 
 | Tema                       | Ação Recomendada                                                                     |
 | -------------------------- | ------------------------------------------------------------------------------------ |
-| **Refatoração adicional**  | Quebrar `_parse_tables` em sub-métodos menores.                                      |
 | **Tipagem**                | Usar `pydantic` para validação de modelos ou `typing.Annotated`.                     |
 | **Testes**                 | Implementar suíte `pytest` com cobertura de >80 %.                                   |
 | **CI/CD**                  | Adicionar *pre-commit* (black, isort, ruff) e GitHub Actions.                        |
