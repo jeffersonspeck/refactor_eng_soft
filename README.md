@@ -8,6 +8,7 @@
 
 1. [Manual de Configuração e Instalação](docs/install.md)
 2. [Documentação Técnica](docs/documentation.md)
+3. [Documentação Interativa](https://jeffersonspeck.github.io/refactor_eng_soft/)
 
 ## Sumário
 
@@ -29,8 +30,8 @@
 
 | Descrição            | URL |
 | -------------------- | --- |
-| Leitura indicada     | [… ](https://engsoftmoderna.info/cap9.html) |
-| Página usada em aula | [… ](https://refactoring.guru/pt-br/refactoring/smells) |
+| Leitura indicada     | [Livro](https://engsoftmoderna.info/cap9.html) |
+| Página usada em aula | [URL](https://refactoring.guru/pt-br/refactoring/smells) |
 
 ---
 
