@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-main.py - ponto de entrada para o sistema de captura de dados Pokémon.
+Módulo main.py
+======================
+
+Ponto de entrada para o sistema de captura de dados Pokémon.
 
 Fluxo principal:
 1. Carrega variáveis de configuração do arquivo ``.env`` (START_PAGE, OUTPUT_FILE).
@@ -17,7 +20,6 @@ Variáveis de ambiente esperadas (definidas em ``.env``):
     START_PAGE   URL da página inicial a ser rastreada.
     OUTPUT_FILE  Caminho do arquivo CSV de saída.
 """
-
 import csv
 import logging
 import os

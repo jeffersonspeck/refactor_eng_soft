@@ -1,23 +1,26 @@
-"""pokemon_crawler.py
+"""
+Módulo pokemon_crawler.py
 ====================
+
 Módulo responsável por varrer ("crawlear") páginas do site **pokemythology.net**
 e extrair informações tabulares sobre Pokémon.  
 O fluxo de uso previsto é:
 
-1. Instanciar ``PokemonCrawler`` com a URL de uma lista ou página individual.
-2. Chamar ``crawl()`` - que devolve um ``list[Pokemon]``.
+- Instanciar ``PokemonCrawler`` com a URL de uma lista ou página individual.
+- Chamar ``crawl()`` - que devolve um ``list[Pokemon]``.
 
 O módulo também oferece ``discover_pages`` (método estático) para, a partir da
 página *lista01.htm*, descobrir todos os demais HTML relevantes.
 
-Boas-práticas adotadas
-----------------------
-* **Docstrings** completos em todas as classes e métodos.
-* **Inline-comments** apenas onde o código não é auto-explicativo.
-* **Logging** em vez de ``print`` para erros ou avisos.
-* **Typed hints** (`list[str]`, `Iterable[Pokemon]`, …) para legibilidade e IDE support.
-"""
+Uso típico:
+    from services.pokemon_crawler import PokemonCrawler
 
+    urls = PokemonCrawler.discover_pages("https://pokemythology.net/conteudo/pokemon/lista01.htm")
+    for url in urls:
+        pokemons = PokemonCrawler(url).crawl()
+        for p in pokemons:
+            print(p.to_dict())
+"""
 from __future__ import annotations
 
 import logging

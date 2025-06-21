@@ -1,3 +1,15 @@
+"""
+Módulo quests.py
+==================
+
+Gera uma descrição aleatória de "missão" para cada página crawleada,
+inspirada em desafios de jogos da franquia Pokémon.
+
+Uso:
+    from services.quests import QuestPokemon
+    quest = QuestPokemon(url)
+    print(quest.generate_description())
+"""
 import random
 
 class QuestPokemon:
@@ -23,11 +35,11 @@ class QuestPokemon:
     CHALLENGES = [
         "Trainer uses only Fire-type Pokémon",
         "Double battle against twin trainers",
-        # … (other challenges)
         "Only status moves are allowed (e.g., Growl, Sleep Powder)",
     ]
 
     def __init__(self, url: str):
+        # Armazena a URL e sorteia um conjunto de elementos da missão
         self.url = url
         self.environment = random.choice(self.ENVIRONMENTS)
         self.difficulty = random.choice(self.DIFFICULTIES)
@@ -35,6 +47,7 @@ class QuestPokemon:
         self.reward = random.choice(self.REWARDS)
 
     def generate_description(self) -> str:
+        # Gera descrição textual da missão formatada
         return (
             f"\n"
             f"Environment: {self.environment}\n"
