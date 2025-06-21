@@ -14,15 +14,15 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ## Summary
 
-1.  [Links indicated by the professor](#1-links-indicados-pelo-professor)
-2.  [Overview of the new architecture](#2-visão-geral-da-nova-arquitetura)
-3.  [Key improvements over the original code](#3-principais-melhorias-em-relação-ao-código-original)
-4.  [Design patterns identified / applied](#4-design-patterns-identificados--aplicados)
-5.  [Code smells & refactorings](#5-code-smells--refactorings)
-6.  [Strengths of the new solution](#6-pontos-fortes-da-nova-solução)
-7.  [Opportunities for improvement and next steps](#7-oportunidades-de-melhoria-e-próximos-passos)
-8.  [Context and theoretical foundation](#8-contextualização-e-fundamentação-teórica)
-9.  [References](#9-referências)
+1.  [Links indicated by the professor](#1-links-indicated-by-the-professor)  
+2.  [Overview of the new architecture](#2-overview-of-the-new-architecture)  
+3.  [Key improvements over the original code](#3-key-improvements-over-the-original-code)  
+4.  [Design patterns identified / applied](#4-design-patterns-identified--applied)  
+5.  [Code smells & refactorings](#5-code-smells--refactorings)  
+6.  [Strengths of the new solution](#6-strengths-of-the-new-solution)  
+7.  [Opportunities for improvement and next steps](#7-opportunities-for-improvement-and-next-steps)  
+8.  [Context and theoretical foundation](#8-context-and-theoretical-foundation)  
+9.  [References](#9-references)
 -----
 
 ## 1. Links Indicated by the Professor
