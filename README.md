@@ -46,7 +46,8 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 │   ├── pokemon.py
 │   └── pokemon_builder.py
 ├── services/         # business rules and utilities
-│   ├── csv_analyzer.py
+│   ├── csv_writer.py          # write csv
+│   ├── csv_analyzer.py        # analyze csv
 │   ├── logging.py             # central logging configuration
 │   ├── pokemon_crawler.py     # crawler and parser
 │   └── quests.py              # extra utilities (e.g., quests)
