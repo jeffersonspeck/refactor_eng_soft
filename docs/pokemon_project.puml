@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0
+class main
+main --> pokemon_crawler
+main --> csv_writer
+main --> csv_analyzer
+class pokemon_crawler
+pokemon_crawler --> pokemon
+pokemon_crawler --> pokemon_builder
+pokemon_crawler --> quests
+class pokemon_builder
+pokemon_builder --> pokemon
+class csv_writer
+csv_writer --> pokemon
+class csv_analyzer
+csv_analyzer --> pokemon
+class quests
+class pokemon
+@enduml

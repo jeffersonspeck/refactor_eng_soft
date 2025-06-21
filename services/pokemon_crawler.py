@@ -47,10 +47,6 @@ from bs4 import BeautifulSoup # type: ignore
 from models.pokemon import Pokemon
 from models.pokemon_builder import PokemonBuilder
 
-class ParsingError(Exception):
-    """[PT-BR] Erro genérico de parsing (ex.: tabela fora do padrão ou campo essencial ausente).
-    [EN] Generic parsing error (e.g., malformed table or missing essential field).
-    """
 class PokemonCrawler:
     """[PT-BR] Crawleia páginas HTML da *PokéMythology* e devolve objetos :class:`Pokemon`.
     [EN] Crawls *PokéMythology* HTML pages and returns :class:`Pokemon` objects.

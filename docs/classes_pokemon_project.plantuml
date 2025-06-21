@@ -1,7 +1,5 @@
 @startuml classes_pokemon_project
 set namespaceSeparator none
-class "<color:red>ParsingError</color>" as services.pokemon_crawler.ParsingError {
-}
 class "Pokemon" as models.pokemon.Pokemon {
   extra_attributes : Dict[str, str]
   image : Optional[str]
@@ -20,7 +18,7 @@ class "PokemonBuilder" as models.pokemon_builder.PokemonBuilder {
 }
 class "PokemonCSVAnalyzer" as services.csv_analyzer.PokemonCSVAnalyzer {
   csv_path : str
-  df : NoneType, TextFileReader
+  df : TextFileReader, NoneType
   encoding : str
   log_missing_values() -> 
   log_summary() -> 
