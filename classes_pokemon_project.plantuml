@@ -1,0 +1,48 @@
+@startuml classes_pokemon_project
+set namespaceSeparator none
+class "<color:red>ParsingError</color>" as services.pokemon_crawler.ParsingError {
+}
+class "Pokemon" as models.pokemon.Pokemon {
+  extra_attributes : Dict[str, str]
+  image : Optional[str]
+  name : str
+  number : str
+  types : List[str]
+  to_dict() -> dict
+}
+class "PokemonBuilder" as models.pokemon_builder.PokemonBuilder {
+  add_attribute(key: str, value: str)
+  add_type(t: str)
+  build() -> Pokemon
+  image(url: str)
+  name(n: str)
+  number(n: str)
+}
+class "PokemonCSVAnalyzer" as services.csv_analyzer.PokemonCSVAnalyzer {
+  csv_path : str
+  df : NoneType, TextFileReader
+  encoding : str
+  log_missing_values() -> 
+  log_summary() -> 
+  run_full_report() -> 
+}
+class "PokemonCrawler" as services.pokemon_crawler.PokemonCrawler {
+  BASE_URL : str
+  url : str
+  crawl() -> list[Pokemon]
+  discover_pages(start_page) -> list[str]
+  fetch_html() -> str
+}
+class "QuestPokemon" as services.quests.QuestPokemon {
+  CHALLENGES : list
+  DIFFICULTIES : list
+  ENVIRONMENTS : list
+  REWARDS : list
+  challenge
+  difficulty
+  environment
+  reward
+  url : str
+  generate_description() -> str
+}
+@enduml
