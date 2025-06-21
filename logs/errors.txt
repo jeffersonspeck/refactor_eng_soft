@@ -1,102 +1,102 @@
-2025-06-20 21:34:12,594 - DEBUG    - urllib3.connectionpool - Starting new HTTPS connection (1): pokemythology.net:443
-2025-06-20 21:34:13,264 - DEBUG    - urllib3.connectionpool - https://pokemythology.net:443 "GET /conteudo/pokemon/lista01.htm HTTP/1.1" 200 None
-2025-06-20 21:34:13,378 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista01.htm
-2025-06-20 21:34:13,752 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:13,752 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/alolan.htm
-2025-06-20 21:34:14,066 - INFO     - root -   + 18 Pokémon captured on this page.
-2025-06-20 21:34:14,066 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista02.htm
-2025-06-20 21:34:15,034 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:15,034 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista03.htm
-2025-06-20 21:34:15,427 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:15,427 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista04.htm
-2025-06-20 21:34:15,768 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:15,768 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista05.htm
-2025-06-20 21:34:16,147 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:16,147 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista06.htm
-2025-06-20 21:34:16,514 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:16,514 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista07.htm
-2025-06-20 21:34:17,259 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:17,259 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista08.htm
-2025-06-20 21:34:18,011 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:18,011 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista09.htm
-2025-06-20 21:34:18,463 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:18,463 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista10.htm
-2025-06-20 21:34:18,977 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:18,977 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista11.htm
-2025-06-20 21:34:19,751 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:19,751 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista12.htm
-2025-06-20 21:34:20,274 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:20,274 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista13.htm
-2025-06-20 21:34:21,217 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:21,217 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista14.htm
-2025-06-20 21:34:21,587 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:21,587 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista15.htm
-2025-06-20 21:34:23,076 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:23,076 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista16.htm
-2025-06-20 21:34:23,412 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:23,412 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista17.htm
-2025-06-20 21:34:23,812 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:23,812 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista18.htm
-2025-06-20 21:34:24,189 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:24,189 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista19.htm
-2025-06-20 21:34:24,547 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:24,547 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista20.htm
-2025-06-20 21:34:25,254 - INFO     - root -   + 50 Pokémon captured on this page.
-2025-06-20 21:34:25,255 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/mega1.htm
-2025-06-20 21:34:25,970 - INFO     - root -   + 28 Pokémon captured on this page.
-2025-06-20 21:34:25,970 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/mega2.htm
-2025-06-20 21:34:28,305 - INFO     - root -   + 22 Pokémon captured on this page.
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,323 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
-2025-06-20 21:34:28,336 - INFO     - root - CSV loaded successfully from 'output/pokemons.csv' (1052 rows, 11 columns)
-2025-06-20 21:34:28,336 - INFO     - root - === Dataset summary ===
-2025-06-20 21:34:28,336 - INFO     - root - Total rows   : 1052
-2025-06-20 21:34:28,336 - INFO     - root - Total columns: 11
-2025-06-20 21:34:28,336 - INFO     - root - Column names : ['Altura', 'Coloração Shiny', 'Descrição', 'Espécie', 'Imagem', 'Linha Evolutiva', 'Nome', 'Nome Japonês', 'Nº', 'Peso', 'Tipo']
-2025-06-20 21:34:28,336 - INFO     - root - Column dtypes:
-2025-06-20 21:34:28,337 - INFO     - root -   • Altura               object
-2025-06-20 21:34:28,337 - INFO     - root -   • Coloração Shiny      object
-2025-06-20 21:34:28,337 - INFO     - root -   • Descrição            object
-2025-06-20 21:34:28,337 - INFO     - root -   • Espécie              object
-2025-06-20 21:34:28,337 - INFO     - root -   • Imagem               object
-2025-06-20 21:34:28,337 - INFO     - root -   • Linha Evolutiva      object
-2025-06-20 21:34:28,337 - INFO     - root -   • Nome                 object
-2025-06-20 21:34:28,337 - INFO     - root -   • Nome Japonês         object
-2025-06-20 21:34:28,337 - INFO     - root -   • Nº                   int64
-2025-06-20 21:34:28,337 - INFO     - root -   • Peso                 object
-2025-06-20 21:34:28,337 - INFO     - root -   • Tipo                 object
-2025-06-20 21:34:28,337 - INFO     - root - First 5 rows:
-2025-06-20 21:34:28,337 - INFO     - root -   Row 0 → {'Altura': '0,7 m (2\x9204\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/001.png', 'Descrição': 'O bulbo em suas  \t\t\tcostas está cheio de nutrientes. Nele, Bulbasaur armazena suas  \t\t\tenergias. O bulbo vai crescendo à medida que envelhece porque ele  \t\t\tabsorve os raios de sol.', 'Espécie': 'Pokémon Semente', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/001.png', 'Linha Evolutiva': 'Bulbasaur > lv.16 >  \t\t\tIvysaur > lv.32 > Venusaur', 'Nome': 'Bulbasaur', 'Nome Japonês': 'Fushigidane', 'Nº': 0, 'Peso': '6,9 kg (15.2 lbs)', 'Tipo': 'Planta/Veneno'}
-2025-06-20 21:34:28,337 - INFO     - root -   Row 1 → {'Altura': '1,0 m (3\x9203\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/002.png', 'Descrição': 'A luz solar fará a  \t\t\tflor em suas costas crescer. Conforme Ivysaur for crescendo, essa  \t\t\tflor irá desabrochar. Ela irá soltar um doce aroma quando florescer.', 'Espécie': 'Pokémon Semente', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/002.png', 'Linha Evolutiva': 'Bulbasaur > lv.16 >  \t\t\tIvysaur > lv.32 > Venusaur', 'Nome': 'Ivysaur', 'Nome Japonês': 'Fushigisou', 'Nº': 0, 'Peso': '13,0 kg (28.7 lbs)', 'Tipo': 'Planta/Veneno'}
-2025-06-20 21:34:28,337 - INFO     - root -   Row 2 → {'Altura': '2,0 m (6\x9207\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/003.png', 'Descrição': 'A luz solar que a  \t\t\tflor de suas costas absorve produz energia para seu corpo. Por esta  \t\t\trazão, ele fica mais forte no verão. O aroma dessa flor pode acalmar  \t\t\tas emoções das pessoas.', 'Espécie': 'Pokémon Semente', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/003.png', 'Linha Evolutiva': 'Bulbasaur > lv.16 >  \t\t\tIvysaur > lv.32 > Venusaur', 'Nome': 'Venusaur', 'Nome Japonês': 'Fushigibana', 'Nº': 0, 'Peso': '100,0 kg (220.5 lbs)', 'Tipo': 'Planta/Veneno'}
-2025-06-20 21:34:28,337 - INFO     - root -   Row 3 → {'Altura': '0,6 m (2\x9200\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/004.png', 'Descrição': 'A chama que possui na  \t\t\tponta de seu rabo mostra a força de sua vida. Se ele estiver fraco,  \t\t\ta chama irá diminuir. Quando está saudável, a chama brilhará  \t\t\tintensamente.', 'Espécie': 'Pokémon Lagarto', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/004.png', 'Linha Evolutiva': 'Charmander > lv.16 >  \t\t\tCharmeleon > lv.36 > Charizard', 'Nome': 'Charmander', 'Nome Japonês': 'Hitokage', 'Nº': 0, 'Peso': '8,5 kg (18.7 lbs)', 'Tipo': 'Fogo'}
-2025-06-20 21:34:28,338 - INFO     - root -   Row 4 → {'Altura': '1,1 m (3\x9207\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/005.png', 'Descrição': 'Gosta muito de  \t\t\tbrigas, por isso busca constantemente por adversários. Ele ataca com  \t\t\tsuas garras afiadas e usando sua cauda como chicote de fogo. Pode  \t\t\tsoltar chamas azuis quando muito animado.', 'Espécie': 'Pokémon Chama', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/005.png', 'Linha Evolutiva': 'Charmander > lv.16 >  \t\t\tCharmeleon > lv.36 > Charizard', 'Nome': 'Charmeleon', 'Nome Japonês': 'Lizard', 'Nº': 0, 'Peso': '19,0 kg (41.9 lbs)', 'Tipo': 'Fogo'}
-2025-06-20 21:34:28,361 - INFO     - root - Statistical summary:
-2025-06-20 21:34:28,362 - INFO     - root -   • Altura               {'count': 1052, 'unique': 127, 'top': '1,2 m (3\x9211\x94)', 'freq': 74}
-2025-06-20 21:34:28,362 - INFO     - root -   • Coloração Shiny      {'count': 1052, 'unique': 1046, 'top': 'https://www.serebii.net/Shiny/SM/774-b.png', 'freq': 7}
-2025-06-20 21:34:28,362 - INFO     - root -   • Descrição            {'count': 1051, 'unique': 1051, 'top': 'O bulbo em suas  \t\t\tcostas está cheio de nutrientes. Nele, Bulbasaur armazena suas  \t\t\tenergias. O bulbo vai crescendo à medida que envelhece porque ele  \t\t\tabsorve os raios de sol.', 'freq': 1}
-2025-06-20 21:34:28,362 - INFO     - root -   • Espécie              {'count': 1052, 'unique': 594, 'top': 'Pokémon Símbolo', 'freq': 28}
-2025-06-20 21:34:28,362 - INFO     - root -   • Imagem               {'count': 1052, 'unique': 1052, 'top': 'https://pokemythology.net/conteudo/imgs/dw/001.png', 'freq': 1}
-2025-06-20 21:34:28,363 - INFO     - root -   • Linha Evolutiva      {'count': 1052, 'unique': 399, 'top': 'Não Evolui', 'freq': 129}
-2025-06-20 21:34:28,363 - INFO     - root -   • Nome                 {'count': 1052, 'unique': 1018, 'top': 'Arceus', 'freq': 18}
-2025-06-20 21:34:28,363 - INFO     - root -   • Nome Japonês         {'count': 1052, 'unique': 879, 'top': 'Annon', 'freq': 28}
-2025-06-20 21:34:28,363 - INFO     - root -   • Nº                   {'count': 1052.0, 'mean': 0.0, 'std': 0.0, 'min': 0.0, '25%': 0.0, '50%': 0.0, '75%': 0.0, 'max': 0.0}
-2025-06-20 21:34:28,364 - INFO     - root -   • Peso                 {'count': 1052, 'unique': 597, 'top': '5,0 kg (11.0 lbs)', 'freq': 30}
-2025-06-20 21:34:28,364 - INFO     - root -   • Tipo                 {'count': 1052, 'unique': 176, 'top': 'Normal', 'freq': 76}
-2025-06-20 21:34:28,371 - INFO     - root - === Missing-value check ===
-2025-06-20 21:34:28,371 - WARNING  - root - Found 1 missing value(s) across the dataset.
-2025-06-20 21:34:28,371 - WARNING  - root -   • Descrição            1 missing
+2025-06-21 14:12:12,370 - DEBUG    - urllib3.connectionpool - Starting new HTTPS connection (1): pokemythology.net:443
+2025-06-21 14:12:12,703 - DEBUG    - urllib3.connectionpool - https://pokemythology.net:443 "GET /conteudo/pokemon/lista01.htm HTTP/1.1" 200 None
+2025-06-21 14:12:12,813 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista01.htm
+2025-06-21 14:12:13,364 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:13,364 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/alolan.htm
+2025-06-21 14:12:13,693 - INFO     - root -   + 18 Pokémon captured on this page.
+2025-06-21 14:12:13,693 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista02.htm
+2025-06-21 14:12:14,092 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:14,092 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista03.htm
+2025-06-21 14:12:14,516 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:14,516 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista04.htm
+2025-06-21 14:12:14,914 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:14,914 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista05.htm
+2025-06-21 14:12:15,307 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:15,307 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista06.htm
+2025-06-21 14:12:15,680 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:15,680 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista07.htm
+2025-06-21 14:12:16,093 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:16,093 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista08.htm
+2025-06-21 14:12:14,867 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:14,867 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista09.htm
+2025-06-21 14:12:15,272 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:15,272 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista10.htm
+2025-06-21 14:12:15,682 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:15,682 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista11.htm
+2025-06-21 14:12:16,133 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:16,133 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista12.htm
+2025-06-21 14:12:16,522 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:16,522 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista13.htm
+2025-06-21 14:12:16,906 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:16,906 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista14.htm
+2025-06-21 14:12:17,287 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:17,288 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista15.htm
+2025-06-21 14:12:17,709 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:17,709 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista16.htm
+2025-06-21 14:12:18,097 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:18,097 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista17.htm
+2025-06-21 14:12:18,568 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:18,568 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista18.htm
+2025-06-21 14:12:18,990 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:18,990 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista19.htm
+2025-06-21 14:12:19,436 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:19,436 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/lista20.htm
+2025-06-21 14:12:19,854 - INFO     - root -   + 50 Pokémon captured on this page.
+2025-06-21 14:12:19,854 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/mega1.htm
+2025-06-21 14:12:20,192 - INFO     - root -   + 28 Pokémon captured on this page.
+2025-06-21 14:12:20,192 - INFO     - root - Crawling Pokémon from: https://pokemythology.net/conteudo/pokemon/mega2.htm
+2025-06-21 14:12:20,504 - INFO     - root -   + 22 Pokémon captured on this page.
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,521 - WARNING  - root - Row skipped—almost empty: {'Nº': '0', 'Nome': '', 'Tipo': '', 'Imagem': '', 'Nome Japonês': '', 'Espécie': '', 'Peso': '', 'Altura': '', 'Linha Evolutiva': '', 'Descrição': ''}
+2025-06-21 14:12:20,535 - INFO     - root - CSV loaded successfully from 'output/pokemons.csv' (1052 rows, 11 columns)
+2025-06-21 14:12:20,535 - INFO     - root - === Dataset summary ===
+2025-06-21 14:12:20,535 - INFO     - root - Total rows   : 1052
+2025-06-21 14:12:20,535 - INFO     - root - Total columns: 11
+2025-06-21 14:12:20,535 - INFO     - root - Column names : ['Altura', 'Coloração Shiny', 'Descrição', 'Espécie', 'Imagem', 'Linha Evolutiva', 'Nome', 'Nome Japonês', 'Nº', 'Peso', 'Tipo']
+2025-06-21 14:12:20,535 - INFO     - root - Column dtypes:
+2025-06-21 14:12:20,535 - INFO     - root -   • Altura               object
+2025-06-21 14:12:20,535 - INFO     - root -   • Coloração Shiny      object
+2025-06-21 14:12:20,535 - INFO     - root -   • Descrição            object
+2025-06-21 14:12:20,535 - INFO     - root -   • Espécie              object
+2025-06-21 14:12:20,535 - INFO     - root -   • Imagem               object
+2025-06-21 14:12:20,535 - INFO     - root -   • Linha Evolutiva      object
+2025-06-21 14:12:20,536 - INFO     - root -   • Nome                 object
+2025-06-21 14:12:20,536 - INFO     - root -   • Nome Japonês         object
+2025-06-21 14:12:20,536 - INFO     - root -   • Nº                   int64
+2025-06-21 14:12:20,536 - INFO     - root -   • Peso                 object
+2025-06-21 14:12:20,536 - INFO     - root -   • Tipo                 object
+2025-06-21 14:12:20,536 - INFO     - root - First 5 rows:
+2025-06-21 14:12:20,536 - INFO     - root -   Row 0 → {'Altura': '0,7 m (2\x9204\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/001.png', 'Descrição': 'O bulbo em suas  \t\t\tcostas está cheio de nutrientes. Nele, Bulbasaur armazena suas  \t\t\tenergias. O bulbo vai crescendo à medida que envelhece porque ele  \t\t\tabsorve os raios de sol.', 'Espécie': 'Pokémon Semente', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/001.png', 'Linha Evolutiva': 'Bulbasaur > lv.16 >  \t\t\tIvysaur > lv.32 > Venusaur', 'Nome': 'Bulbasaur', 'Nome Japonês': 'Fushigidane', 'Nº': 0, 'Peso': '6,9 kg (15.2 lbs)', 'Tipo': 'Planta/Veneno'}
+2025-06-21 14:12:20,536 - INFO     - root -   Row 1 → {'Altura': '1,0 m (3\x9203\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/002.png', 'Descrição': 'A luz solar fará a  \t\t\tflor em suas costas crescer. Conforme Ivysaur for crescendo, essa  \t\t\tflor irá desabrochar. Ela irá soltar um doce aroma quando florescer.', 'Espécie': 'Pokémon Semente', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/002.png', 'Linha Evolutiva': 'Bulbasaur > lv.16 >  \t\t\tIvysaur > lv.32 > Venusaur', 'Nome': 'Ivysaur', 'Nome Japonês': 'Fushigisou', 'Nº': 0, 'Peso': '13,0 kg (28.7 lbs)', 'Tipo': 'Planta/Veneno'}
+2025-06-21 14:12:20,536 - INFO     - root -   Row 2 → {'Altura': '2,0 m (6\x9207\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/003.png', 'Descrição': 'A luz solar que a  \t\t\tflor de suas costas absorve produz energia para seu corpo. Por esta  \t\t\trazão, ele fica mais forte no verão. O aroma dessa flor pode acalmar  \t\t\tas emoções das pessoas.', 'Espécie': 'Pokémon Semente', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/003.png', 'Linha Evolutiva': 'Bulbasaur > lv.16 >  \t\t\tIvysaur > lv.32 > Venusaur', 'Nome': 'Venusaur', 'Nome Japonês': 'Fushigibana', 'Nº': 0, 'Peso': '100,0 kg (220.5 lbs)', 'Tipo': 'Planta/Veneno'}
+2025-06-21 14:12:20,536 - INFO     - root -   Row 3 → {'Altura': '0,6 m (2\x9200\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/004.png', 'Descrição': 'A chama que possui na  \t\t\tponta de seu rabo mostra a força de sua vida. Se ele estiver fraco,  \t\t\ta chama irá diminuir. Quando está saudável, a chama brilhará  \t\t\tintensamente.', 'Espécie': 'Pokémon Lagarto', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/004.png', 'Linha Evolutiva': 'Charmander > lv.16 >  \t\t\tCharmeleon > lv.36 > Charizard', 'Nome': 'Charmander', 'Nome Japonês': 'Hitokage', 'Nº': 0, 'Peso': '8,5 kg (18.7 lbs)', 'Tipo': 'Fogo'}
+2025-06-21 14:12:20,536 - INFO     - root -   Row 4 → {'Altura': '1,1 m (3\x9207\x94)', 'Coloração Shiny': 'https://www.serebii.net/Shiny/SM/005.png', 'Descrição': 'Gosta muito de  \t\t\tbrigas, por isso busca constantemente por adversários. Ele ataca com  \t\t\tsuas garras afiadas e usando sua cauda como chicote de fogo. Pode  \t\t\tsoltar chamas azuis quando muito animado.', 'Espécie': 'Pokémon Chama', 'Imagem': 'https://pokemythology.net/conteudo/imgs/dw/005.png', 'Linha Evolutiva': 'Charmander > lv.16 >  \t\t\tCharmeleon > lv.36 > Charizard', 'Nome': 'Charmeleon', 'Nome Japonês': 'Lizard', 'Nº': 0, 'Peso': '19,0 kg (41.9 lbs)', 'Tipo': 'Fogo'}
+2025-06-21 14:12:20,558 - INFO     - root - Statistical summary:
+2025-06-21 14:12:20,559 - INFO     - root -   • Altura               {'count': 1052, 'unique': 127, 'top': '1,2 m (3\x9211\x94)', 'freq': 74}
+2025-06-21 14:12:20,559 - INFO     - root -   • Coloração Shiny      {'count': 1052, 'unique': 1046, 'top': 'https://www.serebii.net/Shiny/SM/774-b.png', 'freq': 7}
+2025-06-21 14:12:20,559 - INFO     - root -   • Descrição            {'count': 1051, 'unique': 1051, 'top': 'O bulbo em suas  \t\t\tcostas está cheio de nutrientes. Nele, Bulbasaur armazena suas  \t\t\tenergias. O bulbo vai crescendo à medida que envelhece porque ele  \t\t\tabsorve os raios de sol.', 'freq': 1}
+2025-06-21 14:12:20,559 - INFO     - root -   • Espécie              {'count': 1052, 'unique': 594, 'top': 'Pokémon Símbolo', 'freq': 28}
+2025-06-21 14:12:20,559 - INFO     - root -   • Imagem               {'count': 1052, 'unique': 1052, 'top': 'https://pokemythology.net/conteudo/imgs/dw/001.png', 'freq': 1}
+2025-06-21 14:12:20,559 - INFO     - root -   • Linha Evolutiva      {'count': 1052, 'unique': 399, 'top': 'Não Evolui', 'freq': 129}
+2025-06-21 14:12:20,560 - INFO     - root -   • Nome                 {'count': 1052, 'unique': 1018, 'top': 'Arceus', 'freq': 18}
+2025-06-21 14:12:20,560 - INFO     - root -   • Nome Japonês         {'count': 1052, 'unique': 879, 'top': 'Annon', 'freq': 28}
+2025-06-21 14:12:20,560 - INFO     - root -   • Nº                   {'count': 1052.0, 'mean': 0.0, 'std': 0.0, 'min': 0.0, '25%': 0.0, '50%': 0.0, '75%': 0.0, 'max': 0.0}
+2025-06-21 14:12:20,560 - INFO     - root -   • Peso                 {'count': 1052, 'unique': 597, 'top': '5,0 kg (11.0 lbs)', 'freq': 30}
+2025-06-21 14:12:20,560 - INFO     - root -   • Tipo                 {'count': 1052, 'unique': 176, 'top': 'Normal', 'freq': 76}
+2025-06-21 14:12:20,567 - INFO     - root - === Missing-value check ===
+2025-06-21 14:12:20,567 - WARNING  - root - Found 1 missing value(s) across the dataset.
+2025-06-21 14:12:20,567 - WARNING  - root -   • Descrição            1 missing

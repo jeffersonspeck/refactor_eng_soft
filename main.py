@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-main.py – ponto de entrada para o sistema de captura de dados Pokémon.
+main.py - ponto de entrada para o sistema de captura de dados Pokémon.
 
 Fluxo principal:
 1. Carrega variáveis de configuração do arquivo ``.env`` (START_PAGE, OUTPUT_FILE).
@@ -23,7 +23,7 @@ import logging
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 
 from services.pokemon_crawler import PokemonCrawler
 from services.quests import QuestPokemon
