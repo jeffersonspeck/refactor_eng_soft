@@ -1,3 +1,10 @@
+# Arquivos sensíveis e pastas de build temporárias
 .env
 output/
 logs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
