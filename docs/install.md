@@ -39,7 +39,7 @@ pip install -r requirements.txt
 4. **Leitura da Documentação do Arquivos**
 
 ```bash
-pdoc models/ services/ --html --output-dir docs
+pdoc models/ services/ -o docs
 ```
 
 ## Configuração
