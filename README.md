@@ -6,7 +6,8 @@
 
 ## Documentações auxiliares
 
-1. [Documentação Técnica](docs/documentation.md)
+1. [Manual de Configuração e Instalação](docs/install.md)
+2. [Documentação Técnica](docs/documentation.md)
 
 ## Sumário
 
@@ -171,3 +172,31 @@ A refatoração conduzida elimina grande parte dos smells, melhora métricas de 
 ### Observação Final
 
 Este documento foi elaborado para servir como documentação do trabalho de refatoração efetuado.
+
+## Licença
+
+Este projeto é disponibilizado para **uso acadêmico e educacional**, com permissão para:
+
+- Usar livremente o código-fonte;
+- Modificar e adaptar conforme necessário;
+- Compartilhar versões modificadas.
+
+**Condições de uso**:
+- É obrigatório manter a **citação dos autores originais**.
+- Em qualquer redistribuição ou adaptação, deve ser incluído crédito visível a:
+  - Edinéia dos Santos Brizola Brum  
+  - Jefferson Rodrigo Speck  
+  - Rafael Ferreira Lima  
+- A atividade foi originalmente proposta pelo professor **Sidgley Camargo de Andrade**, e isso também deve ser reconhecido nas versões derivadas.
+
+Este projeto **não pode ser comercializado** nem utilizado com fins lucrativos.
+
+---
+
+## Autores
+
+- Edinéia dos Santos Brizola Brum  
+- Jefferson Rodrigo Speck  
+- Rafael Ferreira Lima  
+
+**Proponente da atividade**: Prof. Sidgley Camargo de Andrade
