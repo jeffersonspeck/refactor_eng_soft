@@ -27,8 +27,6 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ## 1. Links Indicated by the Professor
 
-*(to be filled in later with actual URLs)*
-
 | Description          | URL |
 | -------------------- | --- |
 | Recommended Reading  | [Book](https://engsoftmoderna.info/cap9.html) |

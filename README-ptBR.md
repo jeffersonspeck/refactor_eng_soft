@@ -26,8 +26,6 @@
 
 ## 1. Links indicados pelo professor
 
-*(preencher posteriormente com as URLs reais)*
-
 | Descrição            | URL |
 | -------------------- | --- |
 | Leitura indicada     | [Livro](https://engsoftmoderna.info/cap9.html) |
