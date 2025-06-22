@@ -72,6 +72,10 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ¹ **SRP** – *Single Responsibility Principle* (each module/class has one clear reason to change).
 
+### 2.2 BPMN
+
+![Descrição da imagem](docs/pokemon.svg)
+
 -----
 ## 3. Key Improvements Over the Original Code
 

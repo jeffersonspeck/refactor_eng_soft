@@ -70,6 +70,9 @@
 | **Preparação para testes** | Sem estrutura                              | Classes com responsabilidades únicas                           | Testes unitários via `pytest` viáveis e incentivados      |
 > ¹ *SRP = Single Responsibility Principle (Princípio da Responsabilidade Única).*
 
+### 2.2 BPMN
+
+![Descrição da imagem](docs/pokemon.svg)
 ---
 
 ## 3. Principais melhorias em relação ao código original
