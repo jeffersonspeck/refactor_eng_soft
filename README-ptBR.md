@@ -122,15 +122,18 @@
 
 ### 5.1 Mapa geral de smells corrigidos
 
-| Code Smell (original)             | Solução / Refactoring                                     |
-| --------------------------------- | --------------------------------------------------------- |
-| **Método Longo**                  | **Extract Method** + **Extract Class** (`PokemonCrawler`) |
-| **Código Duplicado**              | `discover_pages`, `fetch_html` centralizam acesso HTTP    |
-| **Obsessão por Tipos Primitivos** | **Extract Class** `Pokemon`                               |
-| **Variáveis Globais**             | Removidas                                                 |
-| **Dependência externa visível**   | Configuração de log centralizada (`setup_logging`)        |
-| **Falta de verificação de nulos** | Guard-clauses nos pontos críticos de parsing              |
-
+| Nº | Code Smell                        | Como foi resolvido no projeto refatorado                                                                                                                                                    |
+| -- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1  | **Código Duplicado**              | Foi criado o método `fetch_html()` em `PokemonCrawler` e funções auxiliares em `main.py` (`discover_urls`, `crawl_all_pages`) – toda lógica de requisição/decodificação ficou centralizada. |
+| 2  | **Função Longa**                  | A antiga `crawl_page` foi substituída por uma classe `PokemonCrawler` com métodos internos pequenos (`_parse_single_table`, `_maybe_extract_*`).                                            |
+| 3  | **Variável Global**               | A lista global `pokemon_list` deixou de existir; cada chamada a `PokemonCrawler.crawl()` devolve uma lista que é agregada localmente em `main.py`.                                          |
+| 4  | **Captura Genérica de Exceções**  | Nos módulos refatorados passaram-se a capturar exceções específicas (`URLError`, `HTTPError`, `AttributeError`, `IndexError`, `TypeError`, `FileNotFoundError`, etc.).                      |
+| 5  | **Responsabilidades Misturadas**  | `main.py` foi modularizado: configuração de ambiente, descoberta de URLs, captura, escrita de CSV e análise ficam em funções separadas; a persistência (CSV) migrou para `csv_writer.py`.   |
+| 6  | **Obsessão por Tipos Primitivos** | Introduzidos `Pokemon` (dataclass imutável) e `PokemonBuilder`; o crawler passa a devolver objetos estruturados em vez de `dict`.                                                           |
+| 7  | **Logging Insuficiente**          | Implementado `services.logging.setup_logging()` (arquivo e console opcionais, níveis configuráveis); todos os módulos usam `logging` com mensagens informativas.                            |
+| 8  | **Números e Strings Mágicas**     | Criada a enum‐lite `PokemonFields` em `pokemon_crawler.py`; constantes de cor e separadores estão declaradas em variáveis nomeadas.                                                         |
+| 9  | **Falta de Modularização**        | Funções utilitárias (`clean_csv_value`, `is_effectively_empty`), builders, analisadores e quests foram extraídos para módulos próprios; cada responsabilidade ganhou um arquivo.            |
+| 10 | **Função Genérica Demais**        | `get_pages` foi descartada; `discover_pages()` filtra links que começam por `/conteudo/pokemon/` e terminam em `.htm`, removendo duplicatas e ordenando.                                    |
 > **Nota:** Algumas melhorias estruturais complementares também são consideradas refatorações válidas conforme Fowler (2019), mesmo sem alterar a lógica do programa. Entre elas:
 > 
 > - **Adicionar docstrings e comentários descritivos**, desde que aumentem a clareza e compreensão do código;

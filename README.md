@@ -124,14 +124,19 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ### 5.1 General Map of Corrected Smells
 
-| Code Smell (original)             | Solution / Refactoring                                    |
-| --------------------------------- | --------------------------------------------------------- |
-| **Long Method**                   | **Extract Method** + **Extract Class** (`PokemonCrawler`) |
-| **Duplicated Code**               | `discover_pages`, `fetch_html` centralize HTTP access     |
-| **Primitive Obsession**           | **Extract Class** `Pokemon`                               |
-| **Global Variables**              | Removed                                                   |
-| **Visible External Dependency**   | Centralized log configuration (`setup_logging`)           |
-| **Lack of Null Checks**           | Guard-clauses at critical parsing points                  |
+| No | Code Smell                  | How it was resolved in the final project                                     |
+|----|-----------------------------|-------------------------------------------------------------------------------|
+| 1  | **Duplicate Code**          | The `fetch_html()` method in `PokemonCrawler` and helper functions in `main.py` encapsulate all HTML request and decoding logic. |
+| 2  | **Long Function**           | The original `crawl_page` was decomposed into the `PokemonCrawler` class with well-separated internal methods (e.g., `_parse_single_table`, `_maybe_extract_*`). |
+| 3  | **Global Variable**         | The global `pokemon_list` was eliminated; each call to `crawl()` returns a local list of structured objects. |
+| 4  | **Generic Exception Handling** | Modules now catch specific exceptions (`URLError`, `HTTPError`, `AttributeError`, etc.), improving error traceability. |
+| 5  | **Mixed Responsibilities**  | `main.py` was modularized: environment setup, page discovery, crawling, CSV writing, and analysis are each handled by separate functions or modules. |
+| 6  | **Primitive Obsession**     | The code now uses structured `Pokemon` data objects (frozen dataclass) and a `PokemonBuilder`, instead of passing raw `dicts`. |
+| 7  | **Insufficient Logging**    | A centralized logging module (`setup_logging`) was implemented with optional console output and configurable levels; all modules now use meaningful log messages. |
+| 8  | **Magic Numbers and Strings** | Key labels like `"Nº"`, `"Nome"`, `"Imagem"` were centralized in `PokemonFields`; constants like color codes are now named variables. |
+| 9  | **Lack of Modularization**  | Each responsibility (e.g., CSV writing, data cleaning, HTML parsing, quest generation) was moved to a dedicated module with clear scope. |
+| 10 | **Overly Generic Function** | The old `get_pages` function was replaced with `discover_pages()` which filters relevant Pokémon pages explicitly, removes duplicates, and returns a sorted list. |
+
 
 > **Note:** Some complementary structural improvements are also considered valid refactorings according to Fowler (2019), even without altering the program's logic. These include:
 >
