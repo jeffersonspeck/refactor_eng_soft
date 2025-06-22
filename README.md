@@ -25,7 +25,7 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 9.  [References](#9-references)
 -----
 
-## 1. Links Indicated by the Professor
+## References
 
 | Description          | URL |
 | -------------------- | --- |
@@ -33,6 +33,23 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 | Page Used in Class   | [URL](https://refactoring.guru/pt-br/refactoring/smells) |
 
 -----
+
+## 1. Codes Smells
+
+| No | Code Smell                          | Description                                                                 |
+|----|-------------------------------------|-----------------------------------------------------------------------------|
+| 1  | Duplicate Code                      | HTML request and cleanup logic repeated in multiple places.                |
+| 2  | Long Function                       | The `crawl_page` function performs too many tasks without separation.      |
+| 3  | Global Variable                     | `pokemon_list` is used as a shared global state.                           |
+| 4  | Generic Exception Handling          | Using `except Exception`, which hides the actual error source.             |
+| 5  | Mixed Responsibilities              | The `__main__` block mixes networking, control, and persistence logic.     |
+| 6  | Primitive Obsession                 | Use of dictionaries instead of structured objects or classes.              |
+| 7  | Insufficient Logging                | Lack of informative logs during processing steps.                          |
+| 8  | Magic Numbers and Strings           | Hardcoded values like colors and index positions in the code.              |
+| 9  | Lack of Modularization              | Missing helper functions to isolate specific responsibilities.             |
+| 10 | Overly Generic Function             | `get_pages` returns all links without any filtering criteria.              |
+
+----
 
 ## 2. Overview of the New Architecture
 

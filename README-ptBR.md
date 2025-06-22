@@ -24,12 +24,29 @@
 
 ---
 
-## 1. Links indicados pelo professor
+## Bibliografia
 
 | Descrição            | URL |
 | -------------------- | --- |
 | Leitura indicada     | [Livro](https://engsoftmoderna.info/cap9.html) |
 | Página usada em aula | [URL](https://refactoring.guru/pt-br/refactoring/smells) |
+
+---
+
+## 1. Codes Smells
+
+| Nº | Code Smell                                        | Descrição                                                                 |
+|----|---------------------------------------------------|---------------------------------------------------------------------------|
+| 1  | Código Duplicado                                  | Requisições e limpeza de HTML repetidas em diferentes pontos do código.  |
+| 2  | Função Longa                                       | A função `crawl_page` realiza múltiplas tarefas sem modularização.       |
+| 3  | Variável Global                                    | Uso de `pokemon_list` como variável global compartilhada.                |
+| 4  | Captura Genérica de Exceções                      | Uso de `except Exception`, dificultando a identificação do erro real.    |
+| 5  | Responsabilidades Misturadas                       | O bloco `__main__` combina lógica de rede, controle e persistência.      |
+| 6  | Obsessão por Tipos Primitivos                     | Uso de dicionários (`dict`) em vez de objetos estruturados.              |
+| 7  | Logging Insuficiente                              | Ausência de logs informativos durante o processamento.                   |
+| 8  | Números e Strings Mágicas                         | Uso direto de valores fixos no código (ex.: cores e índices).            |
+| 9  | Falta de Modularização                            | Ausência de funções auxiliares para dividir responsabilidades.           |
+| 10 | Função Genérica Demais                            | `get_pages` retorna todos os links sem qualquer critério de filtragem.   |
 
 ---
 
