@@ -1,4 +1,5 @@
 pdoc
+typing
 beautifulsoup4>=4.12
 requests>=2.31
 pandas>=2.2
