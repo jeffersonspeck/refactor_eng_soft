@@ -14,11 +14,13 @@ Uso típico / Typical usage:
     analyzer.run_full_report()
 """
 import logging
+from typing import Optional
 import pandas as pd  # type: ignore
-from collections import defaultdict
+from pandas.errors import EmptyDataError, ParserError # type: ignore
 
 class PokemonCSVAnalyzer:
-    """[PT-BR] Classe utilitária para executar diferentes validações em um CSV de Pokémon.
+    """
+    [PT-BR] Classe utilitária para executar diferentes validações em um CSV de Pokémon.
     [EN] Utility class to run various validations on a Pokémon CSV.
     """
 
@@ -29,15 +31,11 @@ class PokemonCSVAnalyzer:
             self.df = pd.read_csv(csv_path, encoding=encoding)
             logging.info("CSV loaded successfully from '%s' (%d rows, %d columns)",
                          csv_path, len(self.df), len(self.df.columns))
-        except Exception:
-            logging.error("Failed to load CSV '%s'", csv_path, exc_info=True)
+        except (FileNotFoundError, UnicodeDecodeError, EmptyDataError, ParserError) as e:
+            logging.error("Failed to load CSV '%s': %s", csv_path, str(e), exc_info=True)
             raise
 
-    # -------------------------------------------------
-    # Métodos públicos de análise / Public analysis methods
-    # -------------------------------------------------
-
-    def log_summary(self) -> None:
+    def log_summary(self, head_n: int = 5) -> None:
         """
         [PT-BR] Exibe no log um resumo estatístico e estrutural do conjunto de dados.
         [EN] Logs a structural and statistical summary of the dataset.
@@ -47,17 +45,14 @@ class PokemonCSVAnalyzer:
         logging.info("Total columns: %d", len(self.df.columns))
         logging.info("Column names : %s", list(self.df.columns))
 
-        # Tipos de dados / Data types
         logging.info("Column dtypes:")
         for col, dtype in self.df.dtypes.items():
             logging.info("  • %-20s %s", col, dtype)
 
-        # Primeiras linhas / First rows
-        logging.info("First 5 rows:")
-        for idx, row in self.df.head(5).iterrows():
+        logging.info("First %d rows:", head_n)
+        for idx, row in self.df.head(head_n).iterrows():
             logging.info("  Row %d → %s", idx, row.to_dict())
 
-        # Sumário estatístico / Statistical summary
         stats = self.df.describe(include='all').transpose()
         logging.info("Statistical summary:")
         for col in stats.index:
@@ -68,8 +63,8 @@ class PokemonCSVAnalyzer:
         [PT-BR] Exibe no log a quantidade de valores ausentes por coluna.
         [EN] Logs the number of missing (blank or empty) values per column.
         """
-        missing = self.df.isna() | (self.df.astype(str).apply(lambda col: col.str.strip() == "", axis=0))
-        missing_counts = missing.sum()
+        missing_mask = self.df.isna() | (self.df == "")
+        missing_counts = missing_mask.sum()
         total_missing = missing_counts.sum()
 
         logging.info("=== Missing-value check ===")
@@ -81,10 +76,17 @@ class PokemonCSVAnalyzer:
         for col, cnt in missing_counts[missing_counts > 0].sort_values(ascending=False).items():
             logging.warning("  • %-20s %d missing", col, cnt)
 
-    def run_full_report(self) -> None:
+    def run_full_report(self, show_summary: bool = True, check_missing: bool = True, head_n: int = 5) -> None:
         """
-        [PT-BR] Executa todas as análises disponíveis em sequência.
-        [EN] Runs all available analyses in sequence.
+        [PT-BR] Executa as análises selecionadas em sequência.
+        [EN] Runs selected analyses in sequence.
+
+        Parâmetros:
+            show_summary (bool): mostra o resumo estrutural e estatístico.
+            check_missing (bool): verifica valores ausentes.
+            head_n (int): número de linhas a exibir no resumo.
         """
-        self.log_summary()
-        self.log_missing_values()
+        if show_summary:
+            self.log_summary(head_n=head_n)
+        if check_missing:
+            self.log_missing_values()

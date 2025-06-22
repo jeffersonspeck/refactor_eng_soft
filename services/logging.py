@@ -21,37 +21,51 @@ Uso / Usage:
 
 import logging
 import os
+from typing import Optional
 
-def setup_logging(log_file: str = "logs/errors.txt", console_level=logging.INFO, file_level=logging.DEBUG):
+def setup_logging(
+    log_file: str = "logs/errors.txt",
+    console_level: int = logging.INFO,
+    file_level: int = logging.DEBUG,
+    enable_console: bool = True,
+    append: bool = False,
+    logger_name: Optional[str] = None
+) -> logging.Logger:
     """
-    [PT-BR] Configura o sistema de logging com níveis diferenciados para arquivo e console.
-    [EN] Sets up the logging system with different levels for file and console output.
+    [PT-BR] Configura o sistema de logging com opções para arquivo e console.
+    [EN] Sets up the logging system with options for file and console.
+
+    Parâmetros / Parameters:
+        log_file (str): Caminho para o arquivo de log / Log file path.
+        console_level (int): Nível do log para o console / Console log level.
+        file_level (int): Nível do log para o arquivo / File log level.
+        enable_console (bool): Habilita ou não o log no console / Enable console output.
+        append (bool): Se True, adiciona ao arquivo existente / If True, appends to log file.
+        logger_name (Optional[str]): Nome do logger / Logger name (None = root logger).
+
+    Retorna / Returns:
+        logging.Logger: Instância configurada do logger / Configured logger instance.
     """
-    # [PT-BR] Garante que a pasta de destino exista
-    # [EN] Ensures the target directory exists
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
-    logger = logging.getLogger()
+    logger = logging.getLogger(logger_name)
     logger.setLevel(logging.DEBUG)
 
-    # [PT-BR] Remove handlers anteriores para evitar duplicidade
-    # [EN] Clear previous handlers to avoid duplicate messages
     if logger.hasHandlers():
         logger.handlers.clear()
 
-    # [PT-BR] Handler para salvar em arquivo
-    # [EN] File handler
-    f_handler = logging.FileHandler(log_file, mode="w", encoding="utf-8")
+    mode = "a" if append else "w"
+    f_handler = logging.FileHandler(log_file, mode=mode, encoding="utf-8")
     f_handler.setLevel(file_level)
-
-    # [PT-BR] Handler de console (desativado por padrão)
-    # [EN] Console handler (disabled by default)
-    # c_handler = logging.StreamHandler()
-    # c_handler.setLevel(console_level)
 
     fmt = logging.Formatter("%(asctime)s - %(levelname)-8s - %(name)s - %(message)s")
     f_handler.setFormatter(fmt)
-    # c_handler.setFormatter(fmt)
-
     logger.addHandler(f_handler)
-    # logger.addHandler(c_handler)
+
+    if enable_console:
+        c_handler = logging.StreamHandler()
+        c_handler.setLevel(console_level)
+        c_handler.setFormatter(fmt)
+        logger.addHandler(c_handler)
+
+    return logger

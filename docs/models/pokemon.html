@@ -126,25 +126,43 @@ into a dictionary formatted for CSV export or display.</p>
 </span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
 </span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="k">class</span> <span class="nc">Pokemon</span><span class="p">:</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="n">types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">extra_attributes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>        <span class="c1"># [PT-BR] Campos fixos padronizados</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>        <span class="c1"># [EN] Standard fixed fields</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>            <span class="s2">&quot;Nº&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">),</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>            <span class="s2">&quot;Nome&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>            <span class="s2">&quot;Tipo&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">),</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>            <span class="s2">&quot;Imagem&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>        <span class="p">}</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>        <span class="c1"># [PT-BR] Acrescenta atributos extras capturados do HTML</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>        <span class="c1"># [EN] Appends extra attributes extracted from HTML</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_attributes</span><span class="p">)</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>        <span class="k">return</span> <span class="n">data</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="sd">    [PT-BR] Representa um Pokémon com atributos fixos e extras. Imutável.</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="sd">    [EN] Represents a Pokémon with fixed and extra attributes. Immutable.</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="n">types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="n">extra_attributes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="sd">        [PT-BR] Converte o Pokémon em dicionário para exportação.</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="sd">        [EN] Converts the Pokémon into a dictionary for export.</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">        Parâmetros:</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">            type_sep (str): Separador dos tipos no campo &quot;Tipo&quot;.</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="sd">        Retorna:</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">            dict[str, str]: Dicionário formatado.</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>        <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>            <span class="s2">&quot;Nº&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>            <span class="s2">&quot;Nome&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>            <span class="s2">&quot;Tipo&quot;</span><span class="p">:</span> <span class="n">type_sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">),</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>            <span class="s2">&quot;Imagem&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="p">}</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_attributes</span><span class="p">)</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>        <span class="k">return</span> <span class="n">data</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a><span class="sd">        [PT-BR] Representação legível do objeto.</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">        [EN] Human-readable object representation.</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>        <span class="n">tipo</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">)</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Pokemon[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">tipo</span><span class="si">}</span><span class="s2">)&quot;</span>
 </span></pre></div>
 
 
@@ -163,29 +181,50 @@ into a dictionary formatted for CSV export or display.</p>
     <a class="headerlink" href="#Pokemon"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="Pokemon-25"><a href="#Pokemon-25"><span class="linenos">25</span></a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span><span id="Pokemon-26"><a href="#Pokemon-26"><span class="linenos">26</span></a><span class="k">class</span> <span class="nc">Pokemon</span><span class="p">:</span>
-</span><span id="Pokemon-27"><a href="#Pokemon-27"><span class="linenos">27</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Pokemon-28"><a href="#Pokemon-28"><span class="linenos">28</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="Pokemon-29"><a href="#Pokemon-29"><span class="linenos">29</span></a>    <span class="n">types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-</span><span id="Pokemon-30"><a href="#Pokemon-30"><span class="linenos">30</span></a>    <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="Pokemon-31"><a href="#Pokemon-31"><span class="linenos">31</span></a>    <span class="n">extra_attributes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-</span><span id="Pokemon-32"><a href="#Pokemon-32"><span class="linenos">32</span></a>
-</span><span id="Pokemon-33"><a href="#Pokemon-33"><span class="linenos">33</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Pokemon-34"><a href="#Pokemon-34"><span class="linenos">34</span></a>        <span class="c1"># [PT-BR] Campos fixos padronizados</span>
-</span><span id="Pokemon-35"><a href="#Pokemon-35"><span class="linenos">35</span></a>        <span class="c1"># [EN] Standard fixed fields</span>
-</span><span id="Pokemon-36"><a href="#Pokemon-36"><span class="linenos">36</span></a>        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="Pokemon-37"><a href="#Pokemon-37"><span class="linenos">37</span></a>            <span class="s2">&quot;Nº&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">),</span>
-</span><span id="Pokemon-38"><a href="#Pokemon-38"><span class="linenos">38</span></a>            <span class="s2">&quot;Nome&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-</span><span id="Pokemon-39"><a href="#Pokemon-39"><span class="linenos">39</span></a>            <span class="s2">&quot;Tipo&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">),</span>
-</span><span id="Pokemon-40"><a href="#Pokemon-40"><span class="linenos">40</span></a>            <span class="s2">&quot;Imagem&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
-</span><span id="Pokemon-41"><a href="#Pokemon-41"><span class="linenos">41</span></a>        <span class="p">}</span>
-</span><span id="Pokemon-42"><a href="#Pokemon-42"><span class="linenos">42</span></a>        <span class="c1"># [PT-BR] Acrescenta atributos extras capturados do HTML</span>
-</span><span id="Pokemon-43"><a href="#Pokemon-43"><span class="linenos">43</span></a>        <span class="c1"># [EN] Appends extra attributes extracted from HTML</span>
-</span><span id="Pokemon-44"><a href="#Pokemon-44"><span class="linenos">44</span></a>        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_attributes</span><span class="p">)</span>
-</span><span id="Pokemon-45"><a href="#Pokemon-45"><span class="linenos">45</span></a>        <span class="k">return</span> <span class="n">data</span>
+</span><span id="Pokemon-27"><a href="#Pokemon-27"><span class="linenos">27</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Pokemon-28"><a href="#Pokemon-28"><span class="linenos">28</span></a><span class="sd">    [PT-BR] Representa um Pokémon com atributos fixos e extras. Imutável.</span>
+</span><span id="Pokemon-29"><a href="#Pokemon-29"><span class="linenos">29</span></a><span class="sd">    [EN] Represents a Pokémon with fixed and extra attributes. Immutable.</span>
+</span><span id="Pokemon-30"><a href="#Pokemon-30"><span class="linenos">30</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="Pokemon-31"><a href="#Pokemon-31"><span class="linenos">31</span></a>    <span class="n">number</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Pokemon-32"><a href="#Pokemon-32"><span class="linenos">32</span></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="Pokemon-33"><a href="#Pokemon-33"><span class="linenos">33</span></a>    <span class="n">types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</span><span id="Pokemon-34"><a href="#Pokemon-34"><span class="linenos">34</span></a>    <span class="n">image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Pokemon-35"><a href="#Pokemon-35"><span class="linenos">35</span></a>    <span class="n">extra_attributes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+</span><span id="Pokemon-36"><a href="#Pokemon-36"><span class="linenos">36</span></a>
+</span><span id="Pokemon-37"><a href="#Pokemon-37"><span class="linenos">37</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="Pokemon-38"><a href="#Pokemon-38"><span class="linenos">38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Pokemon-39"><a href="#Pokemon-39"><span class="linenos">39</span></a><span class="sd">        [PT-BR] Converte o Pokémon em dicionário para exportação.</span>
+</span><span id="Pokemon-40"><a href="#Pokemon-40"><span class="linenos">40</span></a><span class="sd">        [EN] Converts the Pokémon into a dictionary for export.</span>
+</span><span id="Pokemon-41"><a href="#Pokemon-41"><span class="linenos">41</span></a>
+</span><span id="Pokemon-42"><a href="#Pokemon-42"><span class="linenos">42</span></a><span class="sd">        Parâmetros:</span>
+</span><span id="Pokemon-43"><a href="#Pokemon-43"><span class="linenos">43</span></a><span class="sd">            type_sep (str): Separador dos tipos no campo &quot;Tipo&quot;.</span>
+</span><span id="Pokemon-44"><a href="#Pokemon-44"><span class="linenos">44</span></a>
+</span><span id="Pokemon-45"><a href="#Pokemon-45"><span class="linenos">45</span></a><span class="sd">        Retorna:</span>
+</span><span id="Pokemon-46"><a href="#Pokemon-46"><span class="linenos">46</span></a><span class="sd">            dict[str, str]: Dicionário formatado.</span>
+</span><span id="Pokemon-47"><a href="#Pokemon-47"><span class="linenos">47</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Pokemon-48"><a href="#Pokemon-48"><span class="linenos">48</span></a>        <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="Pokemon-49"><a href="#Pokemon-49"><span class="linenos">49</span></a>            <span class="s2">&quot;Nº&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
+</span><span id="Pokemon-50"><a href="#Pokemon-50"><span class="linenos">50</span></a>            <span class="s2">&quot;Nome&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="Pokemon-51"><a href="#Pokemon-51"><span class="linenos">51</span></a>            <span class="s2">&quot;Tipo&quot;</span><span class="p">:</span> <span class="n">type_sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">),</span>
+</span><span id="Pokemon-52"><a href="#Pokemon-52"><span class="linenos">52</span></a>            <span class="s2">&quot;Imagem&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+</span><span id="Pokemon-53"><a href="#Pokemon-53"><span class="linenos">53</span></a>        <span class="p">}</span>
+</span><span id="Pokemon-54"><a href="#Pokemon-54"><span class="linenos">54</span></a>        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_attributes</span><span class="p">)</span>
+</span><span id="Pokemon-55"><a href="#Pokemon-55"><span class="linenos">55</span></a>        <span class="k">return</span> <span class="n">data</span>
+</span><span id="Pokemon-56"><a href="#Pokemon-56"><span class="linenos">56</span></a>
+</span><span id="Pokemon-57"><a href="#Pokemon-57"><span class="linenos">57</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="Pokemon-58"><a href="#Pokemon-58"><span class="linenos">58</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Pokemon-59"><a href="#Pokemon-59"><span class="linenos">59</span></a><span class="sd">        [PT-BR] Representação legível do objeto.</span>
+</span><span id="Pokemon-60"><a href="#Pokemon-60"><span class="linenos">60</span></a><span class="sd">        [EN] Human-readable object representation.</span>
+</span><span id="Pokemon-61"><a href="#Pokemon-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Pokemon-62"><a href="#Pokemon-62"><span class="linenos">62</span></a>        <span class="n">tipo</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">)</span>
+</span><span id="Pokemon-63"><a href="#Pokemon-63"><span class="linenos">63</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Pokemon[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">tipo</span><span class="si">}</span><span class="s2">)&quot;</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>[PT-BR] Representa um Pokémon com atributos fixos e extras. Imutável.
+[EN] Represents a Pokémon with fixed and extra attributes. Immutable.</p>
+</div>
+
 
                             <div id="Pokemon.__init__" class="classattr">
                                 <div class="attr function">
@@ -260,29 +299,44 @@ into a dictionary formatted for CSV export or display.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">dict</span>:</span></span>
+        <span class="name">to_dict</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">type_sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span></span><span class="return-annotation">) -> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>:</span></span>
 
                 <label class="view-source-button" for="Pokemon.to_dict-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#Pokemon.to_dict"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Pokemon.to_dict-33"><a href="#Pokemon.to_dict-33"><span class="linenos">33</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-</span><span id="Pokemon.to_dict-34"><a href="#Pokemon.to_dict-34"><span class="linenos">34</span></a>        <span class="c1"># [PT-BR] Campos fixos padronizados</span>
-</span><span id="Pokemon.to_dict-35"><a href="#Pokemon.to_dict-35"><span class="linenos">35</span></a>        <span class="c1"># [EN] Standard fixed fields</span>
-</span><span id="Pokemon.to_dict-36"><a href="#Pokemon.to_dict-36"><span class="linenos">36</span></a>        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="Pokemon.to_dict-37"><a href="#Pokemon.to_dict-37"><span class="linenos">37</span></a>            <span class="s2">&quot;Nº&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">),</span>
-</span><span id="Pokemon.to_dict-38"><a href="#Pokemon.to_dict-38"><span class="linenos">38</span></a>            <span class="s2">&quot;Nome&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-</span><span id="Pokemon.to_dict-39"><a href="#Pokemon.to_dict-39"><span class="linenos">39</span></a>            <span class="s2">&quot;Tipo&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">),</span>
-</span><span id="Pokemon.to_dict-40"><a href="#Pokemon.to_dict-40"><span class="linenos">40</span></a>            <span class="s2">&quot;Imagem&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
-</span><span id="Pokemon.to_dict-41"><a href="#Pokemon.to_dict-41"><span class="linenos">41</span></a>        <span class="p">}</span>
-</span><span id="Pokemon.to_dict-42"><a href="#Pokemon.to_dict-42"><span class="linenos">42</span></a>        <span class="c1"># [PT-BR] Acrescenta atributos extras capturados do HTML</span>
-</span><span id="Pokemon.to_dict-43"><a href="#Pokemon.to_dict-43"><span class="linenos">43</span></a>        <span class="c1"># [EN] Appends extra attributes extracted from HTML</span>
-</span><span id="Pokemon.to_dict-44"><a href="#Pokemon.to_dict-44"><span class="linenos">44</span></a>        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_attributes</span><span class="p">)</span>
-</span><span id="Pokemon.to_dict-45"><a href="#Pokemon.to_dict-45"><span class="linenos">45</span></a>        <span class="k">return</span> <span class="n">data</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Pokemon.to_dict-37"><a href="#Pokemon.to_dict-37"><span class="linenos">37</span></a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_sep</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+</span><span id="Pokemon.to_dict-38"><a href="#Pokemon.to_dict-38"><span class="linenos">38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Pokemon.to_dict-39"><a href="#Pokemon.to_dict-39"><span class="linenos">39</span></a><span class="sd">        [PT-BR] Converte o Pokémon em dicionário para exportação.</span>
+</span><span id="Pokemon.to_dict-40"><a href="#Pokemon.to_dict-40"><span class="linenos">40</span></a><span class="sd">        [EN] Converts the Pokémon into a dictionary for export.</span>
+</span><span id="Pokemon.to_dict-41"><a href="#Pokemon.to_dict-41"><span class="linenos">41</span></a>
+</span><span id="Pokemon.to_dict-42"><a href="#Pokemon.to_dict-42"><span class="linenos">42</span></a><span class="sd">        Parâmetros:</span>
+</span><span id="Pokemon.to_dict-43"><a href="#Pokemon.to_dict-43"><span class="linenos">43</span></a><span class="sd">            type_sep (str): Separador dos tipos no campo &quot;Tipo&quot;.</span>
+</span><span id="Pokemon.to_dict-44"><a href="#Pokemon.to_dict-44"><span class="linenos">44</span></a>
+</span><span id="Pokemon.to_dict-45"><a href="#Pokemon.to_dict-45"><span class="linenos">45</span></a><span class="sd">        Retorna:</span>
+</span><span id="Pokemon.to_dict-46"><a href="#Pokemon.to_dict-46"><span class="linenos">46</span></a><span class="sd">            dict[str, str]: Dicionário formatado.</span>
+</span><span id="Pokemon.to_dict-47"><a href="#Pokemon.to_dict-47"><span class="linenos">47</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Pokemon.to_dict-48"><a href="#Pokemon.to_dict-48"><span class="linenos">48</span></a>        <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="Pokemon.to_dict-49"><a href="#Pokemon.to_dict-49"><span class="linenos">49</span></a>            <span class="s2">&quot;Nº&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">number</span><span class="p">,</span>
+</span><span id="Pokemon.to_dict-50"><a href="#Pokemon.to_dict-50"><span class="linenos">50</span></a>            <span class="s2">&quot;Nome&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+</span><span id="Pokemon.to_dict-51"><a href="#Pokemon.to_dict-51"><span class="linenos">51</span></a>            <span class="s2">&quot;Tipo&quot;</span><span class="p">:</span> <span class="n">type_sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">),</span>
+</span><span id="Pokemon.to_dict-52"><a href="#Pokemon.to_dict-52"><span class="linenos">52</span></a>            <span class="s2">&quot;Imagem&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+</span><span id="Pokemon.to_dict-53"><a href="#Pokemon.to_dict-53"><span class="linenos">53</span></a>        <span class="p">}</span>
+</span><span id="Pokemon.to_dict-54"><a href="#Pokemon.to_dict-54"><span class="linenos">54</span></a>        <span class="n">data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extra_attributes</span><span class="p">)</span>
+</span><span id="Pokemon.to_dict-55"><a href="#Pokemon.to_dict-55"><span class="linenos">55</span></a>        <span class="k">return</span> <span class="n">data</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>[PT-BR] Converte o Pokémon em dicionário para exportação.
+[EN] Converts the Pokémon into a dictionary for export.</p>
+
+<p>Parâmetros:
+    type_sep (str): Separador dos tipos no campo "Tipo".</p>
+
+<p>Retorna:
+    dict[str, str]: Dicionário formatado.</p>
+</div>
+
 
                             </div>
                 </section>

@@ -23,22 +23,40 @@ from typing import List, Optional, Dict
 
 @dataclass(frozen=True)
 class Pokemon:
+    """
+    [PT-BR] Representa um Pokémon com atributos fixos e extras. Imutável.
+    [EN] Represents a Pokémon with fixed and extra attributes. Immutable.
+    """
     number: str
     name: str
     types: List[str]
     image: Optional[str] = None
     extra_attributes: Dict[str, str] = field(default_factory=dict)
 
-    def to_dict(self) -> dict:
-        # [PT-BR] Campos fixos padronizados
-        # [EN] Standard fixed fields
-        data = {
-            "Nº": str(self.number),
+    def to_dict(self, type_sep: str = "/") -> dict[str, str]:
+        """
+        [PT-BR] Converte o Pokémon em dicionário para exportação.
+        [EN] Converts the Pokémon into a dictionary for export.
+
+        Parâmetros:
+            type_sep (str): Separador dos tipos no campo "Tipo".
+
+        Retorna:
+            dict[str, str]: Dicionário formatado.
+        """
+        data: dict[str, str] = {
+            "Nº": self.number,
             "Nome": self.name,
-            "Tipo": "/".join(self.types),
+            "Tipo": type_sep.join(self.types),
             "Imagem": self.image or ""
         }
-        # [PT-BR] Acrescenta atributos extras capturados do HTML
-        # [EN] Appends extra attributes extracted from HTML
         data.update(self.extra_attributes)
         return data
+
+    def __str__(self) -> str:
+        """
+        [PT-BR] Representação legível do objeto.
+        [EN] Human-readable object representation.
+        """
+        tipo = "/".join(self.types)
+        return f"Pokemon[{self.number}] {self.name} ({tipo})"

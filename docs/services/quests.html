@@ -42,19 +42,22 @@
                                 <a class="function" href="#QuestPokemon.__init__">QuestPokemon</a>
                         </li>
                         <li>
-                                <a class="variable" href="#QuestPokemon.ENVIRONMENTS">ENVIRONMENTS</a>
+                                <a class="variable" href="#QuestPokemon.DEFAULT_ENVIRONMENTS">DEFAULT_ENVIRONMENTS</a>
                         </li>
                         <li>
-                                <a class="variable" href="#QuestPokemon.DIFFICULTIES">DIFFICULTIES</a>
+                                <a class="variable" href="#QuestPokemon.DEFAULT_DIFFICULTIES">DEFAULT_DIFFICULTIES</a>
                         </li>
                         <li>
-                                <a class="variable" href="#QuestPokemon.REWARDS">REWARDS</a>
+                                <a class="variable" href="#QuestPokemon.DEFAULT_REWARDS">DEFAULT_REWARDS</a>
                         </li>
                         <li>
-                                <a class="variable" href="#QuestPokemon.CHALLENGES">CHALLENGES</a>
+                                <a class="variable" href="#QuestPokemon.DEFAULT_CHALLENGES">DEFAULT_CHALLENGES</a>
                         </li>
                         <li>
                                 <a class="variable" href="#QuestPokemon.url">url</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#QuestPokemon.rng">rng</a>
                         </li>
                         <li>
                                 <a class="variable" href="#QuestPokemon.environment">environment</a>
@@ -69,7 +72,7 @@
                                 <a class="variable" href="#QuestPokemon.reward">reward</a>
                         </li>
                         <li>
-                                <a class="function" href="#QuestPokemon.generate_description">generate_description</a>
+                                <a class="function" href="#QuestPokemon.to_text">to_text</a>
                         </li>
                 </ul>
 
@@ -124,53 +127,76 @@ inspired by challenges from the Pokémon game series.</p>
 </span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">    print(quest.generate_description())</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="kn">import</span> <span class="nn">random</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="k">class</span> <span class="nc">QuestPokemon</span><span class="p">:</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">ENVIRONMENTS</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>        <span class="s2">&quot;Dense forest&quot;</span><span class="p">,</span> <span class="s2">&quot;Dark cave&quot;</span><span class="p">,</span> <span class="s2">&quot;Busy city&quot;</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>        <span class="s2">&quot;Scorching desert&quot;</span><span class="p">,</span> <span class="s2">&quot;Snowy mountain&quot;</span><span class="p">,</span> <span class="s2">&quot;Ancient ruins&quot;</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>        <span class="s2">&quot;Gloomy swamp&quot;</span><span class="p">,</span> <span class="s2">&quot;Frozen lake&quot;</span><span class="p">,</span> <span class="s2">&quot;Mysterious village&quot;</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="p">]</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="k">class</span> <span class="nc">QuestPokemon</span><span class="p">:</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">    [PT-BR] Gera uma descrição de &quot;missão&quot; simulada para cada URL, inspirada em desafios da franquia.</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">    [EN]    Generates a simulated &quot;quest&quot; description for each URL, inspired by the franchise&#39;s challenges.</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">DIFFICULTIES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Easy&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span> <span class="s2">&quot;Hard&quot;</span><span class="p">,</span> <span class="s2">&quot;Epic&quot;</span><span class="p">]</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="n">REWARDS</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="s2">&quot;You found a special Poké Ball!&quot;</span><span class="p">,</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>        <span class="s2">&quot;You received a rare TM.&quot;</span><span class="p">,</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>        <span class="s2">&quot;An NPC healed your Pokémon.&quot;</span><span class="p">,</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>        <span class="s2">&quot;You caught a rare wild Pokémon.&quot;</span><span class="p">,</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>        <span class="s2">&quot;You received 2000 PokéDollars.&quot;</span><span class="p">,</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>        <span class="s2">&quot;You obtained an evolution item.&quot;</span><span class="p">,</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>        <span class="s2">&quot;You unlocked a new map area.&quot;</span><span class="p">,</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>        <span class="s2">&quot;You received a mysterious egg.&quot;</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="p">]</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>    <span class="n">CHALLENGES</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>        <span class="s2">&quot;Trainer uses only Fire-type Pokémon&quot;</span><span class="p">,</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>        <span class="s2">&quot;Double battle against twin trainers&quot;</span><span class="p">,</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>        <span class="s2">&quot;Only status moves are allowed (e.g., Growl, Sleep Powder)&quot;</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="n">DEFAULT_ENVIRONMENTS</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>        <span class="s2">&quot;Dense forest&quot;</span><span class="p">,</span> <span class="s2">&quot;Dark cave&quot;</span><span class="p">,</span> <span class="s2">&quot;Busy city&quot;</span><span class="p">,</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="s2">&quot;Scorching desert&quot;</span><span class="p">,</span> <span class="s2">&quot;Snowy mountain&quot;</span><span class="p">,</span> <span class="s2">&quot;Ancient ruins&quot;</span><span class="p">,</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="s2">&quot;Gloomy swamp&quot;</span><span class="p">,</span> <span class="s2">&quot;Frozen lake&quot;</span><span class="p">,</span> <span class="s2">&quot;Mysterious village&quot;</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="p">]</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="n">DEFAULT_DIFFICULTIES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Easy&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span> <span class="s2">&quot;Hard&quot;</span><span class="p">,</span> <span class="s2">&quot;Epic&quot;</span><span class="p">]</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="n">DEFAULT_REWARDS</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>        <span class="s2">&quot;You found a special Poké Ball!&quot;</span><span class="p">,</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>        <span class="s2">&quot;You received a rare TM.&quot;</span><span class="p">,</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>        <span class="s2">&quot;An NPC healed your Pokémon.&quot;</span><span class="p">,</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>        <span class="s2">&quot;You caught a rare wild Pokémon.&quot;</span><span class="p">,</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>        <span class="s2">&quot;You received 2000 PokéDollars.&quot;</span><span class="p">,</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>        <span class="s2">&quot;You obtained an evolution item.&quot;</span><span class="p">,</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>        <span class="s2">&quot;You unlocked a new map area.&quot;</span><span class="p">,</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>        <span class="s2">&quot;You received a mysterious egg.&quot;</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="p">]</span>
 </span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="c1"># [PT-BR] Armazena a URL e sorteia um conjunto de elementos da missão</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="c1"># [EN]    Stores the URL and randomly selects a set of quest elements</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ENVIRONMENTS</span><span class="p">)</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DIFFICULTIES</span><span class="p">)</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">challenge</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CHALLENGES</span><span class="p">)</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REWARDS</span><span class="p">)</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>    <span class="k">def</span> <span class="nf">generate_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>        <span class="c1"># [PT-BR] Gera descrição textual da missão formatada</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>        <span class="c1"># [EN]    Generates a formatted textual description of the quest</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>        <span class="k">return</span> <span class="p">(</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>            <span class="sa">f</span><span class="s2">&quot;Environment: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>            <span class="sa">f</span><span class="s2">&quot;Path: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>            <span class="sa">f</span><span class="s2">&quot;Challenge: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">challenge</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>            <span class="sa">f</span><span class="s2">&quot;Difficulty: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>            <span class="sa">f</span><span class="s2">&quot;Reward: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>        <span class="p">)</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="n">DEFAULT_CHALLENGES</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="s2">&quot;Trainer uses only Fire-type Pokémon&quot;</span><span class="p">,</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="s2">&quot;Double battle against twin trainers&quot;</span><span class="p">,</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>        <span class="s2">&quot;Only status moves are allowed (e.g., Growl, Sleep Powder)&quot;</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="p">]</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>        <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>        <span class="n">environments</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>        <span class="n">difficulties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>        <span class="n">rewards</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>        <span class="n">challenges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="p">):</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">        [PT-BR] Constrói uma missão com sorteio interno.</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="sd">        [EN]    Builds a quest with internal random selection.</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">rng</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">()</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">environments</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ENVIRONMENTS</span><span class="p">)</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">difficulties</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_DIFFICULTIES</span><span class="p">)</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">challenge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">challenges</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CHALLENGES</span><span class="p">)</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">rewards</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_REWARDS</span><span class="p">)</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>    <span class="k">def</span> <span class="nf">to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">        [PT-BR] Retorna uma representação textual da missão.</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">        [EN]    Returns a textual representation of the quest.</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a>        <span class="k">return</span> <span class="p">(</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>            <span class="sa">f</span><span class="s2">&quot;Environment: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>            <span class="sa">f</span><span class="s2">&quot;Path: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>            <span class="sa">f</span><span class="s2">&quot;Challenge: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">challenge</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>            <span class="sa">f</span><span class="s2">&quot;Difficulty: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>            <span class="sa">f</span><span class="s2">&quot;Reward: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>        <span class="p">)</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_text</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -186,128 +212,168 @@ inspired by challenges from the Pokémon game series.</p>
 
     </div>
     <a class="headerlink" href="#QuestPokemon"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="QuestPokemon-19"><a href="#QuestPokemon-19"><span class="linenos">19</span></a><span class="k">class</span> <span class="nc">QuestPokemon</span><span class="p">:</span>
-</span><span id="QuestPokemon-20"><a href="#QuestPokemon-20"><span class="linenos">20</span></a>    <span class="n">ENVIRONMENTS</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="QuestPokemon-21"><a href="#QuestPokemon-21"><span class="linenos">21</span></a>        <span class="s2">&quot;Dense forest&quot;</span><span class="p">,</span> <span class="s2">&quot;Dark cave&quot;</span><span class="p">,</span> <span class="s2">&quot;Busy city&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-22"><a href="#QuestPokemon-22"><span class="linenos">22</span></a>        <span class="s2">&quot;Scorching desert&quot;</span><span class="p">,</span> <span class="s2">&quot;Snowy mountain&quot;</span><span class="p">,</span> <span class="s2">&quot;Ancient ruins&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-23"><a href="#QuestPokemon-23"><span class="linenos">23</span></a>        <span class="s2">&quot;Gloomy swamp&quot;</span><span class="p">,</span> <span class="s2">&quot;Frozen lake&quot;</span><span class="p">,</span> <span class="s2">&quot;Mysterious village&quot;</span>
-</span><span id="QuestPokemon-24"><a href="#QuestPokemon-24"><span class="linenos">24</span></a>    <span class="p">]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="QuestPokemon-20"><a href="#QuestPokemon-20"><span class="linenos">20</span></a><span class="k">class</span> <span class="nc">QuestPokemon</span><span class="p">:</span>
+</span><span id="QuestPokemon-21"><a href="#QuestPokemon-21"><span class="linenos">21</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="QuestPokemon-22"><a href="#QuestPokemon-22"><span class="linenos">22</span></a><span class="sd">    [PT-BR] Gera uma descrição de &quot;missão&quot; simulada para cada URL, inspirada em desafios da franquia.</span>
+</span><span id="QuestPokemon-23"><a href="#QuestPokemon-23"><span class="linenos">23</span></a><span class="sd">    [EN]    Generates a simulated &quot;quest&quot; description for each URL, inspired by the franchise&#39;s challenges.</span>
+</span><span id="QuestPokemon-24"><a href="#QuestPokemon-24"><span class="linenos">24</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="QuestPokemon-25"><a href="#QuestPokemon-25"><span class="linenos">25</span></a>
-</span><span id="QuestPokemon-26"><a href="#QuestPokemon-26"><span class="linenos">26</span></a>    <span class="n">DIFFICULTIES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Easy&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span> <span class="s2">&quot;Hard&quot;</span><span class="p">,</span> <span class="s2">&quot;Epic&quot;</span><span class="p">]</span>
-</span><span id="QuestPokemon-27"><a href="#QuestPokemon-27"><span class="linenos">27</span></a>
-</span><span id="QuestPokemon-28"><a href="#QuestPokemon-28"><span class="linenos">28</span></a>    <span class="n">REWARDS</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="QuestPokemon-29"><a href="#QuestPokemon-29"><span class="linenos">29</span></a>        <span class="s2">&quot;You found a special Poké Ball!&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-30"><a href="#QuestPokemon-30"><span class="linenos">30</span></a>        <span class="s2">&quot;You received a rare TM.&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-31"><a href="#QuestPokemon-31"><span class="linenos">31</span></a>        <span class="s2">&quot;An NPC healed your Pokémon.&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-32"><a href="#QuestPokemon-32"><span class="linenos">32</span></a>        <span class="s2">&quot;You caught a rare wild Pokémon.&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-33"><a href="#QuestPokemon-33"><span class="linenos">33</span></a>        <span class="s2">&quot;You received 2000 PokéDollars.&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-34"><a href="#QuestPokemon-34"><span class="linenos">34</span></a>        <span class="s2">&quot;You obtained an evolution item.&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-35"><a href="#QuestPokemon-35"><span class="linenos">35</span></a>        <span class="s2">&quot;You unlocked a new map area.&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-36"><a href="#QuestPokemon-36"><span class="linenos">36</span></a>        <span class="s2">&quot;You received a mysterious egg.&quot;</span>
-</span><span id="QuestPokemon-37"><a href="#QuestPokemon-37"><span class="linenos">37</span></a>    <span class="p">]</span>
-</span><span id="QuestPokemon-38"><a href="#QuestPokemon-38"><span class="linenos">38</span></a>
-</span><span id="QuestPokemon-39"><a href="#QuestPokemon-39"><span class="linenos">39</span></a>    <span class="n">CHALLENGES</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="QuestPokemon-40"><a href="#QuestPokemon-40"><span class="linenos">40</span></a>        <span class="s2">&quot;Trainer uses only Fire-type Pokémon&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-41"><a href="#QuestPokemon-41"><span class="linenos">41</span></a>        <span class="s2">&quot;Double battle against twin trainers&quot;</span><span class="p">,</span>
-</span><span id="QuestPokemon-42"><a href="#QuestPokemon-42"><span class="linenos">42</span></a>        <span class="s2">&quot;Only status moves are allowed (e.g., Growl, Sleep Powder)&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-26"><a href="#QuestPokemon-26"><span class="linenos">26</span></a>    <span class="n">DEFAULT_ENVIRONMENTS</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="QuestPokemon-27"><a href="#QuestPokemon-27"><span class="linenos">27</span></a>        <span class="s2">&quot;Dense forest&quot;</span><span class="p">,</span> <span class="s2">&quot;Dark cave&quot;</span><span class="p">,</span> <span class="s2">&quot;Busy city&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-28"><a href="#QuestPokemon-28"><span class="linenos">28</span></a>        <span class="s2">&quot;Scorching desert&quot;</span><span class="p">,</span> <span class="s2">&quot;Snowy mountain&quot;</span><span class="p">,</span> <span class="s2">&quot;Ancient ruins&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-29"><a href="#QuestPokemon-29"><span class="linenos">29</span></a>        <span class="s2">&quot;Gloomy swamp&quot;</span><span class="p">,</span> <span class="s2">&quot;Frozen lake&quot;</span><span class="p">,</span> <span class="s2">&quot;Mysterious village&quot;</span>
+</span><span id="QuestPokemon-30"><a href="#QuestPokemon-30"><span class="linenos">30</span></a>    <span class="p">]</span>
+</span><span id="QuestPokemon-31"><a href="#QuestPokemon-31"><span class="linenos">31</span></a>
+</span><span id="QuestPokemon-32"><a href="#QuestPokemon-32"><span class="linenos">32</span></a>    <span class="n">DEFAULT_DIFFICULTIES</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Easy&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span> <span class="s2">&quot;Hard&quot;</span><span class="p">,</span> <span class="s2">&quot;Epic&quot;</span><span class="p">]</span>
+</span><span id="QuestPokemon-33"><a href="#QuestPokemon-33"><span class="linenos">33</span></a>
+</span><span id="QuestPokemon-34"><a href="#QuestPokemon-34"><span class="linenos">34</span></a>    <span class="n">DEFAULT_REWARDS</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="QuestPokemon-35"><a href="#QuestPokemon-35"><span class="linenos">35</span></a>        <span class="s2">&quot;You found a special Poké Ball!&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-36"><a href="#QuestPokemon-36"><span class="linenos">36</span></a>        <span class="s2">&quot;You received a rare TM.&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-37"><a href="#QuestPokemon-37"><span class="linenos">37</span></a>        <span class="s2">&quot;An NPC healed your Pokémon.&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-38"><a href="#QuestPokemon-38"><span class="linenos">38</span></a>        <span class="s2">&quot;You caught a rare wild Pokémon.&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-39"><a href="#QuestPokemon-39"><span class="linenos">39</span></a>        <span class="s2">&quot;You received 2000 PokéDollars.&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-40"><a href="#QuestPokemon-40"><span class="linenos">40</span></a>        <span class="s2">&quot;You obtained an evolution item.&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-41"><a href="#QuestPokemon-41"><span class="linenos">41</span></a>        <span class="s2">&quot;You unlocked a new map area.&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-42"><a href="#QuestPokemon-42"><span class="linenos">42</span></a>        <span class="s2">&quot;You received a mysterious egg.&quot;</span>
 </span><span id="QuestPokemon-43"><a href="#QuestPokemon-43"><span class="linenos">43</span></a>    <span class="p">]</span>
 </span><span id="QuestPokemon-44"><a href="#QuestPokemon-44"><span class="linenos">44</span></a>
-</span><span id="QuestPokemon-45"><a href="#QuestPokemon-45"><span class="linenos">45</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="QuestPokemon-46"><a href="#QuestPokemon-46"><span class="linenos">46</span></a>        <span class="c1"># [PT-BR] Armazena a URL e sorteia um conjunto de elementos da missão</span>
-</span><span id="QuestPokemon-47"><a href="#QuestPokemon-47"><span class="linenos">47</span></a>        <span class="c1"># [EN]    Stores the URL and randomly selects a set of quest elements</span>
-</span><span id="QuestPokemon-48"><a href="#QuestPokemon-48"><span class="linenos">48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
-</span><span id="QuestPokemon-49"><a href="#QuestPokemon-49"><span class="linenos">49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ENVIRONMENTS</span><span class="p">)</span>
-</span><span id="QuestPokemon-50"><a href="#QuestPokemon-50"><span class="linenos">50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DIFFICULTIES</span><span class="p">)</span>
-</span><span id="QuestPokemon-51"><a href="#QuestPokemon-51"><span class="linenos">51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">challenge</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CHALLENGES</span><span class="p">)</span>
-</span><span id="QuestPokemon-52"><a href="#QuestPokemon-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REWARDS</span><span class="p">)</span>
-</span><span id="QuestPokemon-53"><a href="#QuestPokemon-53"><span class="linenos">53</span></a>
-</span><span id="QuestPokemon-54"><a href="#QuestPokemon-54"><span class="linenos">54</span></a>    <span class="k">def</span> <span class="nf">generate_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="QuestPokemon-55"><a href="#QuestPokemon-55"><span class="linenos">55</span></a>        <span class="c1"># [PT-BR] Gera descrição textual da missão formatada</span>
-</span><span id="QuestPokemon-56"><a href="#QuestPokemon-56"><span class="linenos">56</span></a>        <span class="c1"># [EN]    Generates a formatted textual description of the quest</span>
-</span><span id="QuestPokemon-57"><a href="#QuestPokemon-57"><span class="linenos">57</span></a>        <span class="k">return</span> <span class="p">(</span>
-</span><span id="QuestPokemon-58"><a href="#QuestPokemon-58"><span class="linenos">58</span></a>            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon-59"><a href="#QuestPokemon-59"><span class="linenos">59</span></a>            <span class="sa">f</span><span class="s2">&quot;Environment: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon-60"><a href="#QuestPokemon-60"><span class="linenos">60</span></a>            <span class="sa">f</span><span class="s2">&quot;Path: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon-61"><a href="#QuestPokemon-61"><span class="linenos">61</span></a>            <span class="sa">f</span><span class="s2">&quot;Challenge: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">challenge</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon-62"><a href="#QuestPokemon-62"><span class="linenos">62</span></a>            <span class="sa">f</span><span class="s2">&quot;Difficulty: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon-63"><a href="#QuestPokemon-63"><span class="linenos">63</span></a>            <span class="sa">f</span><span class="s2">&quot;Reward: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon-64"><a href="#QuestPokemon-64"><span class="linenos">64</span></a>        <span class="p">)</span>
+</span><span id="QuestPokemon-45"><a href="#QuestPokemon-45"><span class="linenos">45</span></a>    <span class="n">DEFAULT_CHALLENGES</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="QuestPokemon-46"><a href="#QuestPokemon-46"><span class="linenos">46</span></a>        <span class="s2">&quot;Trainer uses only Fire-type Pokémon&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-47"><a href="#QuestPokemon-47"><span class="linenos">47</span></a>        <span class="s2">&quot;Double battle against twin trainers&quot;</span><span class="p">,</span>
+</span><span id="QuestPokemon-48"><a href="#QuestPokemon-48"><span class="linenos">48</span></a>        <span class="s2">&quot;Only status moves are allowed (e.g., Growl, Sleep Powder)&quot;</span>
+</span><span id="QuestPokemon-49"><a href="#QuestPokemon-49"><span class="linenos">49</span></a>    <span class="p">]</span>
+</span><span id="QuestPokemon-50"><a href="#QuestPokemon-50"><span class="linenos">50</span></a>
+</span><span id="QuestPokemon-51"><a href="#QuestPokemon-51"><span class="linenos">51</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+</span><span id="QuestPokemon-52"><a href="#QuestPokemon-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="QuestPokemon-53"><a href="#QuestPokemon-53"><span class="linenos">53</span></a>        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="QuestPokemon-54"><a href="#QuestPokemon-54"><span class="linenos">54</span></a>        <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon-55"><a href="#QuestPokemon-55"><span class="linenos">55</span></a>        <span class="n">environments</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon-56"><a href="#QuestPokemon-56"><span class="linenos">56</span></a>        <span class="n">difficulties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon-57"><a href="#QuestPokemon-57"><span class="linenos">57</span></a>        <span class="n">rewards</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon-58"><a href="#QuestPokemon-58"><span class="linenos">58</span></a>        <span class="n">challenges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon-59"><a href="#QuestPokemon-59"><span class="linenos">59</span></a>    <span class="p">):</span>
+</span><span id="QuestPokemon-60"><a href="#QuestPokemon-60"><span class="linenos">60</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="QuestPokemon-61"><a href="#QuestPokemon-61"><span class="linenos">61</span></a><span class="sd">        [PT-BR] Constrói uma missão com sorteio interno.</span>
+</span><span id="QuestPokemon-62"><a href="#QuestPokemon-62"><span class="linenos">62</span></a><span class="sd">        [EN]    Builds a quest with internal random selection.</span>
+</span><span id="QuestPokemon-63"><a href="#QuestPokemon-63"><span class="linenos">63</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="QuestPokemon-64"><a href="#QuestPokemon-64"><span class="linenos">64</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+</span><span id="QuestPokemon-65"><a href="#QuestPokemon-65"><span class="linenos">65</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">rng</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">()</span>
+</span><span id="QuestPokemon-66"><a href="#QuestPokemon-66"><span class="linenos">66</span></a>
+</span><span id="QuestPokemon-67"><a href="#QuestPokemon-67"><span class="linenos">67</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">environments</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ENVIRONMENTS</span><span class="p">)</span>
+</span><span id="QuestPokemon-68"><a href="#QuestPokemon-68"><span class="linenos">68</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">difficulties</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_DIFFICULTIES</span><span class="p">)</span>
+</span><span id="QuestPokemon-69"><a href="#QuestPokemon-69"><span class="linenos">69</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">challenge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">challenges</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CHALLENGES</span><span class="p">)</span>
+</span><span id="QuestPokemon-70"><a href="#QuestPokemon-70"><span class="linenos">70</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">rewards</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_REWARDS</span><span class="p">)</span>
+</span><span id="QuestPokemon-71"><a href="#QuestPokemon-71"><span class="linenos">71</span></a>
+</span><span id="QuestPokemon-72"><a href="#QuestPokemon-72"><span class="linenos">72</span></a>    <span class="k">def</span> <span class="nf">to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="QuestPokemon-73"><a href="#QuestPokemon-73"><span class="linenos">73</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="QuestPokemon-74"><a href="#QuestPokemon-74"><span class="linenos">74</span></a><span class="sd">        [PT-BR] Retorna uma representação textual da missão.</span>
+</span><span id="QuestPokemon-75"><a href="#QuestPokemon-75"><span class="linenos">75</span></a><span class="sd">        [EN]    Returns a textual representation of the quest.</span>
+</span><span id="QuestPokemon-76"><a href="#QuestPokemon-76"><span class="linenos">76</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="QuestPokemon-77"><a href="#QuestPokemon-77"><span class="linenos">77</span></a>        <span class="k">return</span> <span class="p">(</span>
+</span><span id="QuestPokemon-78"><a href="#QuestPokemon-78"><span class="linenos">78</span></a>            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon-79"><a href="#QuestPokemon-79"><span class="linenos">79</span></a>            <span class="sa">f</span><span class="s2">&quot;Environment: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon-80"><a href="#QuestPokemon-80"><span class="linenos">80</span></a>            <span class="sa">f</span><span class="s2">&quot;Path: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon-81"><a href="#QuestPokemon-81"><span class="linenos">81</span></a>            <span class="sa">f</span><span class="s2">&quot;Challenge: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">challenge</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon-82"><a href="#QuestPokemon-82"><span class="linenos">82</span></a>            <span class="sa">f</span><span class="s2">&quot;Difficulty: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon-83"><a href="#QuestPokemon-83"><span class="linenos">83</span></a>            <span class="sa">f</span><span class="s2">&quot;Reward: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon-84"><a href="#QuestPokemon-84"><span class="linenos">84</span></a>        <span class="p">)</span>
+</span><span id="QuestPokemon-85"><a href="#QuestPokemon-85"><span class="linenos">85</span></a>
+</span><span id="QuestPokemon-86"><a href="#QuestPokemon-86"><span class="linenos">86</span></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="QuestPokemon-87"><a href="#QuestPokemon-87"><span class="linenos">87</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_text</span><span class="p">()</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>[PT-BR] Gera uma descrição de "missão" simulada para cada URL, inspirada em desafios da franquia.
+[EN]    Generates a simulated "quest" description for each URL, inspired by the franchise's challenges.</p>
+</div>
+
 
                             <div id="QuestPokemon.__init__" class="classattr">
                                         <input id="QuestPokemon.__init__-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
-        <span class="name">QuestPokemon</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">url</span><span class="p">:</span> <span class="nb">str</span></span>)</span>
+        <span class="name">QuestPokemon</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">url</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">environments</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">difficulties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">rewards</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">challenges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span>)</span>
 
                 <label class="view-source-button" for="QuestPokemon.__init__-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#QuestPokemon.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="QuestPokemon.__init__-45"><a href="#QuestPokemon.__init__-45"><span class="linenos">45</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="QuestPokemon.__init__-46"><a href="#QuestPokemon.__init__-46"><span class="linenos">46</span></a>        <span class="c1"># [PT-BR] Armazena a URL e sorteia um conjunto de elementos da missão</span>
-</span><span id="QuestPokemon.__init__-47"><a href="#QuestPokemon.__init__-47"><span class="linenos">47</span></a>        <span class="c1"># [EN]    Stores the URL and randomly selects a set of quest elements</span>
-</span><span id="QuestPokemon.__init__-48"><a href="#QuestPokemon.__init__-48"><span class="linenos">48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
-</span><span id="QuestPokemon.__init__-49"><a href="#QuestPokemon.__init__-49"><span class="linenos">49</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ENVIRONMENTS</span><span class="p">)</span>
-</span><span id="QuestPokemon.__init__-50"><a href="#QuestPokemon.__init__-50"><span class="linenos">50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DIFFICULTIES</span><span class="p">)</span>
-</span><span id="QuestPokemon.__init__-51"><a href="#QuestPokemon.__init__-51"><span class="linenos">51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">challenge</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">CHALLENGES</span><span class="p">)</span>
-</span><span id="QuestPokemon.__init__-52"><a href="#QuestPokemon.__init__-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REWARDS</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="QuestPokemon.__init__-51"><a href="#QuestPokemon.__init__-51"><span class="linenos">51</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+</span><span id="QuestPokemon.__init__-52"><a href="#QuestPokemon.__init__-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="QuestPokemon.__init__-53"><a href="#QuestPokemon.__init__-53"><span class="linenos">53</span></a>        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span><span id="QuestPokemon.__init__-54"><a href="#QuestPokemon.__init__-54"><span class="linenos">54</span></a>        <span class="n">rng</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon.__init__-55"><a href="#QuestPokemon.__init__-55"><span class="linenos">55</span></a>        <span class="n">environments</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon.__init__-56"><a href="#QuestPokemon.__init__-56"><span class="linenos">56</span></a>        <span class="n">difficulties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon.__init__-57"><a href="#QuestPokemon.__init__-57"><span class="linenos">57</span></a>        <span class="n">rewards</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon.__init__-58"><a href="#QuestPokemon.__init__-58"><span class="linenos">58</span></a>        <span class="n">challenges</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="QuestPokemon.__init__-59"><a href="#QuestPokemon.__init__-59"><span class="linenos">59</span></a>    <span class="p">):</span>
+</span><span id="QuestPokemon.__init__-60"><a href="#QuestPokemon.__init__-60"><span class="linenos">60</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="QuestPokemon.__init__-61"><a href="#QuestPokemon.__init__-61"><span class="linenos">61</span></a><span class="sd">        [PT-BR] Constrói uma missão com sorteio interno.</span>
+</span><span id="QuestPokemon.__init__-62"><a href="#QuestPokemon.__init__-62"><span class="linenos">62</span></a><span class="sd">        [EN]    Builds a quest with internal random selection.</span>
+</span><span id="QuestPokemon.__init__-63"><a href="#QuestPokemon.__init__-63"><span class="linenos">63</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="QuestPokemon.__init__-64"><a href="#QuestPokemon.__init__-64"><span class="linenos">64</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+</span><span id="QuestPokemon.__init__-65"><a href="#QuestPokemon.__init__-65"><span class="linenos">65</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">rng</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">()</span>
+</span><span id="QuestPokemon.__init__-66"><a href="#QuestPokemon.__init__-66"><span class="linenos">66</span></a>
+</span><span id="QuestPokemon.__init__-67"><a href="#QuestPokemon.__init__-67"><span class="linenos">67</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">environments</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_ENVIRONMENTS</span><span class="p">)</span>
+</span><span id="QuestPokemon.__init__-68"><a href="#QuestPokemon.__init__-68"><span class="linenos">68</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">difficulties</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_DIFFICULTIES</span><span class="p">)</span>
+</span><span id="QuestPokemon.__init__-69"><a href="#QuestPokemon.__init__-69"><span class="linenos">69</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">challenge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">challenges</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_CHALLENGES</span><span class="p">)</span>
+</span><span id="QuestPokemon.__init__-70"><a href="#QuestPokemon.__init__-70"><span class="linenos">70</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">rewards</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_REWARDS</span><span class="p">)</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>[PT-BR] Constrói uma missão com sorteio interno.
+[EN]    Builds a quest with internal random selection.</p>
+</div>
+
 
                             </div>
-                            <div id="QuestPokemon.ENVIRONMENTS" class="classattr">
+                            <div id="QuestPokemon.DEFAULT_ENVIRONMENTS" class="classattr">
                                 <div class="attr variable">
-            <span class="name">ENVIRONMENTS</span>        =
-<input id="QuestPokemon.ENVIRONMENTS-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="QuestPokemon.ENVIRONMENTS-view-value"></label><span class="default_value">[&#39;Dense forest&#39;, &#39;Dark cave&#39;, &#39;Busy city&#39;, &#39;Scorching desert&#39;, &#39;Snowy mountain&#39;, &#39;Ancient ruins&#39;, &#39;Gloomy swamp&#39;, &#39;Frozen lake&#39;, &#39;Mysterious village&#39;]</span>
+            <span class="name">DEFAULT_ENVIRONMENTS</span>        =
+<input id="QuestPokemon.DEFAULT_ENVIRONMENTS-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="QuestPokemon.DEFAULT_ENVIRONMENTS-view-value"></label><span class="default_value">[&#39;Dense forest&#39;, &#39;Dark cave&#39;, &#39;Busy city&#39;, &#39;Scorching desert&#39;, &#39;Snowy mountain&#39;, &#39;Ancient ruins&#39;, &#39;Gloomy swamp&#39;, &#39;Frozen lake&#39;, &#39;Mysterious village&#39;]</span>
 
         
     </div>
-    <a class="headerlink" href="#QuestPokemon.ENVIRONMENTS"></a>
+    <a class="headerlink" href="#QuestPokemon.DEFAULT_ENVIRONMENTS"></a>
     
     
 
                             </div>
-                            <div id="QuestPokemon.DIFFICULTIES" class="classattr">
+                            <div id="QuestPokemon.DEFAULT_DIFFICULTIES" class="classattr">
                                 <div class="attr variable">
-            <span class="name">DIFFICULTIES</span>        =
+            <span class="name">DEFAULT_DIFFICULTIES</span>        =
 <span class="default_value">[&#39;Easy&#39;, &#39;Medium&#39;, &#39;Hard&#39;, &#39;Epic&#39;]</span>
 
         
     </div>
-    <a class="headerlink" href="#QuestPokemon.DIFFICULTIES"></a>
+    <a class="headerlink" href="#QuestPokemon.DEFAULT_DIFFICULTIES"></a>
     
     
 
                             </div>
-                            <div id="QuestPokemon.REWARDS" class="classattr">
+                            <div id="QuestPokemon.DEFAULT_REWARDS" class="classattr">
                                 <div class="attr variable">
-            <span class="name">REWARDS</span>        =
-<input id="QuestPokemon.REWARDS-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="QuestPokemon.REWARDS-view-value"></label><span class="default_value">[&#39;You found a special Poké Ball!&#39;, &#39;You received a rare TM.&#39;, &#39;An NPC healed your Pokémon.&#39;, &#39;You caught a rare wild Pokémon.&#39;, &#39;You received 2000 PokéDollars.&#39;, &#39;You obtained an evolution item.&#39;, &#39;You unlocked a new map area.&#39;, &#39;You received a mysterious egg.&#39;]</span>
+            <span class="name">DEFAULT_REWARDS</span>        =
+<input id="QuestPokemon.DEFAULT_REWARDS-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="QuestPokemon.DEFAULT_REWARDS-view-value"></label><span class="default_value">[&#39;You found a special Poké Ball!&#39;, &#39;You received a rare TM.&#39;, &#39;An NPC healed your Pokémon.&#39;, &#39;You caught a rare wild Pokémon.&#39;, &#39;You received 2000 PokéDollars.&#39;, &#39;You obtained an evolution item.&#39;, &#39;You unlocked a new map area.&#39;, &#39;You received a mysterious egg.&#39;]</span>
 
         
     </div>
-    <a class="headerlink" href="#QuestPokemon.REWARDS"></a>
+    <a class="headerlink" href="#QuestPokemon.DEFAULT_REWARDS"></a>
     
     
 
                             </div>
-                            <div id="QuestPokemon.CHALLENGES" class="classattr">
+                            <div id="QuestPokemon.DEFAULT_CHALLENGES" class="classattr">
                                 <div class="attr variable">
-            <span class="name">CHALLENGES</span>        =
-<input id="QuestPokemon.CHALLENGES-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="QuestPokemon.CHALLENGES-view-value"></label><span class="default_value">[&#39;Trainer uses only Fire-type Pokémon&#39;, &#39;Double battle against twin trainers&#39;, &#39;Only status moves are allowed (e.g., Growl, Sleep Powder)&#39;]</span>
+            <span class="name">DEFAULT_CHALLENGES</span>        =
+<input id="QuestPokemon.DEFAULT_CHALLENGES-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="QuestPokemon.DEFAULT_CHALLENGES-view-value"></label><span class="default_value">[&#39;Trainer uses only Fire-type Pokémon&#39;, &#39;Double battle against twin trainers&#39;, &#39;Only status moves are allowed (e.g., Growl, Sleep Powder)&#39;]</span>
 
         
     </div>
-    <a class="headerlink" href="#QuestPokemon.CHALLENGES"></a>
+    <a class="headerlink" href="#QuestPokemon.DEFAULT_CHALLENGES"></a>
     
     
 
@@ -319,6 +385,17 @@ inspired by challenges from the Pokémon game series.</p>
         
     </div>
     <a class="headerlink" href="#QuestPokemon.url"></a>
+    
+    
+
+                            </div>
+                            <div id="QuestPokemon.rng" class="classattr">
+                                <div class="attr variable">
+            <span class="name">rng</span>
+
+        
+    </div>
+    <a class="headerlink" href="#QuestPokemon.rng"></a>
     
     
 
@@ -367,32 +444,37 @@ inspired by challenges from the Pokémon game series.</p>
     
 
                             </div>
-                            <div id="QuestPokemon.generate_description" class="classattr">
-                                        <input id="QuestPokemon.generate_description-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="QuestPokemon.to_text" class="classattr">
+                                        <input id="QuestPokemon.to_text-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">generate_description</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+        <span class="name">to_text</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
 
-                <label class="view-source-button" for="QuestPokemon.generate_description-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="QuestPokemon.to_text-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#QuestPokemon.generate_description"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="QuestPokemon.generate_description-54"><a href="#QuestPokemon.generate_description-54"><span class="linenos">54</span></a>    <span class="k">def</span> <span class="nf">generate_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="QuestPokemon.generate_description-55"><a href="#QuestPokemon.generate_description-55"><span class="linenos">55</span></a>        <span class="c1"># [PT-BR] Gera descrição textual da missão formatada</span>
-</span><span id="QuestPokemon.generate_description-56"><a href="#QuestPokemon.generate_description-56"><span class="linenos">56</span></a>        <span class="c1"># [EN]    Generates a formatted textual description of the quest</span>
-</span><span id="QuestPokemon.generate_description-57"><a href="#QuestPokemon.generate_description-57"><span class="linenos">57</span></a>        <span class="k">return</span> <span class="p">(</span>
-</span><span id="QuestPokemon.generate_description-58"><a href="#QuestPokemon.generate_description-58"><span class="linenos">58</span></a>            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon.generate_description-59"><a href="#QuestPokemon.generate_description-59"><span class="linenos">59</span></a>            <span class="sa">f</span><span class="s2">&quot;Environment: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon.generate_description-60"><a href="#QuestPokemon.generate_description-60"><span class="linenos">60</span></a>            <span class="sa">f</span><span class="s2">&quot;Path: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon.generate_description-61"><a href="#QuestPokemon.generate_description-61"><span class="linenos">61</span></a>            <span class="sa">f</span><span class="s2">&quot;Challenge: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">challenge</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon.generate_description-62"><a href="#QuestPokemon.generate_description-62"><span class="linenos">62</span></a>            <span class="sa">f</span><span class="s2">&quot;Difficulty: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon.generate_description-63"><a href="#QuestPokemon.generate_description-63"><span class="linenos">63</span></a>            <span class="sa">f</span><span class="s2">&quot;Reward: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="QuestPokemon.generate_description-64"><a href="#QuestPokemon.generate_description-64"><span class="linenos">64</span></a>        <span class="p">)</span>
+    <a class="headerlink" href="#QuestPokemon.to_text"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="QuestPokemon.to_text-72"><a href="#QuestPokemon.to_text-72"><span class="linenos">72</span></a>    <span class="k">def</span> <span class="nf">to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="QuestPokemon.to_text-73"><a href="#QuestPokemon.to_text-73"><span class="linenos">73</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="QuestPokemon.to_text-74"><a href="#QuestPokemon.to_text-74"><span class="linenos">74</span></a><span class="sd">        [PT-BR] Retorna uma representação textual da missão.</span>
+</span><span id="QuestPokemon.to_text-75"><a href="#QuestPokemon.to_text-75"><span class="linenos">75</span></a><span class="sd">        [EN]    Returns a textual representation of the quest.</span>
+</span><span id="QuestPokemon.to_text-76"><a href="#QuestPokemon.to_text-76"><span class="linenos">76</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="QuestPokemon.to_text-77"><a href="#QuestPokemon.to_text-77"><span class="linenos">77</span></a>        <span class="k">return</span> <span class="p">(</span>
+</span><span id="QuestPokemon.to_text-78"><a href="#QuestPokemon.to_text-78"><span class="linenos">78</span></a>            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon.to_text-79"><a href="#QuestPokemon.to_text-79"><span class="linenos">79</span></a>            <span class="sa">f</span><span class="s2">&quot;Environment: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon.to_text-80"><a href="#QuestPokemon.to_text-80"><span class="linenos">80</span></a>            <span class="sa">f</span><span class="s2">&quot;Path: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon.to_text-81"><a href="#QuestPokemon.to_text-81"><span class="linenos">81</span></a>            <span class="sa">f</span><span class="s2">&quot;Challenge: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">challenge</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon.to_text-82"><a href="#QuestPokemon.to_text-82"><span class="linenos">82</span></a>            <span class="sa">f</span><span class="s2">&quot;Difficulty: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">difficulty</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon.to_text-83"><a href="#QuestPokemon.to_text-83"><span class="linenos">83</span></a>            <span class="sa">f</span><span class="s2">&quot;Reward: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span id="QuestPokemon.to_text-84"><a href="#QuestPokemon.to_text-84"><span class="linenos">84</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>[PT-BR] Retorna uma representação textual da missão.
+[EN]    Returns a textual representation of the quest.</p>
+</div>
+
 
                             </div>
                 </section>

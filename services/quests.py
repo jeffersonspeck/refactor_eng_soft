@@ -14,17 +14,23 @@ Uso / Usage:
     print(quest.generate_description())
 """
 import random
+from typing import Optional, Sequence
 
 class QuestPokemon:
-    ENVIRONMENTS = [
+    """
+    [PT-BR] Gera uma descrição de "missão" simulada para cada URL, inspirada em desafios da franquia.
+    [EN]    Generates a simulated "quest" description for each URL, inspired by the franchise's challenges.
+    """
+
+    DEFAULT_ENVIRONMENTS = [
         "Dense forest", "Dark cave", "Busy city",
         "Scorching desert", "Snowy mountain", "Ancient ruins",
         "Gloomy swamp", "Frozen lake", "Mysterious village"
     ]
 
-    DIFFICULTIES = ["Easy", "Medium", "Hard", "Epic"]
+    DEFAULT_DIFFICULTIES = ["Easy", "Medium", "Hard", "Epic"]
 
-    REWARDS = [
+    DEFAULT_REWARDS = [
         "You found a special Poké Ball!",
         "You received a rare TM.",
         "An NPC healed your Pokémon.",
@@ -35,24 +41,38 @@ class QuestPokemon:
         "You received a mysterious egg."
     ]
 
-    CHALLENGES = [
+    DEFAULT_CHALLENGES = [
         "Trainer uses only Fire-type Pokémon",
         "Double battle against twin trainers",
-        "Only status moves are allowed (e.g., Growl, Sleep Powder)",
+        "Only status moves are allowed (e.g., Growl, Sleep Powder)"
     ]
 
-    def __init__(self, url: str):
-        # [PT-BR] Armazena a URL e sorteia um conjunto de elementos da missão
-        # [EN]    Stores the URL and randomly selects a set of quest elements
+    def __init__(
+        self,
+        url: str,
+        rng: Optional[random.Random] = None,
+        environments: Optional[Sequence[str]] = None,
+        difficulties: Optional[Sequence[str]] = None,
+        rewards: Optional[Sequence[str]] = None,
+        challenges: Optional[Sequence[str]] = None,
+    ):
+        """
+        [PT-BR] Constrói uma missão com sorteio interno.
+        [EN]    Builds a quest with internal random selection.
+        """
         self.url = url
-        self.environment = random.choice(self.ENVIRONMENTS)
-        self.difficulty = random.choice(self.DIFFICULTIES)
-        self.challenge = random.choice(self.CHALLENGES)
-        self.reward = random.choice(self.REWARDS)
+        self.rng = rng or random.Random()
 
-    def generate_description(self) -> str:
-        # [PT-BR] Gera descrição textual da missão formatada
-        # [EN]    Generates a formatted textual description of the quest
+        self.environment = self.rng.choice(environments or self.DEFAULT_ENVIRONMENTS)
+        self.difficulty = self.rng.choice(difficulties or self.DEFAULT_DIFFICULTIES)
+        self.challenge = self.rng.choice(challenges or self.DEFAULT_CHALLENGES)
+        self.reward = self.rng.choice(rewards or self.DEFAULT_REWARDS)
+
+    def to_text(self) -> str:
+        """
+        [PT-BR] Retorna uma representação textual da missão.
+        [EN]    Returns a textual representation of the quest.
+        """
         return (
             f"\n"
             f"Environment: {self.environment}\n"
@@ -61,3 +81,6 @@ class QuestPokemon:
             f"Difficulty: {self.difficulty}\n"
             f"Reward: {self.reward}\n"
         )
+
+    def __str__(self) -> str:
+        return self.to_text()

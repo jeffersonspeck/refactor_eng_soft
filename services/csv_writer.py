@@ -26,39 +26,69 @@ Uso típico / Typical usage:
 """
 import csv
 import logging
-from typing import Iterable
+from typing import Iterable, Protocol, runtime_checkable
 from pathlib import Path
+from contextlib import suppress
 
-def write_pokemon_csv(pokemons: Iterable, path: str | Path) -> int:
+@runtime_checkable
+class HasToDict(Protocol):
+    def to_dict(self) -> dict[str, object]: ...
+
+def clean_csv_value(value: object) -> object:
     """
-    [PT-BR] Grava a lista de objetos Pokemon em um CSV.
-    [EN]    Writes the given Pokemon list to a CSV file.
+    [PT-BR] Limpa valores para escrita em CSV (quebras de linha, espaços).
+    [EN] Cleans values for CSV output (line breaks, extra spaces).
+    """
+    if isinstance(value, str):
+        return value.replace("\n", " ").strip()
+    return value
 
-    Retorna / Returns:
+def is_effectively_empty(row: dict[str, object]) -> bool:
+    """
+    [PT-BR] Verifica se a linha está vazia (ignora apenas None ou strings vazias).
+    [EN] Checks if the row is effectively empty (ignores None or empty strings).
+    """
+    return all(v in (None, "") for v in row.values())
+
+def write_pokemon_csv(pokemons: Iterable[HasToDict], path: str | Path, skip_empty: bool = True) -> int:
+    """
+    [PT-BR] Grava objetos `Pokemon` no CSV, com limpeza básica e validação de linhas.
+    [EN] Writes `Pokemon` objects to CSV, with basic cleaning and row validation.
+
+    Parâmetros:
+        pokemons (Iterable[HasToDict]): lista de objetos com .to_dict().
+        path (str | Path): caminho do arquivo de saída.
+        skip_empty (bool): se True, ignora linhas consideradas vazias.
+
+    Retorna:
         int: quantidade de linhas efetivamente gravadas.
     """
-    pokemons = list(pokemons)  # caso seja generator
+    pokemons = list(pokemons)
     if not pokemons:
         logging.warning("Empty Pokémon list: nothing to write.")
         return 0
 
-    fieldnames = sorted({k for p in pokemons for k in p.to_dict().keys()})
-    written = 0
+    try:
+        fieldnames = sorted({k for p in pokemons for k in p.to_dict().keys()})
+        written = 0
 
-    with open(path, "w", encoding="utf-8", newline="") as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
+        with open(path, "w", encoding="utf-8", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
 
-        for p in pokemons:
-            row = {
-                k: (v.replace("\n", " ").strip() if isinstance(v, str) else v)
-                for k, v in p.to_dict().items()
-            }
-            if all(v in (None, "", "0") for v in row.values()):
-                logging.warning("Row skipped—almost empty: %s", row)
-                continue
-            writer.writerow(row)
-            written += 1
+            for p in pokemons:
+                row = {k: clean_csv_value(v) for k, v in p.to_dict().items()}
 
-    logging.info("%d Pokémon exported to '%s'.", written, path)    
-    return written
+                if skip_empty and is_effectively_empty(row):
+                    logging.warning("Row skipped—effectively empty: %s", row)
+                    continue
+
+                writer.writerow(row)
+                written += 1
+
+        logging.info("%d Pokémon exported to '%s'.", written, path)
+        return written
+
+    except (IOError, OSError) as e:
+        logging.error("Failed to write CSV file '%s': %s", path, str(e), exc_info=True)
+        return 0

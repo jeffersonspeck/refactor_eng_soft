@@ -44,6 +44,12 @@
                     <a class="variable" href="#OUTPUT_FILE">OUTPUT_FILE</a>
             </li>
             <li>
+                    <a class="function" href="#discover_urls">discover_urls</a>
+            </li>
+            <li>
+                    <a class="function" href="#crawl_all_pages">crawl_all_pages</a>
+            </li>
+            <li>
                     <a class="function" href="#main">main</a>
             </li>
     </ul>
@@ -145,99 +151,88 @@ Entry point for the Pokémon data capture system.</p>
 </span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a><span class="sd">Usage:</span>
 </span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a><span class="sd">    $ python main.py</span>
 </span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="kn">import</span> <span class="nn">csv</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a><span class="kn">import</span> <span class="nn">os</span>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="kn">import</span> <span class="nn">logging</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="kn">import</span> <span class="nn">os</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>  <span class="c1"># type: ignore</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span> <span class="c1"># type: ignore</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="kn">from</span> <span class="nn">services.pokemon_crawler</span> <span class="kn">import</span> <span class="n">PokemonCrawler</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="kn">from</span> <span class="nn">services.quests</span> <span class="kn">import</span> <span class="n">QuestPokemon</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="kn">from</span> <span class="nn">services.logging</span> <span class="kn">import</span> <span class="n">setup_logging</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="kn">from</span> <span class="nn">services.csv_analyzer</span> <span class="kn">import</span> <span class="n">PokemonCSVAnalyzer</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="kn">from</span> <span class="nn">services.csv_writer</span> <span class="kn">import</span> <span class="n">write_pokemon_csv</span> <span class="c1"># type: ignore   </span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="c1"># ---------------------------------------------------------------------------</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="c1"># [PT-BR] Configuração da aplicação </span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="c1"># [EN]    Application setup</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="c1"># ---------------------------------------------------------------------------</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="c1"># [PT-BR] Carrega variáveis do arquivo .env (na raiz do projeto)</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="c1"># [EN]   Loads variables from the .env file (located at the project root)</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="n">load_dotenv</span><span class="p">()</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="n">START_PAGE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>    <span class="s2">&quot;START_PAGE&quot;</span><span class="p">,</span> <span class="s2">&quot;https://pokemythology.net/conteudo/pokemon/lista01.htm&quot;</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="p">)</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="n">OUTPUT_FILE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="s2">&quot;output/pokemons.csv&quot;</span><span class="p">)</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="c1"># [PT-BR] Garante que a pasta de saída exista</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="c1"># [EN]   Ensures that the output folder exists</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a><span class="n">Path</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="c1"># [PT-BR] Configura logging (arquivo + console)</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="c1"># [EN]   Configures logging (file + console)</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="n">setup_logging</span><span class="p">()</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="kn">from</span> <span class="nn">services.pokemon_crawler</span> <span class="kn">import</span> <span class="n">PokemonCrawler</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="kn">from</span> <span class="nn">services.quests</span> <span class="kn">import</span> <span class="n">QuestPokemon</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="kn">from</span> <span class="nn">services.logging</span> <span class="kn">import</span> <span class="n">setup_logging</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="kn">from</span> <span class="nn">services.csv_writer</span> <span class="kn">import</span> <span class="n">write_pokemon_csv</span>  <span class="c1"># type: ignore</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="kn">from</span> <span class="nn">services.csv_analyzer</span> <span class="kn">import</span> <span class="n">PokemonCSVAnalyzer</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="c1"># [PT-BR] Carregamento de variáveis de ambiente e preparação de pastas</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="c1"># [EN]   Load environment variables and prepare folders</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a><span class="n">load_dotenv</span><span class="p">()</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="n">START_PAGE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>    <span class="s2">&quot;START_PAGE&quot;</span><span class="p">,</span> <span class="s2">&quot;https://pokemythology.net/conteudo/pokemon/lista01.htm&quot;</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="p">)</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="n">OUTPUT_FILE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OUTPUT_FILE&quot;</span><span class="p">,</span> <span class="s2">&quot;output/pokemons.csv&quot;</span><span class="p">)</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="n">Path</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a><span class="c1"># [PT-BR] Descobre todas as páginas a partir da página inicial</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a><span class="c1"># [EN]   Discover all listing pages from the start page</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a><span class="k">def</span> <span class="nf">discover_urls</span><span class="p">(</span><span class="n">start_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>    <span class="n">urls</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="o">.</span><span class="n">discover_pages</span><span class="p">(</span><span class="n">start_url</span><span class="p">)</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>    <span class="k">if</span> <span class="n">start_url</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>        <span class="n">urls</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_url</span><span class="p">)</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>    <span class="k">return</span> <span class="n">urls</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
 </span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>
 </span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="c1"># [PT-BR] Função principal que orquestra o fluxo completo do programa.</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="c1"># [EN]   Main function that orchestrates the full program flow.</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="c1"># [PT-BR] Realiza o crawling de todas as páginas e retorna a lista consolidada</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="c1"># [EN]   Crawls all discovered pages and returns the consolidated list</span>
 </span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">    [PT-BR] Fluxo principal de execução.</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">    [EN] Main execution flow.</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>    <span class="c1"># [PT-BR] Descoberta de páginas a partir da página inicial</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>    <span class="c1"># [EN]   Discover sub-pages starting from the initial page</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>    <span class="n">urls</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="o">.</span><span class="n">discover_pages</span><span class="p">(</span><span class="n">START_PAGE</span><span class="p">)</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    <span class="k">if</span> <span class="n">START_PAGE</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="n">urls</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">START_PAGE</span><span class="p">)</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span><span class="si">}</span><span class="s2"> pages found. Starting capture…&quot;</span><span class="p">)</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="n">all_pokemons</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>    <span class="c1"># [PT-BR] Itera sobre cada URL coletada</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="c1"># [EN]   Iterates over each collected URL</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Crawling Pokémon from: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="c1"># [PT-BR] Exemplo de uso da classe QuestPokemon com texto lúdico no console</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="c1"># [EN] Example usage of the QuestPokemon class with playful text in the console</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">QuestPokemon</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">generate_description</span><span class="p">())</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>            <span class="n">pokemons</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">crawl</span><span class="p">()</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>            <span class="n">all_pokemons</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  + </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span><span class="si">}</span><span class="s2"> Pokémon captured on this page.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  + </span><span class="si">%d</span><span class="s2"> Pokémon captured on this page.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">))</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to process </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="k">def</span> <span class="nf">crawl_all_pages</span><span class="p">(</span><span class="n">urls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>    <span class="n">all_pokemons</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Crawling Pokémon from: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>        <span class="nb">print</span><span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="n">QuestPokemon</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">to_text</span><span class="p">()))</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>            <span class="n">pokemons</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">crawl</span><span class="p">()</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>            <span class="n">all_pokemons</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  + </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span><span class="si">}</span><span class="s2"> Pokémon captured on this page.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  + </span><span class="si">%d</span><span class="s2"> Pokémon captured on this page.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">))</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to process </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="k">return</span> <span class="n">all_pokemons</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="c1"># [PT-BR] Função principal</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a><span class="c1"># [EN]   Main function</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="n">setup_logging</span><span class="p">()</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="n">urls</span> <span class="o">=</span> <span class="n">discover_urls</span><span class="p">(</span><span class="n">START_PAGE</span><span class="p">)</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span><span class="si">}</span><span class="s2"> pages found. Starting capture…&quot;</span><span class="p">)</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>    <span class="n">all_pokemons</span> <span class="o">=</span> <span class="n">crawl_all_pages</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_pokemons</span><span class="p">:</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No Pokémon captured.&quot;</span><span class="p">)</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>        <span class="k">return</span>
 </span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_pokemons</span><span class="p">:</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No Pokémon captured.&quot;</span><span class="p">)</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>        <span class="k">return</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>    <span class="c1"># -----------------------------------------------------------------------------</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>    <span class="c1"># [PT-BR] Escrita do CSV consolidado</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>    <span class="c1"># [EN] Writing the consolidated CSV</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>    <span class="c1"># -----------------------------------------------------------------------------</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>    <span class="n">written</span> <span class="o">=</span> <span class="n">write_pokemon_csv</span><span class="p">(</span><span class="n">all_pokemons</span><span class="p">,</span> <span class="n">OUTPUT_FILE</span><span class="p">)</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">written</span><span class="si">}</span><span class="s2"> Pokémon exported to &#39;</span><span class="si">{</span><span class="n">OUTPUT_FILE</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>    
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="c1"># -------------------------------------------------------------------------------------</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>    <span class="c1"># [PT-BR] Análise opcional do CSV contendo estatísticas e consistência, gravada no log</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>    <span class="c1"># [EN] Optional CSV analysis with statistics and consistency check, logged</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>    <span class="c1"># --------------------------------------------------------------------------------------</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>    <span class="n">PokemonCSVAnalyzer</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">run_full_report</span><span class="p">()</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a><span class="c1"># ---------------------------------------------------------------------------</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="c1"># [PT-BR] Execução direta</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="c1"># [EN] Direct execution</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="c1"># ---------------------------------------------------------------------------</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>    <span class="n">main</span><span class="p">()</span>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="n">written</span> <span class="o">=</span> <span class="n">write_pokemon_csv</span><span class="p">(</span><span class="n">all_pokemons</span><span class="p">,</span> <span class="n">OUTPUT_FILE</span><span class="p">)</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">written</span><span class="si">}</span><span class="s2"> Pokémon exported to &#39;</span><span class="si">{</span><span class="n">OUTPUT_FILE</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>    <span class="n">PokemonCSVAnalyzer</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">run_full_report</span><span class="p">()</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="c1"># [PT-BR] Execução direta</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="c1"># [EN]   Direct execution</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a><span class="c1"># ----------------------------------------------------------------------------</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>    <span class="n">main</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -245,7 +240,7 @@ Entry point for the Pokémon data capture system.</p>
                 <section id="START_PAGE">
                     <div class="attr variable">
             <span class="name">START_PAGE</span><span class="annotation">: str</span>        =
-<span class="default_value">&#39;https://pokemythology.net/conteudo/pokemon/lista01.htm&#39;</span>
+<span class="default_value">$START_PAGE</span>
 
         
     </div>
@@ -257,12 +252,65 @@ Entry point for the Pokémon data capture system.</p>
                 <section id="OUTPUT_FILE">
                     <div class="attr variable">
             <span class="name">OUTPUT_FILE</span><span class="annotation">: str</span>        =
-<span class="default_value">&#39;output/pokemons.csv&#39;</span>
+<span class="default_value">$OUTPUT_FILE</span>
 
         
     </div>
     <a class="headerlink" href="#OUTPUT_FILE"></a>
     
+    
+
+                </section>
+                <section id="discover_urls">
+                            <input id="discover_urls-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">discover_urls</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">start_url</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>:</span></span>
+
+                <label class="view-source-button" for="discover_urls-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#discover_urls"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="discover_urls-67"><a href="#discover_urls-67"><span class="linenos">67</span></a><span class="k">def</span> <span class="nf">discover_urls</span><span class="p">(</span><span class="n">start_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="discover_urls-68"><a href="#discover_urls-68"><span class="linenos">68</span></a>    <span class="n">urls</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="o">.</span><span class="n">discover_pages</span><span class="p">(</span><span class="n">start_url</span><span class="p">)</span>
+</span><span id="discover_urls-69"><a href="#discover_urls-69"><span class="linenos">69</span></a>    <span class="k">if</span> <span class="n">start_url</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+</span><span id="discover_urls-70"><a href="#discover_urls-70"><span class="linenos">70</span></a>        <span class="n">urls</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_url</span><span class="p">)</span>
+</span><span id="discover_urls-71"><a href="#discover_urls-71"><span class="linenos">71</span></a>    <span class="k">return</span> <span class="n">urls</span>
+</span></pre></div>
+
+
+    
+
+                </section>
+                <section id="crawl_all_pages">
+                            <input id="crawl_all_pages-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">crawl_all_pages</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">urls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span>:</span></span>
+
+                <label class="view-source-button" for="crawl_all_pages-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#crawl_all_pages"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="crawl_all_pages-78"><a href="#crawl_all_pages-78"><span class="linenos">78</span></a><span class="k">def</span> <span class="nf">crawl_all_pages</span><span class="p">(</span><span class="n">urls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+</span><span id="crawl_all_pages-79"><a href="#crawl_all_pages-79"><span class="linenos">79</span></a>    <span class="n">all_pokemons</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="crawl_all_pages-80"><a href="#crawl_all_pages-80"><span class="linenos">80</span></a>    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+</span><span id="crawl_all_pages-81"><a href="#crawl_all_pages-81"><span class="linenos">81</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Crawling Pokémon from: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+</span><span id="crawl_all_pages-82"><a href="#crawl_all_pages-82"><span class="linenos">82</span></a>        <span class="nb">print</span><span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="n">QuestPokemon</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">to_text</span><span class="p">()))</span>
+</span><span id="crawl_all_pages-83"><a href="#crawl_all_pages-83"><span class="linenos">83</span></a>
+</span><span id="crawl_all_pages-84"><a href="#crawl_all_pages-84"><span class="linenos">84</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="crawl_all_pages-85"><a href="#crawl_all_pages-85"><span class="linenos">85</span></a>            <span class="n">pokemons</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">crawl</span><span class="p">()</span>
+</span><span id="crawl_all_pages-86"><a href="#crawl_all_pages-86"><span class="linenos">86</span></a>            <span class="n">all_pokemons</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span>
+</span><span id="crawl_all_pages-87"><a href="#crawl_all_pages-87"><span class="linenos">87</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  + </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span><span class="si">}</span><span class="s2"> Pokémon captured on this page.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="crawl_all_pages-88"><a href="#crawl_all_pages-88"><span class="linenos">88</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  + </span><span class="si">%d</span><span class="s2"> Pokémon captured on this page.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">))</span>
+</span><span id="crawl_all_pages-89"><a href="#crawl_all_pages-89"><span class="linenos">89</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="crawl_all_pages-90"><a href="#crawl_all_pages-90"><span class="linenos">90</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to process </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="crawl_all_pages-91"><a href="#crawl_all_pages-91"><span class="linenos">91</span></a>    <span class="k">return</span> <span class="n">all_pokemons</span>
+</span></pre></div>
+
+
     
 
                 </section>
@@ -277,60 +325,25 @@ Entry point for the Pokémon data capture system.</p>
 
     </div>
     <a class="headerlink" href="#main"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="main-78"><a href="#main-78"><span class="linenos"> 78</span></a><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="main-79"><a href="#main-79"><span class="linenos"> 79</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="main-80"><a href="#main-80"><span class="linenos"> 80</span></a><span class="sd">    [PT-BR] Fluxo principal de execução.</span>
-</span><span id="main-81"><a href="#main-81"><span class="linenos"> 81</span></a><span class="sd">    [EN] Main execution flow.</span>
-</span><span id="main-82"><a href="#main-82"><span class="linenos"> 82</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="main-83"><a href="#main-83"><span class="linenos"> 83</span></a>    <span class="c1"># [PT-BR] Descoberta de páginas a partir da página inicial</span>
-</span><span id="main-84"><a href="#main-84"><span class="linenos"> 84</span></a>    <span class="c1"># [EN]   Discover sub-pages starting from the initial page</span>
-</span><span id="main-85"><a href="#main-85"><span class="linenos"> 85</span></a>    <span class="n">urls</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="o">.</span><span class="n">discover_pages</span><span class="p">(</span><span class="n">START_PAGE</span><span class="p">)</span>
-</span><span id="main-86"><a href="#main-86"><span class="linenos"> 86</span></a>    <span class="k">if</span> <span class="n">START_PAGE</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-</span><span id="main-87"><a href="#main-87"><span class="linenos"> 87</span></a>        <span class="n">urls</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">START_PAGE</span><span class="p">)</span>
-</span><span id="main-88"><a href="#main-88"><span class="linenos"> 88</span></a>
-</span><span id="main-89"><a href="#main-89"><span class="linenos"> 89</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span><span class="si">}</span><span class="s2"> pages found. Starting capture…&quot;</span><span class="p">)</span>
-</span><span id="main-90"><a href="#main-90"><span class="linenos"> 90</span></a>    <span class="n">all_pokemons</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="main-91"><a href="#main-91"><span class="linenos"> 91</span></a>
-</span><span id="main-92"><a href="#main-92"><span class="linenos"> 92</span></a>    <span class="c1"># [PT-BR] Itera sobre cada URL coletada</span>
-</span><span id="main-93"><a href="#main-93"><span class="linenos"> 93</span></a>    <span class="c1"># [EN]   Iterates over each collected URL</span>
-</span><span id="main-94"><a href="#main-94"><span class="linenos"> 94</span></a>    <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
-</span><span id="main-95"><a href="#main-95"><span class="linenos"> 95</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Crawling Pokémon from: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
-</span><span id="main-96"><a href="#main-96"><span class="linenos"> 96</span></a>
-</span><span id="main-97"><a href="#main-97"><span class="linenos"> 97</span></a>        <span class="c1"># [PT-BR] Exemplo de uso da classe QuestPokemon com texto lúdico no console</span>
-</span><span id="main-98"><a href="#main-98"><span class="linenos"> 98</span></a>        <span class="c1"># [EN] Example usage of the QuestPokemon class with playful text in the console</span>
-</span><span id="main-99"><a href="#main-99"><span class="linenos"> 99</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">QuestPokemon</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">generate_description</span><span class="p">())</span>
-</span><span id="main-100"><a href="#main-100"><span class="linenos">100</span></a>
-</span><span id="main-101"><a href="#main-101"><span class="linenos">101</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="main-102"><a href="#main-102"><span class="linenos">102</span></a>            <span class="n">pokemons</span> <span class="o">=</span> <span class="n">PokemonCrawler</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">crawl</span><span class="p">()</span>
-</span><span id="main-103"><a href="#main-103"><span class="linenos">103</span></a>            <span class="n">all_pokemons</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span>
-</span><span id="main-104"><a href="#main-104"><span class="linenos">104</span></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  + </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">)</span><span class="si">}</span><span class="s2"> Pokémon captured on this page.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="main-105"><a href="#main-105"><span class="linenos">105</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  + </span><span class="si">%d</span><span class="s2"> Pokémon captured on this page.&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pokemons</span><span class="p">))</span>
-</span><span id="main-106"><a href="#main-106"><span class="linenos">106</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-</span><span id="main-107"><a href="#main-107"><span class="linenos">107</span></a>            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to process </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="main-98"><a href="#main-98"><span class="linenos"> 98</span></a><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="main-99"><a href="#main-99"><span class="linenos"> 99</span></a>    <span class="n">setup_logging</span><span class="p">()</span>
+</span><span id="main-100"><a href="#main-100"><span class="linenos">100</span></a>    <span class="n">urls</span> <span class="o">=</span> <span class="n">discover_urls</span><span class="p">(</span><span class="n">START_PAGE</span><span class="p">)</span>
+</span><span id="main-101"><a href="#main-101"><span class="linenos">101</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span><span class="si">}</span><span class="s2"> pages found. Starting capture…&quot;</span><span class="p">)</span>
+</span><span id="main-102"><a href="#main-102"><span class="linenos">102</span></a>
+</span><span id="main-103"><a href="#main-103"><span class="linenos">103</span></a>    <span class="n">all_pokemons</span> <span class="o">=</span> <span class="n">crawl_all_pages</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span>
+</span><span id="main-104"><a href="#main-104"><span class="linenos">104</span></a>
+</span><span id="main-105"><a href="#main-105"><span class="linenos">105</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_pokemons</span><span class="p">:</span>
+</span><span id="main-106"><a href="#main-106"><span class="linenos">106</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No Pokémon captured.&quot;</span><span class="p">)</span>
+</span><span id="main-107"><a href="#main-107"><span class="linenos">107</span></a>        <span class="k">return</span>
 </span><span id="main-108"><a href="#main-108"><span class="linenos">108</span></a>
-</span><span id="main-109"><a href="#main-109"><span class="linenos">109</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_pokemons</span><span class="p">:</span>
-</span><span id="main-110"><a href="#main-110"><span class="linenos">110</span></a>        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No Pokémon captured.&quot;</span><span class="p">)</span>
-</span><span id="main-111"><a href="#main-111"><span class="linenos">111</span></a>        <span class="k">return</span>
-</span><span id="main-112"><a href="#main-112"><span class="linenos">112</span></a>
-</span><span id="main-113"><a href="#main-113"><span class="linenos">113</span></a>    <span class="c1"># -----------------------------------------------------------------------------</span>
-</span><span id="main-114"><a href="#main-114"><span class="linenos">114</span></a>    <span class="c1"># [PT-BR] Escrita do CSV consolidado</span>
-</span><span id="main-115"><a href="#main-115"><span class="linenos">115</span></a>    <span class="c1"># [EN] Writing the consolidated CSV</span>
-</span><span id="main-116"><a href="#main-116"><span class="linenos">116</span></a>    <span class="c1"># -----------------------------------------------------------------------------</span>
-</span><span id="main-117"><a href="#main-117"><span class="linenos">117</span></a>    <span class="n">written</span> <span class="o">=</span> <span class="n">write_pokemon_csv</span><span class="p">(</span><span class="n">all_pokemons</span><span class="p">,</span> <span class="n">OUTPUT_FILE</span><span class="p">)</span>
-</span><span id="main-118"><a href="#main-118"><span class="linenos">118</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">written</span><span class="si">}</span><span class="s2"> Pokémon exported to &#39;</span><span class="si">{</span><span class="n">OUTPUT_FILE</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>    
-</span><span id="main-119"><a href="#main-119"><span class="linenos">119</span></a>
-</span><span id="main-120"><a href="#main-120"><span class="linenos">120</span></a>    <span class="c1"># -------------------------------------------------------------------------------------</span>
-</span><span id="main-121"><a href="#main-121"><span class="linenos">121</span></a>    <span class="c1"># [PT-BR] Análise opcional do CSV contendo estatísticas e consistência, gravada no log</span>
-</span><span id="main-122"><a href="#main-122"><span class="linenos">122</span></a>    <span class="c1"># [EN] Optional CSV analysis with statistics and consistency check, logged</span>
-</span><span id="main-123"><a href="#main-123"><span class="linenos">123</span></a>    <span class="c1"># --------------------------------------------------------------------------------------</span>
-</span><span id="main-124"><a href="#main-124"><span class="linenos">124</span></a>    <span class="n">PokemonCSVAnalyzer</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">run_full_report</span><span class="p">()</span>
+</span><span id="main-109"><a href="#main-109"><span class="linenos">109</span></a>    <span class="n">written</span> <span class="o">=</span> <span class="n">write_pokemon_csv</span><span class="p">(</span><span class="n">all_pokemons</span><span class="p">,</span> <span class="n">OUTPUT_FILE</span><span class="p">)</span>
+</span><span id="main-110"><a href="#main-110"><span class="linenos">110</span></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">written</span><span class="si">}</span><span class="s2"> Pokémon exported to &#39;</span><span class="si">{</span><span class="n">OUTPUT_FILE</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+</span><span id="main-111"><a href="#main-111"><span class="linenos">111</span></a>
+</span><span id="main-112"><a href="#main-112"><span class="linenos">112</span></a>    <span class="n">PokemonCSVAnalyzer</span><span class="p">(</span><span class="n">OUTPUT_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">run_full_report</span><span class="p">()</span>
 </span></pre></div>
 
 
-            <div class="docstring"><p>[PT-BR] Fluxo principal de execução.
-[EN] Main execution flow.</p>
-</div>
-
+    
 
                 </section>
     </main>
