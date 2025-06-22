@@ -72,7 +72,8 @@
 
 ### 2.2 BPMN
 
-![Descrição da imagem](docs/pokemon.svg)
+<!-- ![Descrição da imagem](docs/pokemon.svg) -->
+<img src="docs/pokemon.svg" alt="Logo" style="background:white; padding:10px; border-radius:4px;">
 ---
 
 ## 3. Principais melhorias em relação ao código original

@@ -74,8 +74,8 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ### 2.2 BPMN
 
-![Descrição da imagem](docs/pokemon.svg)
-
+<!-- ![Descrição da imagem](docs/pokemon.svg) -->
+<img src="docs/pokemon.svg" alt="Logo" style="background:white; padding:10px; border-radius:4px;">
 -----
 ## 3. Key Improvements Over the Original Code
 
