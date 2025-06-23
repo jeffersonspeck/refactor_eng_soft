@@ -1,0 +1,58 @@
+@startuml classes_refactored
+set namespaceSeparator none
+class "HasToDict" as refactor_eng_soft.services.csv_writer.HasToDict {
+  to_dict() -> dict[str, object]
+}
+class "Pokemon" as refactor_eng_soft.models.pokemon.Pokemon {
+  extra_attributes : Dict[str, str]
+  image : Optional[str]
+  name : str
+  number : str
+  types : List[str]
+  to_dict(type_sep: str) -> dict[str, str]
+}
+class "PokemonBuilder" as refactor_eng_soft.models.pokemon_builder.PokemonBuilder {
+  add_attribute(key: str, value: str) -> Self
+  add_type(t: str) -> Self
+  build() -> Pokemon
+  image(url: str) -> Self
+  name(n: str) -> Self
+  number(n: str) -> Self
+  reset() -> 
+}
+class "PokemonCSVAnalyzer" as refactor_eng_soft.services.csv_analyzer.PokemonCSVAnalyzer {
+  csv_path : str
+  df : TextFileReader, NoneType
+  encoding : str
+  log_missing_values() -> 
+  log_summary(head_n: int) -> 
+  run_full_report(show_summary: bool, check_missing: bool, head_n: int) -> 
+}
+class "PokemonCrawler" as refactor_eng_soft.services.pokemon_crawler.PokemonCrawler {
+  BASE_URL : str
+  url : str
+  crawl() -> list[Pokemon]
+  discover_pages(start_page) -> list[str]
+  fetch_html() -> str
+}
+class "PokemonFields" as refactor_eng_soft.services.pokemon_crawler.PokemonFields {
+  IMAGE : str
+  NAME : str
+  NUM : str
+  SHINY : str
+  TYPE : str
+}
+class "QuestPokemon" as refactor_eng_soft.services.quests.QuestPokemon {
+  DEFAULT_CHALLENGES : list
+  DEFAULT_DIFFICULTIES : list
+  DEFAULT_ENVIRONMENTS : list
+  DEFAULT_REWARDS : list
+  challenge
+  difficulty
+  environment
+  reward
+  rng : Random
+  url : str
+  to_text() -> str
+}
+@enduml

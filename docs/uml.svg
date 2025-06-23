@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-314.88 -108.034 1303.669 697.623">
+  <title>Diagrama UML - Projeto Pokémon Crawler</title>
+  <g transform="matrix(1, 0, 0, 1, -311.841858, -144.711411)">
+    <g class="title" data-source-line="1"/>
+    <g class="cluster" data-entity="models" data-source-line="3" data-uid="ent0002" id="cluster_models">
+      <path d="M193.5,387.0769 L251.3545,387.0769 A3.75,3.75 0 0 1 253.8545,389.5769 L260.8545,409.3738 L468.5,409.3738 A2.5,2.5 0 0 1 471,411.8738 L471,721.9569 A2.5,2.5 0 0 1 468.5,724.4569 L193.5,724.4569 A2.5,2.5 0 0 1 191,721.9569 L191,389.5769 A2.5,2.5 0 0 1 193.5,387.0769" fill="none" style="stroke:#000000;stroke-width:1.5;"/>
+      <line style="stroke:#000000;stroke-width:1.5;" x1="191" x2="260.8545" y1="409.3738" y2="409.3738"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="56.8545" x="195" y="402.072" style="white-space: pre;">models</text>
+    </g>
+    <g class="cluster" data-entity="services" data-source-line="19" data-uid="ent0005" id="cluster_services">
+      <path d="M8.5,215.1869 L74.2842,215.1869 A3.75,3.75 0 0 1 76.7842,217.6869 L83.7842,237.4838 L1285.5,237.4838 A2.5,2.5 0 0 1 1288,239.9838 L1288,360.5769 A2.5,2.5 0 0 1 1285.5,363.0769 L8.5,363.0769 A2.5,2.5 0 0 1 6,360.5769 L6,217.6869 A2.5,2.5 0 0 1 8.5,215.1869" fill="none" style="stroke:#000000;stroke-width:1.5;"/>
+      <line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="83.7842" y1="237.4838" y2="237.4838"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="64.7842" x="10" y="230.182" style="white-space: pre;">services</text>
+    </g>
+    <g class="cluster" data-entity="app" data-source-line="46" data-uid="ent0011" id="cluster_app">
+      <path d="M500.5,43.2969 L530.9902,43.2969 A3.75,3.75 0 0 1 533.4902,45.7969 L540.4902,65.5938 L673.5,65.5938 A2.5,2.5 0 0 1 676,68.0938 L676,188.6869 A2.5,2.5 0 0 1 673.5,191.1869 L500.5,191.1869 A2.5,2.5 0 0 1 498,188.6869 L498,45.7969 A2.5,2.5 0 0 1 500.5,43.2969" fill="none" style="stroke:#000000;stroke-width:1.5;"/>
+      <line style="stroke:#000000;stroke-width:1.5;" x1="498" x2="540.4902" y1="65.5938" y2="65.5938"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="29.4902" x="502" y="58.292" style="white-space: pre;">app</text>
+    </g>
+    <g class="entity" data-entity="Pokemon" data-source-line="4" data-uid="ent0003" id="entity_Pokemon">
+      <rect fill="#F1F1F1" height="80.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="119.0713" x="271.46" y="627.8669"/>
+      <ellipse cx="296.48" cy="643.8669" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M299.4487,649.5075 Q298.8706,649.8044 298.23,649.945 Q297.5893,650.1012 296.8862,650.1012 Q294.3862,650.1012 293.0581,648.4606 Q291.7456,646.8044 291.7456,643.6794 Q291.7456,640.5544 293.0581,638.8981 Q294.3862,637.2419 296.8862,637.2419 Q297.5893,637.2419 298.23,637.3981 Q298.8862,637.5544 299.4487,637.8512 L299.4487,640.57 Q298.8237,639.9919 298.23,639.7262 Q297.6362,639.445 297.0112,639.445 Q295.6675,639.445 294.98,640.5231 Q294.2925,641.5856 294.2925,643.6794 Q294.2925,645.7731 294.98,646.8512 Q295.6675,647.9137 297.0112,647.9137 Q297.6362,647.9137 298.23,647.6481 Q298.8237,647.3669 299.4487,646.7887 L299.4487,649.5075 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64.8047" x="312.7066" y="648.7136" style="white-space: pre;">Pokemon</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="272.46" x2="389.5313" y1="659.8669" y2="659.8669"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="272.46" x2="389.5313" y1="667.8669" y2="667.8669"/>
+      <ellipse cx="282.46" cy="681.5153" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93.0713" x="291.46" y="684.862" style="white-space: pre;">to_dict(): dict</text>
+      <ellipse cx="282.46" cy="697.8122" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85.1689" x="291.46" y="701.1589" style="white-space: pre;">__str__(): str</text>
+    </g>
+    <g class="entity" data-entity="PokemonBuilder" data-source-line="9" data-uid="ent0004" id="entity_PokemonBuilder">
+      <rect fill="#F1F1F1" height="145.7813" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="247.5322" x="207.23" y="422.0769"/>
+      <ellipse cx="269.5874" cy="438.0769" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M272.5562,443.7175 Q271.978,444.0144 271.3374,444.155 Q270.6968,444.3113 269.9937,444.3113 Q267.4937,444.3113 266.1655,442.6706 Q264.853,441.0144 264.853,437.8894 Q264.853,434.7644 266.1655,433.1081 Q267.4937,431.4519 269.9937,431.4519 Q270.6968,431.4519 271.3374,431.6081 Q271.9937,431.7644 272.5562,432.0613 L272.5562,434.78 Q271.9312,434.2019 271.3374,433.9363 Q270.7437,433.655 270.1187,433.655 Q268.7749,433.655 268.0874,434.7331 Q267.3999,435.7956 267.3999,437.8894 Q267.3999,439.9831 268.0874,441.0613 Q268.7749,442.1238 270.1187,442.1238 Q270.7437,442.1238 271.3374,441.8581 Q271.9312,441.5769 272.5562,440.9988 L272.5562,443.7175 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114.3174" x="290.0874" y="442.9236" style="white-space: pre;">PokemonBuilder</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="208.23" x2="453.7622" y1="454.0769" y2="454.0769"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="208.23" x2="453.7622" y1="462.0769" y2="462.0769"/>
+      <ellipse cx="218.23" cy="475.7253" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137.6279" x="227.23" y="479.072" style="white-space: pre;">number(n: str): Self</text>
+      <ellipse cx="218.23" cy="492.0222" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122.6914" x="227.23" y="495.3689" style="white-space: pre;">name(n: str): Self</text>
+      <ellipse cx="218.23" cy="508.3191" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144.2314" x="227.23" y="511.6657" style="white-space: pre;">add_type(t: str): Self</text>
+      <ellipse cx="218.23" cy="524.6159" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136.2402" x="227.23" y="527.9626" style="white-space: pre;">image(url: str): Self</text>
+      <ellipse cx="218.23" cy="540.9128" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="221.5322" x="227.23" y="544.2595" style="white-space: pre;">add_attribute(k: str, v: str): Self</text>
+      <ellipse cx="218.23" cy="557.2097" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119.3213" x="227.23" y="560.5564" style="white-space: pre;">build(): Pokemon</text>
+    </g>
+    <g class="entity" data-entity="PokemonCrawler" data-source-line="20" data-uid="ent0006" id="entity_PokemonCrawler">
+      <rect fill="#F1F1F1" height="96.8906" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="264.6768" x="21.66" y="250.1869"/>
+      <ellipse cx="90.4364" cy="266.1869" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M93.4051,271.8275 Q92.827,272.1244 92.1864,272.265 Q91.5457,272.4213 90.8426,272.4213 Q88.3426,272.4213 87.0145,270.7806 Q85.702,269.1244 85.702,265.9994 Q85.702,262.8744 87.0145,261.2181 Q88.3426,259.5619 90.8426,259.5619 Q91.5457,259.5619 92.1864,259.7181 Q92.8426,259.8744 93.4051,260.1713 L93.4051,262.89 Q92.7801,262.3119 92.1864,262.0463 Q91.5926,261.765 90.9676,261.765 Q89.6239,261.765 88.9364,262.8431 Q88.2489,263.9056 88.2489,265.9994 Q88.2489,268.0931 88.9364,269.1713 Q89.6239,270.2338 90.9676,270.2338 Q91.5926,270.2338 92.1864,269.9681 Q92.7801,269.6869 93.4051,269.1088 L93.4051,271.8275 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="118.624" x="110.9364" y="271.0336" style="white-space: pre;">PokemonCrawler</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="22.66" x2="285.3368" y1="282.1869" y2="282.1869"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="22.66" x2="285.3368" y1="290.1869" y2="290.1869"/>
+      <ellipse cx="32.66" cy="303.8353" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153.7539" x="41.66" y="307.182" style="white-space: pre;">crawl(): list[Pokemon]</text>
+      <ellipse cx="32.66" cy="320.1322" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113.1211" x="41.66" y="323.4789" style="white-space: pre;">fetch_html(): str</text>
+      <ellipse cx="32.66" cy="336.4291" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="238.6768" x="41.66" y="339.7757" style="white-space: pre;">discover_pages(start: str): list[str]</text>
+    </g>
+    <g class="entity" data-entity="QuestPokemon" data-source-line="26" data-uid="ent0007" id="entity_QuestPokemon">
+      <rect fill="#F1F1F1" height="64.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="138.0938" x="320.95" y="266.4869"/>
+      <ellipse cx="335.95" cy="282.4869" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M338.9188,288.1275 Q338.3406,288.4244 337.7,288.565 Q337.0594,288.7212 336.3563,288.7212 Q333.8563,288.7212 332.5281,287.0806 Q331.2156,285.4244 331.2156,282.2994 Q331.2156,279.1744 332.5281,277.5181 Q333.8563,275.8619 336.3563,275.8619 Q337.0594,275.8619 337.7,276.0181 Q338.3563,276.1744 338.9188,276.4712 L338.9188,279.19 Q338.2938,278.6119 337.7,278.3462 Q337.1063,278.065 336.4813,278.065 Q335.1375,278.065 334.45,279.1431 Q333.7625,280.2056 333.7625,282.2994 Q333.7625,284.3931 334.45,285.4712 Q335.1375,286.5337 336.4813,286.5337 Q337.1063,286.5337 337.7,286.2681 Q338.2938,285.9869 338.9188,285.4087 L338.9188,288.1275 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106.0938" x="349.95" y="287.3336" style="white-space: pre;">QuestPokemon</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="321.95" x2="458.0438" y1="298.4869" y2="298.4869"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="321.95" x2="458.0438" y1="306.4869" y2="306.4869"/>
+      <ellipse cx="331.95" cy="320.1353" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87.5615" x="340.95" y="323.482" style="white-space: pre;">to_text(): str</text>
+    </g>
+    <g class="entity" data-entity="PokemonCSVAnalyzer" data-source-line="30" data-uid="ent0008" id="entity_PokemonCSVAnalyzer">
+      <rect fill="#F1F1F1" height="96.8906" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="185.9658" x="494.02" y="250.1869"/>
+      <ellipse cx="509.02" cy="266.1869" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M511.9888,271.8275 Q511.4106,272.1244 510.77,272.265 Q510.1294,272.4213 509.4263,272.4213 Q506.9263,272.4213 505.5981,270.7806 Q504.2856,269.1244 504.2856,265.9994 Q504.2856,262.8744 505.5981,261.2181 Q506.9263,259.5619 509.4263,259.5619 Q510.1294,259.5619 510.77,259.7181 Q511.4263,259.8744 511.9888,260.1713 L511.9888,262.89 Q511.3638,262.3119 510.77,262.0463 Q510.1763,261.765 509.5513,261.765 Q508.2075,261.765 507.52,262.8431 Q506.8325,263.9056 506.8325,265.9994 Q506.8325,268.0931 507.52,269.1713 Q508.2075,270.2338 509.5513,270.2338 Q510.1763,270.2338 510.77,269.9681 Q511.3638,269.6869 511.9888,269.1088 L511.9888,271.8275 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153.9658" x="523.02" y="271.0336" style="white-space: pre;">PokemonCSVAnalyzer</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="495.02" x2="678.9858" y1="282.1869" y2="282.1869"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="495.02" x2="678.9858" y1="290.1869" y2="290.1869"/>
+      <ellipse cx="505.02" cy="303.8353" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105.3281" x="514.02" y="307.182" style="white-space: pre;">log_summary()</text>
+      <ellipse cx="505.02" cy="320.1322" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145.5645" x="514.02" y="323.4789" style="white-space: pre;">log_missing_values()</text>
+      <ellipse cx="505.02" cy="336.4291" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113.0732" x="514.02" y="339.7757" style="white-space: pre;">run_full_report()</text>
+    </g>
+    <g class="entity" data-entity="CSVWriter" data-source-line="36" data-uid="ent0009" id="entity_CSVWriter">
+      <rect fill="#F1F1F1" height="72.5625" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="315.3379" x="715.33" y="262.3569"/>
+      <ellipse cx="832.956" cy="282.4897" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M835.9247,288.1303 Q835.3466,288.4272 834.706,288.5678 Q834.0654,288.7241 833.3622,288.7241 Q830.8622,288.7241 829.5341,287.0834 Q828.2216,285.4272 828.2216,282.3022 Q828.2216,279.1772 829.5341,277.5209 Q830.8622,275.8647 833.3622,275.8647 Q834.0654,275.8647 834.706,276.0209 Q835.3622,276.1772 835.9247,276.4741 L835.9247,279.1928 Q835.2997,278.6147 834.706,278.3491 Q834.1122,278.0678 833.4872,278.0678 Q832.1435,278.0678 831.456,279.1459 Q830.7685,280.2084 830.7685,282.3022 Q830.7685,284.3959 831.456,285.4741 Q832.1435,286.5366 833.4872,286.5366 Q834.1122,286.5366 834.706,286.2709 Q835.2997,285.9897 835.9247,285.4116 L835.9247,288.1303 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="49.9805" x="864.2587" y="278.4955" style="white-space: pre;">«Utility»</text>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71.5859" x="853.456" y="294.3207" style="white-space: pre;">CSVWriter</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="716.33" x2="1029.6679" y1="302.6225" y2="302.6225"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="716.33" x2="1029.6679" y1="310.6225" y2="310.6225"/>
+      <ellipse cx="726.33" cy="324.2709" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289.3379" x="735.33" y="327.6176" style="white-space: pre;">write_pokemon_csv(pokemons, path): int</text>
+    </g>
+    <g class="entity" data-entity="LoggerConfig" data-source-line="40" data-uid="ent0010" id="entity_LoggerConfig">
+      <rect fill="#F1F1F1" height="72.5625" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="205.9834" x="1066.01" y="262.3569"/>
+      <ellipse cx="1118.0383" cy="282.4897" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M1121.0071,288.1303 Q1120.4289,288.4272 1119.7883,288.5678 Q1119.1477,288.7241 1118.4446,288.7241 Q1115.9446,288.7241 1114.6164,287.0834 Q1113.3039,285.4272 1113.3039,282.3022 Q1113.3039,279.1772 1114.6164,277.5209 Q1115.9446,275.8647 1118.4446,275.8647 Q1119.1477,275.8647 1119.7883,276.0209 Q1120.4446,276.1772 1121.0071,276.4741 L1121.0071,279.1928 Q1120.3821,278.6147 1119.7883,278.3491 Q1119.1946,278.0678 1118.5696,278.0678 Q1117.2258,278.0678 1116.5383,279.1459 Q1115.8508,280.2084 1115.8508,282.3022 Q1115.8508,284.3959 1116.5383,285.4741 Q1117.2258,286.5366 1118.5696,286.5366 Q1119.1946,286.5366 1119.7883,286.2709 Q1120.3821,285.9897 1121.0071,285.4116 L1121.0071,288.1303 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="49.9805" x="1160.2615" y="278.4955" style="white-space: pre;">«Utility»</text>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93.4268" x="1138.5383" y="294.3207" style="white-space: pre;">LoggerConfig</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="1067.01" x2="1270.9934" y1="302.6225" y2="302.6225"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="1067.01" x2="1270.9934" y1="310.6225" y2="310.6225"/>
+      <ellipse cx="1077.01" cy="324.2709" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="179.9834" x="1086.01" y="327.6176" style="white-space: pre;">setup_logging(...): Logger</text>
+    </g>
+    <g class="entity" data-entity="MainController" data-source-line="47" data-uid="ent0012" id="entity_MainController">
+      <rect fill="#F1F1F1" height="96.8906" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="146.9141" x="513.54" y="78.2969"/>
+      <ellipse cx="534.0841" cy="94.2969" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/>
+      <path d="M537.0529,99.9375 Q536.4748,100.2344 535.8341,100.375 Q535.1935,100.5313 534.4904,100.5313 Q531.9904,100.5313 530.6623,98.8906 Q529.3498,97.2344 529.3498,94.1094 Q529.3498,90.9844 530.6623,89.3281 Q531.9904,87.6719 534.4904,87.6719 Q535.1935,87.6719 535.8341,87.8281 Q536.4904,87.9844 537.0529,88.2813 L537.0529,91 Q536.4279,90.4219 535.8341,90.1563 Q535.2404,89.875 534.6154,89.875 Q533.2716,89.875 532.5841,90.9531 Q531.8966,92.0156 531.8966,94.1094 Q531.8966,96.2031 532.5841,97.2813 Q533.2716,98.3438 534.6154,98.3438 Q535.2404,98.3438 535.8341,98.0781 Q536.4279,97.7969 537.0529,97.2188 L537.0529,99.9375 Z " fill="#000000"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102.5938" x="549.3162" y="99.1436" style="white-space: pre;">MainController</text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="514.54" x2="659.4541" y1="110.2969" y2="110.2969"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="514.54" x2="659.4541" y1="118.2969" y2="118.2969"/>
+      <ellipse cx="524.54" cy="131.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91.5947" x="533.54" y="135.292" style="white-space: pre;">main(): None</text>
+      <ellipse cx="524.54" cy="148.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102.7236" x="533.54" y="151.5889" style="white-space: pre;">discover_urls()</text>
+      <ellipse cx="524.54" cy="164.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/>
+      <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120.9141" x="533.54" y="167.8857" style="white-space: pre;">crawl_all_pages()</text>
+    </g>
+    <g class="link" data-entity-1="MainController" data-entity-2="PokemonCrawler" data-source-line="55" data-uid="lnk13" id="link_MainController_PokemonCrawler">
+      <path codeline="55" d="M513.34,142.5369 C454.87,155.6469 371.81,177.3469 303,207.1869 C276.07,218.8669 253.2528,231.5146 228.9628,246.6446" fill="none" id="MainController-to-PokemonCrawler" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="223.87,249.8169,233.6241,248.4537,228.114,247.1733,229.3944,241.6633,223.87,249.8169" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="MainController" data-entity-2="QuestPokemon" data-source-line="56" data-uid="lnk14" id="link_MainController_QuestPokemon">
+      <path codeline="56" d="M516.89,175.4969 C503.32,185.5369 489.45,196.3769 477,207.1869 C455.94,225.4769 438.2368,243.657 421.7568,261.697" fill="none" id="MainController-to-QuestPokemon" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="417.71,266.1269,426.7334,262.18,421.0823,262.4353,420.8269,256.7842,417.71,266.1269" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="MainController" data-entity-2="CSVWriter" data-source-line="57" data-uid="lnk15" id="link_MainController_CSVWriter">
+      <path codeline="57" d="M660.65,171.4969 C707.99,199.6169 763.5417,232.6123 807.9117,258.9723" fill="none" id="MainController-to-CSVWriter" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="813.07,262.0369,807.3755,254.0012,808.7714,259.4831,803.2894,260.8789,813.07,262.0369" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="MainController" data-entity-2="PokemonCSVAnalyzer" data-source-line="58" data-uid="lnk16" id="link_MainController_PokemonCSVAnalyzer">
+      <path codeline="58" d="M587,175.5269 C587,198.7869 587,220.6769 587,243.9269" fill="none" id="MainController-to-PokemonCSVAnalyzer" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="587,249.9269,591,240.9269,587,244.9269,583,240.9269,587,249.9269" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="MainController" data-entity-2="LoggerConfig" data-source-line="59" data-uid="lnk17" id="link_MainController_LoggerConfig">
+      <path codeline="59" d="M660.66,129.8969 C754.26,134.9569 919.12,151.7469 1048,207.1869 C1078.6,220.3569 1104.0566,238.8213 1126.5366,258.0113" fill="none" id="MainController-to-LoggerConfig" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="1131.1,261.9069,1126.8519,253.0213,1127.2972,258.6606,1121.6579,259.1058,1131.1,261.9069" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="PokemonBuilder" data-entity-2="Pokemon" data-source-line="61" data-uid="lnk18" id="link_PokemonBuilder_Pokemon">
+      <path codeline="61" d="M331,568.0769 C331,588.5469 331,604.0669 331,621.8069" fill="none" id="PokemonBuilder-to-Pokemon" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="331,627.8069,335,618.8069,331,622.8069,327,618.8069,331,627.8069" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="PokemonCrawler" data-entity-2="Pokemon" data-source-line="62" data-uid="lnk19" id="link_PokemonCrawler_Pokemon">
+      <path codeline="62" d="M149.4,347.4869 C146.3,404.2669 148.69,499.7769 190,567.8669 C208.95,599.0969 236.6406,620.1475 265.9006,636.7375" fill="none" id="PokemonCrawler-to-Pokemon" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="271.12,639.6969,265.2638,631.7783,266.7705,637.2308,261.318,638.7375,271.12,639.6969" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="PokemonCrawler" data-entity-2="PokemonBuilder" data-source-line="63" data-uid="lnk20" id="link_PokemonCrawler_PokemonBuilder">
+      <path codeline="63" d="M197.3,347.1769 C217.77,369.6469 238.6094,392.5314 261.3294,417.4714" fill="none" id="PokemonCrawler-to-PokemonBuilder" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="265.37,421.9069,262.266,412.5599,262.0028,418.2107,256.3521,417.9475,265.37,421.9069" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+    <g class="link" data-entity-1="CSVWriter" data-entity-2="Pokemon" data-source-line="64" data-uid="lnk21" id="link_CSVWriter_Pokemon">
+      <path codeline="64" d="M820.54,335.2069 C718.92,404.1169 500.8861,551.9698 394.5761,624.0498" fill="none" id="CSVWriter-to-Pokemon" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="389.61,627.4169,399.3039,625.6769,393.7484,624.6109,394.8145,619.0554,389.61,627.4169" style="stroke:#181818;stroke-width:1;"/>
+    </g>
+  </g>
+</svg>

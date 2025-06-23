@@ -1,19 +1,65 @@
 @startuml
-skinparam classAttributeIconSize 0
-class main
-main --> pokemon_crawler
-main --> csv_writer
-main --> csv_analyzer
-class pokemon_crawler
-pokemon_crawler --> pokemon
-pokemon_crawler --> pokemon_builder
-pokemon_crawler --> quests
-class pokemon_builder
-pokemon_builder --> pokemon
-class csv_writer
-csv_writer --> pokemon
-class csv_analyzer
-csv_analyzer --> pokemon
-class quests
-class pokemon
+package models {
+  class Pokemon {
+    + to_dict(): dict
+    + __str__(): str
+  }
+
+  class PokemonBuilder {
+    + number(n: str): Self
+    + name(n: str): Self
+    + add_type(t: str): Self
+    + image(url: str): Self
+    + add_attribute(k: str, v: str): Self
+    + build(): Pokemon
+  }
+}
+
+package services {
+  class PokemonCrawler {
+    + crawl(): list[Pokemon]
+    + fetch_html(): str
+    + discover_pages(start: str): list[str]
+  }
+
+  class QuestPokemon {
+    + to_text(): str
+  }
+
+  class PokemonCSVAnalyzer {
+    + log_summary()
+    + log_missing_values()
+    + run_full_report()
+  }
+
+  class CSVWriter
+  CSVWriter : + write_pokemon_csv(pokemons, path): int
+  CSVWriter <<Utility>>
+
+  class LoggerConfig
+  LoggerConfig : + setup_logging(...): Logger
+  LoggerConfig <<Utility>>
+}
+
+' --- Novo bloco: aplicação ---
+package app {
+  class MainController {
+    + main(): None
+    + discover_urls()
+    + crawl_all_pages()
+  }
+}
+
+' Relações principais
+MainController --> PokemonCrawler
+MainController --> QuestPokemon
+MainController --> CSVWriter
+MainController --> PokemonCSVAnalyzer
+MainController --> LoggerConfig
+
+PokemonBuilder --> Pokemon
+PokemonCrawler --> Pokemon
+PokemonCrawler --> PokemonBuilder
+CSVWriter --> Pokemon
+
 @enduml

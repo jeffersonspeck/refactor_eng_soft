@@ -91,7 +91,11 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ### 2.2 BPMN
 
-![Descrição da imagem](docs/pokemon.svg)
+![BPMN](docs/pokemon.svg)
+
+### 2.3 BPMN
+
+![UML](docs/uml.svg)
 
 -----
 ## 3. Key Improvements Over the Original Code

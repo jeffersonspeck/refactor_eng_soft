@@ -89,7 +89,12 @@
 
 ### 2.2 BPMN
 
-![Descrição da imagem](docs/pokemon.svg)
+![BPMN](docs/pokemon.svg)
+
+### 2.3 BPMN
+
+![UML](docs/uml.svg)
+
 ---
 
 ## 3. Principais melhorias em relação ao código original

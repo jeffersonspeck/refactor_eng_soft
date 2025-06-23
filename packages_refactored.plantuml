@@ -1,0 +1,32 @@
+@startuml packages_refactored
+set namespaceSeparator none
+package "refactor_eng_soft.main" as refactor_eng_soft.main {
+}
+package "refactor_eng_soft.models" as refactor_eng_soft.models {
+}
+package "refactor_eng_soft.models.__pycache__" as refactor_eng_soft.models.__pycache__ {
+}
+package "refactor_eng_soft.models.pokemon" as refactor_eng_soft.models.pokemon {
+}
+package "refactor_eng_soft.models.pokemon_builder" as refactor_eng_soft.models.pokemon_builder {
+}
+package "refactor_eng_soft.services" as refactor_eng_soft.services {
+}
+package "refactor_eng_soft.services.__pycache__" as refactor_eng_soft.services.__pycache__ {
+}
+package "refactor_eng_soft.services.csv_analyzer" as refactor_eng_soft.services.csv_analyzer {
+}
+package "refactor_eng_soft.services.csv_writer" as refactor_eng_soft.services.csv_writer {
+}
+package "refactor_eng_soft.services.logging" as refactor_eng_soft.services.logging {
+}
+package "refactor_eng_soft.services.pokemon_crawler" as refactor_eng_soft.services.pokemon_crawler {
+}
+package "refactor_eng_soft.services.quests" as refactor_eng_soft.services.quests {
+}
+refactor_eng_soft.main --> refactor_eng_soft.services.csv_analyzer
+refactor_eng_soft.main --> refactor_eng_soft.services.csv_writer
+refactor_eng_soft.main --> refactor_eng_soft.services.logging
+refactor_eng_soft.main --> refactor_eng_soft.services.pokemon_crawler
+refactor_eng_soft.main --> refactor_eng_soft.services.quests
+@enduml
