@@ -39,7 +39,32 @@
                 </a>
             <input type="search" placeholder="Search API Documentation..." aria-label="search box">
     </header>
-    <main class="pdoc"></main>
+    <main class="pdoc">
+        <section>
+        <h2>Sistema de Extração e Análise de Dados - Pokémon</h2>
+
+        <h3>Descrição (PT-BR)</h3>
+        <p>
+            O sistema realiza a extração, organização e análise de dados sobre Pokémon a partir de páginas da web.
+            Ele utiliza técnicas de web scraping com <code>BeautifulSoup</code>, constrói objetos estruturados com a
+            classe <code>PokemonBuilder</code> e exporta os dados em arquivos CSV. Também inclui análise automatizada
+            dos dados com geração de relatórios e tratamento de informações como coloração shiny e tipos.
+            A refatoração modularizou responsabilidades, separando crawler, modelo de dados, persistência e análise.
+        </p>
+
+        <h3>Description (EN)</h3>
+        <p>
+            The system extracts, organizes, and analyzes Pokémon data from web pages. It uses web scraping with
+            <code>BeautifulSoup</code>, builds structured objects through the <code>PokemonBuilder</code> class,
+            and exports data to CSV files. It also includes automated data analysis, report generation, and handling
+            of information such as shiny coloration and types. The refactoring modularized responsibilities by separating
+            crawler logic, data modeling, persistence, and analysis components.
+        </p>
+        </section>
+        <div style="width: 100%; max-width: 800px; margin: auto;">
+            <img src="uml.svg" alt="Diagrama UML" style="width: 100%; height: auto; display: block;" />
+        </div>
+    </main>
 <script>
     function escapeHTML(html) {
         return document.createElement('div').appendChild(document.createTextNode(html)).parentNode.innerHTML;
