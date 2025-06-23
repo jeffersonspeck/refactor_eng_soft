@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-314.88 -108.034 1303.669 697.623">
   <title>Diagrama UML - Projeto Pokémon Crawler</title>
+  <rect x="-314.56" y="-107.17" width="1304.4" height="696.457" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);"/>
   <g transform="matrix(1, 0, 0, 1, -311.841858, -144.711411)">
     <g class="title" data-source-line="1"/>
     <g class="cluster" data-entity="models" data-source-line="3" data-uid="ent0002" id="cluster_models">
