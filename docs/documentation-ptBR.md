@@ -1,46 +1,46 @@
 # Ciclo Funcional do Sistema
 
-## Fluxo Principal (Execução sem erros)
+## Fluxo Principal (Execução sem Erros)
 
-1. **Início**  
-   A aplicação é iniciada pelo script **`main.py`**.
+1. **Início**
+   A aplicação é iniciada a partir do script **`main.py`**.
 
-2. **Configuração de Logging**  
-   O módulo **`services/logging.py`** configura os logs (arquivo, formato, níveis).
+2. **Configuração de Logs**
+   O módulo **`services/logging.py`** configura o sistema de logging com saída para arquivo (e opcionalmente para console), com níveis ajustáveis e criação automática do diretório de logs.
 
-3. **Inicialização do Crawler**  
-   Um objeto da classe **`PokemonCrawler`** é instanciado.
+3. **Inicialização do Crawler**
+   Para cada URL, um objeto **`PokemonCrawler`** é instanciado.
 
-4. **Acesso à Página Inicial**  
-   - O crawler chama **`fetch_html(url)`** para obter a página `lista01.htm`.  
-   - O HTML retornado é limpo e convertido em objeto **`BeautifulSoup`** (*soup*).
+4. **Descoberta da Página Inicial**
 
-5. **Descoberta de Links Secundários**  
-   A função **`discover_pages()`** coleta todos os links para páginas de Pokémon individuais ou blocos.
+   * A função `discover_pages()` acessa a página inicial (`lista01.htm`) utilizando `requests.get`.
+   * Ela extrai todos os links válidos para páginas individuais ou em bloco, elimina duplicatas e retorna a lista ordenada.
 
-6. **Parsing das Páginas**  
-   Para cada URL descoberta:  
-   1. Chama-se novamente **`fetch_html`**.  
-   2. O conteúdo é analisado em **`_parse_tables`**.  
-   3. Cada tabela é transformada em **`PokemonBuilder`**, depois em **`Pokemon`**.  
-   4. O objeto **`Pokemon`** é adicionado à lista interna de resultados válidos.
+5. **Coleta e Análise das Páginas**
+   Para cada URL descoberta:
 
-7. **Análise e Exportação**  
-   - (Opcional) **`PokemonCSVAnalyzer`** verifica integridade (nulos, duplicados, estatísticas).  
-   - A lista final é exportada para **`pokemons.csv`** dentro da pasta `output/`.
+   1. Um novo **`PokemonCrawler(url)`** chama **`fetch_html()`** para obter o HTML.
+   2. O conteúdo é processado internamente em **`_parse_tables()`**, usando **BeautifulSoup**.
+   3. Cada tabela é transformada por um **`PokemonBuilder`** em um objeto **`Pokemon`**.
+   4. Os objetos válidos são adicionados à lista de resultados.
 
-8. **Encerramento Normal**  
-   O programa finaliza e grava mensagem de sucesso no log.
+6. **Análise e Exportação**
+
+   * (Opcional) O **`PokemonCSVAnalyzer`** verifica integridade, valores ausentes, tipos de dados e estatísticas.
+   * A lista final é exportada para um arquivo CSV via **`write_pokemon_csv()`**, na pasta `output/`.
+
+7. **Encerramento Normal**
+   A execução termina normalmente e uma mensagem de sucesso é registrada no log.
 
 ---
 
-## Fluxo Alternativo (Erros)
+## Fluxo Alternativo (Tratamento de Erros)
 
-| Etapa | Possível Erro | Tratamento |
-|-------|---------------|------------|
-| **`fetch_html`** | `URLError`, `HTTPError` (falha de conexão) | Erro logado com contexto; crawler continua com a próxima URL |
-| **Parsing (`_parse_tables`)** | Tabela malformada ou sem imagem | Exceção capturada e logada; tabela descartada, loop prossegue |
-| **Criação do `Pokemon`** | Campo essencial ausente | `PokemonBuilder` gera aviso no log e pode descartar ou criar objeto incompleto |
-| **Exportação CSV** | Erro de escrita (permissão, arquivo aberto) | Erro logado; aplicação aborta com `exit(1)` ou segue em modo degradado |
+| Etapa                    | Possível Erro                                         | Tratamento                                                                                |
+| ------------------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **`fetch_html()`**       | `URLError`, `HTTPError` (falha na conexão)            | O erro é registrado com rastreio e contexto da URL; a próxima URL é tentada               |
+| **`_parse_tables()`**    | Tabela malformada ou inconsistências no HTML          | A exceção é capturada e registrada; a tabela é ignorada                                   |
+| **Criação de `Pokemon`** | Falta de campos obrigatórios (`number`, `name`)       | O `PokemonBuilder` lança `ValueError`; o erro é registrado e o objeto descartado          |
+| **Exportação CSV**       | Falha na escrita (ex.: permissão negada, disco cheio) | A exceção é capturada e registrada; `write_pokemon_csv()` retorna 0 e a execução continua |
 
-> **Observação:** em todos os casos de erro, o logger registra **stack trace**, URL/tabela afetada e nível apropriado (`WARNING` ou `ERROR`), permitindo diagnóstico rápido.
+> **Nota:** Em todos os casos de erro, o logger registra o **stack trace**, a URL ou tabela afetada e o nível apropriado (`WARNING` ou `ERROR`), facilitando a depuração.

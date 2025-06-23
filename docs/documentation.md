@@ -2,45 +2,45 @@
 
 ## Main Flow (Error-Free Execution)
 
-1.  **Start**
+1. **Start**
    The application starts with the **`main.py`** script.
 
-2.  **Logging Configuration**
-   The **`services/logging.py`** module configures logs (file, format, levels).
+2. **Logging Configuration**
+   The **`services/logging.py`** module configures logging with file and optional console output, customizable levels, and directory handling.
 
-3.  **Crawler Initialization**
-   A **`PokemonCrawler`** class object is instantiated.
+3. **Crawler Initialization**
+   For each URL, a **`PokemonCrawler`** object is instantiated.
 
-4.  **Initial Page Access**
-   * The crawler calls **`fetch_html(url)`** to retrieve the `lista01.htm` page.
-   * The returned HTML is cleaned and converted into a **`BeautifulSoup`** object (*soup*).
+4. **Initial Page Discovery**
 
-5.  **Secondary Link Discovery**
-   The **`discover_pages()`** function collects all links to individual Pokémon or block pages.
+   * The `discover_pages()` function downloads the initial page (`lista01.htm`) using `requests.get`.
+   * It extracts all valid Pokémon-related subpages (individual or block pages), filters duplicates, and returns them sorted.
 
-6.  **Page Parsing**
+5. **Page Crawling and Parsing**
    For each discovered URL:
-   1.  **`fetch_html`** is called again.
-   2.  The content is analyzed in **`_parse_tables`**.
-   3.  Each table is transformed into a **`PokemonBuilder`**, then into a **`Pokemon`** object.
-   4.  The **`Pokemon`** object is added to the internal list of valid results.
 
-7.  **Analysis and Export**
-   * (Optional) **`PokemonCSVAnalyzer`** verifies integrity (nulls, duplicates, statistics).
-   * The final list is exported to **`pokemons.csv`** within the `output/` folder.
+   1. A new **`PokemonCrawler(url)`** calls **`fetch_html()`** to retrieve the HTML content.
+   2. The content is parsed in **`_parse_tables()`** using **BeautifulSoup**.
+   3. Each table is passed to **`PokemonBuilder`**, which creates a validated **`Pokemon`** object.
+   4. Valid Pokémon objects are accumulated in the result list.
 
-8.  **Normal Termination**
-   The program finishes and logs a success message.
+6. **Analysis and Export**
+
+   * (Optional) The **`PokemonCSVAnalyzer`** runs integrity checks (missing values, types, stats).
+   * The result is written to a CSV file using **`write_pokemon_csv()`** in the `output/` folder.
+
+7. **Normal Termination**
+   The program completes its execution and logs a success message with a summary.
 
 ---
 
 ## Alternative Flow (Errors)
 
-| Step | Possible Error | Handling |
-|---|---|---|
-| **`fetch_html`** | `URLError`, `HTTPError` (connection failure) | Error logged with context; crawler continues with the next URL |
-| **Parsing (`_parse_tables`)** | Malformed table or missing image | Exception caught and logged; table discarded, loop continues |
-| **`Pokemon` Creation** | Essential field missing | `PokemonBuilder` generates a warning in the log and may discard or create an incomplete object |
-| **CSV Export** | Write error (permission, file open) | Error logged; application aborts with `exit(1)` or proceeds in degraded mode |
+| Step                   | Possible Error                                     | Handling                                                                                      |
+| ---------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **`fetch_html()`**     | `URLError`, `HTTPError` (connection failure)       | Error is logged with stack trace and URL context; next URL is attempted                       |
+| **`_parse_tables()`**  | Malformed HTML structure or table inconsistency    | Exception is caught and logged; that table is skipped                                         |
+| **`Pokemon` Creation** | Missing required fields (`number`, `name`)         | `PokemonBuilder` raises `ValueError`; the error is logged, object skipped                     |
+| **CSV Export**         | Write failure (e.g., permission denied, disk full) | Exception is caught; error is logged; `write_pokemon_csv()` returns 0 and execution continues |
 
-> **Note:** In all error cases, the logger records the **stack trace**, affected URL/table, and appropriate level (`WARNING` or `ERROR`), allowing for quick diagnosis.
+> **Note:** In all error cases, the logger records the **stack trace**, affected URL or table, and an appropriate log level (`WARNING` or `ERROR`), enabling effective debugging.
