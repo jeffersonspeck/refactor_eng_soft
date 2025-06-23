@@ -93,7 +93,7 @@ This README is available in both English and Portuguese (Brazilian Portuguese). 
 
 ![BPMN](docs/pokemon.svg)
 
-### 2.3 BPMN
+### 2.3 UML
 
 ![UML](docs/uml.svg)
 
